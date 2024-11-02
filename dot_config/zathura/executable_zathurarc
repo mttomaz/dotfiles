@@ -4,4 +4,4 @@ set recolor-lightcolor          "#1a1b26" # Background
 set recolor-darkcolor           "#a9b1d6" # Foreground
 
 set adjust-open width
-set recolor true
+set recolor false
