@@ -5,13 +5,14 @@ STEAMAPPS_PATH="$STEAM_PATH/steamapps"
 SHADER_PATH="$STEAMAPPS_PATH/shadercache"
 
 declare -A GAMES
-for i in $(ls $SHADER_PATH); do
-  GAMES[$i]="$(awk -F\" '/name/ {print $4}' "$STEAMAPPS_PATH/appmanifest_${i}.acf")"
+for i in "$SHADER_PATH"/*; do
+  ID="$(basename "$i")"
+  GAMES["$ID"]="$(awk -F\" '/name/ {print $4}' "$STEAMAPPS_PATH/appmanifest_${ID}.acf")"
 done
 
 APPID=$(for key in "${!GAMES[@]}"; do echo "$key: ${GAMES[$key]}"; done | fzf --prompt="Select a game: " | awk -F: '{print $1}')
 if [[ -n "$APPID" ]]; then
-  rm -rf "$SHADER_PATH/$APPID"
+  rm -rf "${SHADER_PATH:?}/${APPID}"
   echo "Shader cache from ${GAMES[$APPID]} (${APPID}) removed."
 else
   echo "Shader cache doesn't exists."

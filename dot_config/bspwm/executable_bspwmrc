@@ -2,8 +2,8 @@
 
 PRIMARY_MONITOR="$(xrandr | awk '/primary/ {print $1}')"
 SECONDARY_MONITOR="$(xrandr | awk '/HDMI/ {print $1}')"
-bspc monitor $PRIMARY_MONITOR -d 1 2 3 4 5 6 7
-bspc monitor $SECONDARY_MONITOR -d 8 9
+bspc monitor "$PRIMARY_MONITOR"   -d 1 2 3 4 5 6 7
+bspc monitor "$SECONDARY_MONITOR" -d 8 9
 
 bspc config pointer_motion_interval   5
 bspc config pointer_follows_monitor   true
@@ -15,7 +15,7 @@ bpsc config remove_disabled_monitors  true
 bspc config border_width  2
 bspc config window_gap    4
 
-bspc config split_ratio          0.52
+bspc config split_ratio          0.50
 bspc config single_monocle       true
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
@@ -29,31 +29,33 @@ bspc config external_rules_command "$HOME/.config/bspwm/external_rules"
 # Ordering windows
 bspc rule -a kitty            desktop='^1' follow=on
 bspc rule -a Google-chrome    desktop='^2' follow=on
-bspc rule -a Brave-browser    desktop='^2' follon=on
+bspc rule -a Brave-browser    desktop='^2' follow=on
+bspc rule -a zen-alpha        desktop='^2' follow=on
 bspc rule -a discord          desktop='^3'
+bspc rule -a vesktop          desktop='^3'
 bspc rule -a TelegramDesktop  desktop='^3'
-bspc rule -a Evince           desktop='^3'
 bspc rule -a vlc              desktop='^4'
 bspc rule -a Code             desktop='^5'
 bspc rule -a jetbrains-studio desktop='^5'
 bspc rule -a Gimp-2.10        desktop='^5'
 bspc rule -a Steam            desktop='^6'
-bspc rule -a Lutris           desktop='^6'
+bspc rule -a Lutris           desktop='^7'
 bspc rule -a qBittorrent      desktop='^6'
 bspc rule -a DBeaver          dekstop='^6'
+bspc rule -a obsidian         desktop='^7'
 
-bspc rule -a feh                                 state=floating
-bspc rule -a imv                                 state=floating
-bspc rule -a org.gnome.Nautilus                  state=floating
-bspc rule -a gnome-calculator                    state=floating
-bspc rule -a Gufw.py                             state=floating
-bspc rule -a Gcolor3                             state=floating
-bspc rule -a File-roller                         state=floating
-
+bspc rule -a feh                 state=floating
+bspc rule -a imv                 state=floating
+bspc rule -a org.gnome.Nautilus  state=floating
+bspc rule -a gnome-calculator    state=floating
+bspc rule -a Gufw.py             state=floating
+bspc rule -a Gcolor3             state=floating
+bspc rule -a File-roller         state=floating
+bspc rule -a Pcmanfm             state=floating
 bspc rule -a Picture-in-Picture  state=floating
 
 # Games
-bspc rule -a hl2_linux                desktop='^5'
+bspc rule -a hl2_linux desktop='^5'
 
 steamlib=$HOME/.steam/steam/
 mygames=$(find "${steamlib}/steamapps" -iname "*.acf" | awk -F'[_.]' '{print $(NF-1)}')
@@ -64,10 +66,9 @@ done
 
 ## Autostart
 # Polybar
-$HOME/.config/polybar/launch.sh &
+"$HOME/.config/polybar/launch.sh" &
 
 # Eww bar
 # "$HOME"/.config/eww/launch.sh &
 
 killall -q sxhkd; sxhkd -c "$HOME/.config/bspwm/sxhkdrc" &
-# setxkbmap br &

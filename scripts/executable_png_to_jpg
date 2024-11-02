@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 
-source colors.conf
+source "$HOME/scripts/colors.conf"
 
 
 path="$XDG_PICTURES_DIR/wallpapers"
-images=($(ls $path | sed "/README.md/d"))
+images=($(ls "$path" | sed "/README.md/d"))
 
-cd $path
+cd "$path" || return
 
-if ( grep -q ".png" <<< ${images[@]} ) ; then
+if ( grep -q ".png" <<< "${images[@]}" ) ; then
   for i in ${images[@]} ; do
     image_type=$( ls $i | cut -d '.' -f 2 )
 
     if [[ "$image_type" == "png" ]] ; then
       echo -e "Converting ${bold_green}$i${end}\n"
-      new_image="$( ls $i | cut -d '.' -f 1 ).jpg"
+      new_image="$( ls "$i" | cut -d '.' -f 1 ).jpg"
 
       convert "$i" "$new_image" && rm "$i"
     fi

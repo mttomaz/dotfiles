@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source colors.conf
+source "$HOME/scripts/colors.conf"
 
 declare -A resolutions
 resolutions[FHD]="1920x1080"

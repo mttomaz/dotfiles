@@ -6,7 +6,6 @@ FILE_PATH="$1"
 CODEC="265"
 [[ -n "$2" ]] && CODEC=$2
 
-
 compress-mkv() {
   if [[ "$CODEC" = "264" ]]; then
     ffmpeg -vaapi_device /dev/dri/renderD128 -i "$1" -vf 'scale=iw-mod(iw\,16):ih-mod(ih\,16),format=nv12,hwupload' -c:v hevc_vaapi -c:a aac -b:a 128k -b:v 2M -y "${1%.*}${OUTPUT_EXT}"
@@ -15,10 +14,10 @@ compress-mkv() {
   fi
 }
 
-mapfile -t FILES <<< "$(find "$FILE_PATH" -iname "*${INPUT_EXT}")"
-[[ -z "${FILES[@]}" ]] && exit
+mapfile -t FILES <<<"$(find "$FILE_PATH" -iname "*${INPUT_EXT}")"
+[[ -z "${FILES[*]}" ]] && exit
 
 for file in "${FILES[@]}"; do
   compress-mkv "${file}" &&
-  rm "${file}"
+    rm "${file}"
 done

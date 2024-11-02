@@ -11,11 +11,11 @@ super + backslash
   rofi -show drun
 
 # browser
-super + b 
+super + b
   zen
 
 # file manager
-super + f 
+super + f
   pcmanfm
   # nautilus
 
@@ -46,9 +46,9 @@ super + shift + x
   ~/scripts/vol spotify set 1%-
   # {pactl set-sink-volume @DEFAULT_SINK@ -10%,~/.config/polybar/scripts/spotify-module change-volume down}
 
-XF86AudioMute     
+XF86AudioMute
   wpctl set-mute @DEFAULT_SINK@ toggle
-XF86AudioMicMute  
+XF86AudioMicMute
   wpctl set-mute @DEFAULT_SOURCE@ toggle
 
 XF86Audio{Play,Prev,Next}

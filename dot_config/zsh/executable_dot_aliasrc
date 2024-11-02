@@ -43,7 +43,7 @@ alias gitr='git restore'
 alias gitrs='git restore --staged'
 
 giti() {
-  echo "$1" >> "$PWD/.gitignore"
+  echo "$1" >>"$PWD/.gitignore"
 }
 
 clone-tmp() {
@@ -55,8 +55,10 @@ clone-tmp() {
 y() {
   TMP="$(mktemp -t yazi-cwd.XXXXX)"
   yazi --cwd-file "$TMP" "$@"
-  [[ -f "$TMP" ]] && cd "$(cat "$TMP")" &&
-  rm "$TMP" || true
+  if [[ -f "$TMP" ]]; then
+    cd "$(cat "$TMP")" || return
+    rm "$TMP"
+  fi
 }
 
 mnt-pendrive() {
@@ -91,34 +93,45 @@ fix-pacman() {
 
 nmwifi() {
   case $1 in
-    l|list|-l|--list)
-      nmcli device wifi list
-      ;;
-    c|connect|-c|--connect)
-      nmcli device wifi connect "$2"
-      ;;
+  l | list | -l | --list)
+    nmcli device wifi list
+    ;;
+  c | connect | -c | --connect)
+    nmcli device wifi connect "$2"
+    ;;
   esac
 }
 
 bt() {
+  [[ -n "$2" ]] && MAC_ADRESS="$(bluetoothctl devices | grep "$2" | awk '{print $2}')"
   case $1 in
-    l|list)
-      bluetoothctl devices
-      ;;
-    c|connect)
-      MAC_ADRESS="$(bluetoothctl devices | grep "$2" | awk '{print $2}')"
-      bluetoothctl connect "$MAC_ADRESS"
-      ;;
-    d|disconnect)
-      MAC_ADRESS="$(bluetoothctl devices | grep "$2" | awk '{print $2}')"
+  l | list)
+    bluetoothctl devices
+    ;;
+  lc | list-connected)
+    bluetoothctl devices Connected
+    ;;
+  c | connect)
+    bluetoothctl connect "$MAC_ADRESS"
+    ;;
+  d | disconnect)
+    bluetoothctl disconnect "$MAC_ADRESS"
+    ;;
+  t | toggle)
+    DEVICES_CONNECTED="$(bluetoothctl devices Connected | awk '{print $2}')"
+    if grep -q "$MAC_ADRESS" <<<"${DEVICES_CONNECTED[@]}"; then
       bluetoothctl disconnect "$MAC_ADRESS"
-      ;;
+    else
+      bluetoothctl connect "$MAC_ADRESS"
+    fi
+    ;;
   esac
 }
 
 reload() {
   killall -q "$1"
-  "$@" & disown
+  "$@" &
+  disown
 }
 
 back-edit() {
@@ -150,12 +163,11 @@ cleanup() {
   trash-empty
 }
 
-
 video-wallpaper() {
   VIDEO_PATH="/tmp/video.webm"
-  [[ -f "$VIDEO_PATH" ]] && rm 
+  [[ -f "$VIDEO_PATH" ]] && rm
   ytdl -o "$VIDEO_PATH" "$1" &&
-  mpvpaper -f -o "no-audio loop --speed=3" eDP-1 "$VIDEO_PATH"
+    mpvpaper -f -o "no-audio loop --speed=3" eDP-1 "$VIDEO_PATH"
 }
 
 ## Programing ##
@@ -163,7 +175,7 @@ video-wallpaper() {
 mksh() {
   if [[ ! -e "$1" ]]; then
     if [[ -d $(dirname "$1") ]]; then
-      echo -e "#!/usr/bin/env bash\n\n" > "$1" 
+      echo -e "#!/usr/bin/env bash\n\n" >"$1"
       chmod +x "$1"
       if [[ "$2" = "-e" ]]; then
         neo "$1"
@@ -176,11 +188,11 @@ mksh() {
 mkpy() {
   if [[ ! -e "$1" ]]; then
     if [[ -d $(dirname "$1") ]]; then
-      echo -e "#!/usr/bin/env python3" > "$1"
+      echo -e "#!/usr/bin/env python3" >"$1"
       if [[ -n "$2" ]]; then
-        echo "import $2" >> "$1"
+        echo "import $2" >>"$1"
       fi
-      echo -e "\n\ndef main() -> None:\n  ...\n\nif __name__ == \"__main__\":\n  main()" >> "$1"
+      echo -e "\n\ndef main() -> None:\n  ...\n\nif __name__ == \"__main__\":\n  main()" >>"$1"
       chmod +x "$1"
     fi
   fi
@@ -190,6 +202,6 @@ venv() {
   if [[ "$1" = "create" ]]; then
     python -m virtualenv venv
   elif [[ "$1" = "init" ]]; then
-    source venv/bin/activate
+    source "venv/bin/activate"
   fi
 }

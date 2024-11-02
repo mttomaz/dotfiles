@@ -1,31 +1,31 @@
 #!/usr/bin/env bash
 
-source $HOME/scripts/colors.conf
+source "$HOME/scripts/colors.conf"
 
 # Compact
 c() {
   METHODS="tar.gz tar.bz2 tar.xz tar.zst gz bz2 xz zst tar tbz2 tgz zip 7z rar"
-  [[ -d "$1" ]] && METHODS="$(echo $METHODS | sed "s/ gz bz2 xz zst//")"
+  [[ -d "$1" ]] && METHODS="$(echo "$METHODS" | sed "s/ gz bz2 xz zst//")"
   if [[ -e "$1" ]]; then
     METHOD="$(echo "$METHODS" | tr \  \\n | fzf --prompt="Choose a compression method: ")"
 
     case "$METHOD" in
-      tar.gz)  tar czvf $1.tar.gz $1                           ;;
-      tar.bz2) tar cjvf $1.tar.bz2 $1                          ;;
-      tar.xz)  tar cJvf $1.tar.xz $1                           ;;
-      tar.zst) tar cvf $1.tar.zst -I "zstd --ultra -22 -T0" $1 ;;
-      tar)     tar cvf $1.tar $1                               ;;
-      gz)      gzip -9 -k $1                                   ;;
-      bz2)     bzip2 -9 -k $1                                  ;;
-      xz)      xz -9 -k $1                                     ;;
-      zst)     zstd --ultra -22 -T0 -f -v $1                   ;;
-      tgz)     tar czvf $1.tgz $1                              ;;
-      tbz2)    tar cjvf $1.tbz2 $1                             ;;
-      zip)     zip -r $1.zip $1                                ;;
-      7z)      7z a $1.7z $1                                   ;;
-      rar)     rar a $1.rar $1                                 ;;
+      tar.gz)  tar czvf "$1.tar.gz" "$1"                           ;;
+      tar.bz2) tar cjvf "$1.tar.bz2" "$1"                          ;;
+      tar.xz)  tar cJvf "$1.tar.xz" "$1"                           ;;
+      tar.zst) tar cvf "$1.tar.zst" -I "zstd --ultra -22 -T0" "$1" ;;
+      tar)     tar cvf "$1.tar" "$1"                               ;;
+      gz)      gzip -9 -k "$1"                                     ;;
+      bz2)     bzip2 -9 -k "$1"                                    ;;
+      xz)      xz -9 -k "$1"                                       ;;
+      zst)     zstd --ultra -22 -T0 -f -v "$1"                     ;;
+      tgz)     tar czvf "$1.tgz" "$1"                              ;;
+      tbz2)    tar cjvf "$1.tbz2" "$1"                             ;;
+      zip)     zip -r "$1.zip" "$1"                                ;;
+      7z)      7z a "$1.7z" "$1"                                   ;;
+      rar)     rar a "$1.rar" "$1"                                 ;;
       *)
-        echo -e "${bold_red}\"$METHOD\" is not available.${end}" ;;
+        echo -e "${bold_red}\"$METHOD\" is not available.${end}"   ;;
     esac
   else
     echo -e "${bold_red}\"$1\" is not a valid file.${end}"
@@ -35,31 +35,27 @@ c() {
 # Extract
 x() {
   if [[ -f $1 ]]; then
-    case $1 in
-      *.tar.gz)   tar xvf    $1  ;;
-      *.tar.bz2)  tar xvf    $1  ;;
-      *.tar.xz)   tar xvf    $1  ;;
-      *.tar.zst)  tar xvf $1 -I "zstd -T0" ;;
-      *.tar)      tar xvf    $1  ;;
-      *.gz)       gunzip     $1  ;;
-      *.bz2)      bunzip2    $1  ;;
-      *.xz)       xz -d      $1  ;;
-      *.zst)      zstd -d -T0 -f -v $1 ;;
-      *.tgz)      tar xzf    $1  ;;
-      *.tbz2)     tar xjf    $1  ;;
-      *.zip)      unzip      $1  ;;
-      *.7z)       7z x       $1  ;;
-      *.rar)      unrar x    $1  ;;
-      *)          echo "${bold_red}\"$1\" cannot be extracted via extract().${end}" ;;
+    case "$1" in
+      *.tar.gz)   tar xvf "$1"               ;;
+      *.tar.bz2)  tar xvf "$1"               ;;
+      *.tar.xz)   tar xvf "$1"               ;;
+      *.tar.zst)  tar xvf "$1" -I "zstd -T0" ;;
+      *.tar)      tar xvf "$1"               ;;
+      *.gz)       gunzip  "$1"               ;;
+      *.bz2)      bunzip2 "$1"               ;;
+      *.xz)       xz -d   "$1"               ;;
+      *.zst)      zstd -d "$1" -T0 -f -v     ;;
+      *.tgz)      tar xzf "$1"               ;;
+      *.tbz2)     tar xjf "$1"               ;;
+      *.zip)      unzip   "$1"               ;;
+      *.7z)       7z x    "$1"               ;;
+      *.rar)      unrar x "$1"               ;;
+      *)
+        echo "${bold_red}\"$1\" cannot be extracted via x().${end}" ;;
     esac
   else
     echo -e "${bold_red}\"$1\" is not a valid file.${end}"
   fi
 }
 
-#if [[ "$1" = "c" ]]; then
-#  compact "$2"
-#elif [[ "$1" = "x" ]]; then
-#  extract "$2"
-#fi
 "$@"
