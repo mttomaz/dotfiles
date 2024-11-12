@@ -24,9 +24,13 @@ export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 export XCURSOR_PATH="/usr/share/icons:$XDG_DATA_HOME/icons"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export NPM_CONFIG_INIT_MODULE="$XDG_CONFIG_HOME/npm/config/npm-init.js"
+export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
+export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
+export DOTNET_CLI_HOME="$XDG_DATA_HOME/dotnet"
 export PARALLEL_HOME="$XDG_CONFIG_HOME/parallel"
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 export LESSHISTFILE="$XDG_CACHE_HOME/less_history"
 
 # Other variables
@@ -45,8 +49,9 @@ export PGID=$(id -g)
 
 # Variables needed to work with flutter
 export _JAVA_AWT_WM_NONREPARENTING=1
-export CHROME_EXECUTABLE=/usr/bin/chromium
+export CHROME_EXECUTABLE="/usr/bin/chromium"
 export ANDROID_HOME="$XDG_DATA_HOME/Android"
+export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export CXX="clang++"
 
