@@ -11,8 +11,13 @@ return {
       javascript = { "prettier" },
       json = { "prettier" },
       lua = { "stylua" },
-      python = { "black", "ruff" },
+      python = { "ruff_format" },
       yaml = { "prettier" },
+    },
+    formatters = {
+      ruff_format = {
+        prepend_args = { "--config", "indent-width=2" },
+      },
     },
   },
 }

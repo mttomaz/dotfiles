@@ -7,10 +7,10 @@ return {
       "lua-language-server", -- lua
       "shellcheck", -- sh, bash
       "bash-language-server", -- bash
-      "black", -- python
       "ruff", -- python
       "rust-analyzer", -- rust
       "yaml-language-server", -- yaml
+      "java-language-server", -- java
       "hadolint", -- docker
       "css-lsp", -- css
       "prettier", -- html, css, javascript, json
