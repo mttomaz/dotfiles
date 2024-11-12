@@ -1,0 +1,28 @@
+;; widgets/sidebar/sidebar.yuck
+
+;; Widgets
+
+; Main Widget
+(defwidget sidebar_widget []
+  (box
+    :class "sidebar"
+    :orientation "v"
+    :spacing 20
+    :space-evenly false
+))
+
+
+;; Main Window
+(defwindow sidebar
+  :monitor 0
+  :windowtype "dock"
+  :stacking "overlay"
+  :geometry
+    (geometry
+      :x "-4px"
+      :y "36px"
+      :width "25%"
+      :height "35%"
+      :anchor "top right")
+  (sidebar_widget)
+)

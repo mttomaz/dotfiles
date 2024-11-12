@@ -2,8 +2,8 @@
 
 [manager]
 sort_dir_first = true
-sort_by = "extension"
-linemode = "permissions"
+sort_by = "natural"
+linemode = "size"
 
 # Plugins
 ## Git

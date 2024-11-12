@@ -1,22 +1,25 @@
-;; src/yuck/calendar.yuck
+;; widgets/calendar/calendar.yuck
 
 ;; Widgets
+
+; Main Widget
 (defwidget cal []
   (box
     :class "calendar"
-  (calendar)))
+  (calendar)
+))
+
 
 ;; Main Window
 (defwindow calendar
-  ; :monitor "eDP"
   :monitor 0
   :windowtype "dock"
   :stacking "overlay"
   :geometry
     (geometry
-      :x "8px"
-      :y "48px"
-      :width "17%"
-      :height "16%"
+      :x "4px"
+      :y "36px"
+      :width "14%"
+      :height "18%"
       :anchor "top left")
 (cal))

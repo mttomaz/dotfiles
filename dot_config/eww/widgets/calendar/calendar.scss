@@ -1,0 +1,39 @@
+// src/scss/calendar.scss
+
+.calendar {
+  font-size: 14px;
+  font-weight: 700;
+  padding: 4px;
+  background-color: #7e9cd8;
+  & calendar {
+    background-color: #16161d;
+    color: #dcd7ba; // Outros dias do mês
+  }
+}
+
+// Dia selecionado
+calendar:selected {
+  border-radius: 4px;
+  background-color: #7e9cd8;
+  color: #16161d;
+}
+
+// Mês e Ano
+calendar.header {
+  font-weight: 900;
+  color: #727169;
+}
+
+// Botões para selecionar mês e ano
+calendar.button {
+  color: #727169;
+}
+
+// Dias da semana
+calendar.highlight {
+  color: #9cabca;
+}
+// Dias que não fazem parte do mês atual
+calendar:indeterminate {
+  color: #727169;
+}

@@ -29,7 +29,7 @@ bspc config external_rules_command "$HOME/.config/bspwm/external_rules"
 # Ordering windows
 bspc rule -a kitty            desktop='^1' follow=on
 bspc rule -a Google-chrome    desktop='^2' follow=on
-bspc rule -a Brave-browser    desktop='^2' follow=on
+bspc rule -a firefox          desktop='^2' follow=on
 bspc rule -a zen-alpha        desktop='^2' follow=on
 bspc rule -a discord          desktop='^3'
 bspc rule -a vesktop          desktop='^3'
@@ -37,7 +37,6 @@ bspc rule -a TelegramDesktop  desktop='^3'
 bspc rule -a vlc              desktop='^4'
 bspc rule -a Code             desktop='^5'
 bspc rule -a jetbrains-studio desktop='^5'
-bspc rule -a Gimp-2.10        desktop='^5'
 bspc rule -a Steam            desktop='^6'
 bspc rule -a Lutris           desktop='^7'
 bspc rule -a qBittorrent      desktop='^6'
@@ -48,14 +47,20 @@ bspc rule -a feh                 state=floating
 bspc rule -a imv                 state=floating
 bspc rule -a org.gnome.Nautilus  state=floating
 bspc rule -a gnome-calculator    state=floating
-bspc rule -a Gufw.py             state=floating
 bspc rule -a Gcolor3             state=floating
 bspc rule -a File-roller         state=floating
 bspc rule -a Pcmanfm             state=floating
 bspc rule -a Picture-in-Picture  state=floating
+bspc rule -a "*:*:Picture-in-Picture" state=floating sticky=on
+
 
 # Games
-bspc rule -a hl2_linux desktop='^5'
+bspc rule -a tf_linux64 desktop='^5'
+bspc rule -a Unturned   desktop='^5'
+bspc rule -a Aragami    desktop='^5'
+bspc rule -a ATLauncher desktop='^5'
+bspc rule -a Minecraft  desktop='^5'
+bspc rule -a Sober      desktop='^5'
 
 steamlib=$HOME/.steam/steam/
 mygames=$(find "${steamlib}/steamapps" -iname "*.acf" | awk -F'[_.]' '{print $(NF-1)}')
@@ -66,9 +71,9 @@ done
 
 ## Autostart
 # Polybar
-"$HOME/.config/polybar/launch.sh" &
+# "$HOME/.config/polybar/launch.sh" &
 
 # Eww bar
-# "$HOME"/.config/eww/launch.sh &
+"$HOME"/.config/eww/launch.sh &
 
 killall -q sxhkd; sxhkd -c "$HOME/.config/bspwm/sxhkdrc" &

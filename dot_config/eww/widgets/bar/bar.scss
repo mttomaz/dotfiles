@@ -1,0 +1,95 @@
+// widgets/bar/bar.scss
+
+.bar {
+  font-size: 14px;
+  font-weight: 700;
+  background-color: #16161d;
+  color: #c8c093;
+}
+
+.clock {
+  padding: 0 6px;
+}
+
+.workspaces {
+  font-weight: 900;
+  padding: 2px 6px;
+
+  button {
+    padding: 0 4px;
+  }
+  &_focused {
+    color: #c8c093;
+  }
+  &_occupied {
+    color: #717c7c;
+  }
+  &_urgent {
+    color: #ff5d62;
+  }
+  &_empty {
+    color: #363646;
+  }
+}
+
+.weather {
+  padding: 0 6px;
+}
+
+.music {
+  font-weight: 900;
+  padding: 0 6px;
+}
+
+.tray {
+  padding: 0 6px;
+}
+
+.tray menu {
+  border: 3px solid #9cabca;
+  background-color: #16161d;
+
+  > menuitem {
+    padding: 2px 4px;
+
+    &:disabled label {
+      color: #727169;
+    }
+
+    &:hover {
+      color: #16161d;
+      background-color: #9cabca;
+    }
+  }
+
+  separator {
+    background-color: #252535;
+
+    &:last-child {
+      padding: unset;
+    }
+  }
+}
+
+.network {
+  padding: 0 8px;
+}
+
+.memory {
+  padding: 0 6px;
+}
+
+.battery {
+  padding: 0 6px;
+  & label:last-child {
+    padding-left: 8px;
+  }
+}
+
+.left {
+  margin: 4px 0 4px 4px;
+}
+
+.right {
+  margin: 4px 4px 4px 0;
+}

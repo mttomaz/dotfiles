@@ -1,14 +1,20 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-## Eww path
-CONFIG_PATH="$HOME/.config/eww"
-EWW="/usr/bin/eww -c $CONFIG_PATH"
+# EWW Path
+CONFIG_PATH="$HOME/Documents/dev/eww"
+EWW="eww -c $CONFIG_PATH"
+NETWORK_INTERFACE="$(ip route | awk '/default/ {print $5}')"
+export NETWORK_INTERFACE
 
-if [[ ! $(pidof eww) ]]; then
+if ! pidof eww; then
   ${EWW} daemon &
   sleep 0.25
-  waybar &
+  ${EWW} open bar
+  if pidof bspwm; then
+    sleep 0.25
+    xdo lower -N "Eww"
+    xdo above -N "Eww" -t "$(xdo id -N Bspwm -n root)"
+  fi
 else
   ${EWW} kill
-  killall eww waybar
 fi

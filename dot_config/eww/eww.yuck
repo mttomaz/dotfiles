@@ -1,24 +1,9 @@
-;; Variables
-(deflisten music_status "playerctl --player=spotify status --follow")
-; (deflisten music_title "scripts/getTitle.sh")
-(deflisten music_title "playerctl --player=spotify metadata -f '{{title}}' --follow")
-; (deflisten music_author "scripts/getAuthor.sh")
-(deflisten music_author "playerctl --player=spotify metadata -f '{{artist}}' --follow")
-(deflisten music_cover "scripts/getCover.sh")
+;; eww.yuck
 
+;; -- Widgets --
 ;; Bar
-(include './src/yuck/bar.yuck')
-;; Battery
-(include './src/yuck/battery.yuck')
-;; Calendar
-(include './src/yuck/calendar.yuck')
-;; Monitor
-(include './src/yuck/monitor.yuck')
-;; Music
-(include './src/yuck/music.yuck')
+(include "widgets/bar/bar.yuck")
 ;; Sidebar
-(include './src/yuck/sidebar.yuck')
-;; Toast
-(include './src/yuck/toast.yuck')
-
-(include './src/updates/updates.yuck')
+(include "widgets/sidebar/sidebar.yuck")
+;; Calendar
+(include "widgets/calendar/calendar.yuck")
