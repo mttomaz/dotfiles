@@ -1,6 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-source "$HOME/scripts/colors.conf"
+# Colors
+END="\033[0m"
+WHITE="\033[1;97m"
+GREEN="\033[1;32m"
 
 pidof -q swaybg && killall swaybg
 
@@ -30,5 +33,5 @@ fi
 sed -i "/${WALLPAPER_NAME}/d" "$CACHE_FILE"
 echo "$NEXT_WALLPAPER" >"$XDG_CACHE_HOME/scripts/current_wallpaper"
 
-echo -e "  Selected the wallpaper: ${bold_green}\"${WALLPAPER_NAME}\"${end},
-       \r  and removed it from ${bold_white}\"${CACHE_FILE}\"${end}."
+echo -e "  Selected the wallpaper: ${GREEN}\"${WALLPAPER_NAME}\"${END},
+       \r  and removed it from ${WHITE}\"${CACHE_FILE}\"${END}."

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 icon_font="Material-Design-Icons"
 font="JetBrains Mono Medium Nerd Font Complete"

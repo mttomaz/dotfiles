@@ -1,24 +1,26 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-source "$HOME/scripts/colors.conf"
-
+# Colors
+END="\033[0m"
+RED="\033[0;31m"
+GREEN="\033[1;32m"
 
 path="$XDG_PICTURES_DIR/wallpapers"
 images=($(ls "$path" | sed "/README.md/d"))
 
 cd "$path" || return
 
-if ( grep -q ".png" <<< "${images[@]}" ) ; then
-  for i in ${images[@]} ; do
-    image_type=$( ls $i | cut -d '.' -f 2 )
+if (grep -q ".png" <<<"${images[@]}"); then
+  for i in ${images[@]}; do
+    image_type=$(ls $i | cut -d '.' -f 2)
 
-    if [[ "$image_type" == "png" ]] ; then
-      echo -e "Converting ${bold_green}$i${end}\n"
-      new_image="$( ls "$i" | cut -d '.' -f 1 ).jpg"
+    if [[ "$image_type" == "png" ]]; then
+      echo -e "Converting ${GREEN}$i${END}\n"
+      new_image="$(ls "$i" | cut -d '.' -f 1).jpg"
 
       convert "$i" "$new_image" && rm "$i"
     fi
   done
 else
-  echo -e "${bold_red}No png images to convert${end}\n"
+  echo -e "${RED}No png images to convert${END}\n"
 fi

@@ -1,6 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-source "$HOME/scripts/colors.conf"
+# Colors
+END="\033[0m"
+RED="\033[0;31m"
+GREEN="\033[1;32m"
 
 declare -A resolutions
 resolutions[FHD]="1920x1080"
@@ -14,11 +17,11 @@ declare -a wrong_resolutions
 for image in "${wallpapers[@]}"; do
   suposed_size=$(echo "$image" | awk -F "[()]" '{ print $2 }')
   actual_size=$(identify -format "%wx%h" "$path/$image")
- 
+
   for size in "${!resolutions[@]}"; do
     if [[ "$suposed_size" == "$size" ]]; then
       if [[ "$actual_size" != "${resolutions[$size]}" ]]; then
-        echo -e "${red}$image${end}\n  Size: $actual_size\n"
+        echo -e "${RED}$image${END}\n  Size: $actual_size\n"
         wrong_resolutions+=("yes")
       fi
     fi
@@ -26,5 +29,5 @@ for image in "${wallpapers[@]}"; do
 done
 
 if [[ ! ${wrong_resolutions[*]} ]]; then
-  echo -e "${bold_green}There's no images with wrong resolutions${end}\n" 
+  echo -e "${GREEN}There's no images with wrong resolutions${END}\n"
 fi

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 get-date() {
   date "+%A_%R_%d-%m-%y"
@@ -14,25 +14,24 @@ freeze-select() {
 
 outline_color="0.38,0.68,0.93"
 
-
 while [[ "$1" ]]; do
   case "$1" in
-    select|s)
-      freeze-select
-      maim -usk -c $outline_color -b 4 "$HOME/Pictures/screenshots/$(get-date).png"
-      kill $feh_pid
-      ;;
-    select-copy|scp)
-      freeze-select
-      maim -usk -c $outline_color -b 4 | xclip -selection clipboard -t image/png
-      kill $feh_pid
-      ;;
-    full|f)
-      maim -u "$HOME/Pictures/screenshots/$(get-date).png"
-      ;;
-    full-copy|fcp)
-      maim -u | xclip -selection clipboard -t image/png
-      ;;
+  select | s)
+    freeze-select
+    maim -usk -c $outline_color -b 4 "$HOME/Pictures/screenshots/$(get-date).png"
+    kill $feh_pid
+    ;;
+  select-copy | scp)
+    freeze-select
+    maim -usk -c $outline_color -b 4 | xclip -selection clipboard -t image/png
+    kill $feh_pid
+    ;;
+  full | f)
+    maim -u "$HOME/Pictures/screenshots/$(get-date).png"
+    ;;
+  full-copy | fcp)
+    maim -u | xclip -selection clipboard -t image/png
+    ;;
   esac
   exit
 done

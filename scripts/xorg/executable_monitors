@@ -1,8 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 POSITION="$(cat "$XDG_CACHE_HOME/scripts/monitor_position")"
 WALLPAPER="$(cat "$XDG_CACHE_HOME/scripts/current_wallpaper")"
-
 
 monitor_add() {
   xrandr --output eDP --primary --mode 1920x1080 --rotate normal --output HDMI-A-0 --mode 1920x1080 --rotate normal $POSITION eDP
@@ -13,20 +12,20 @@ monitor_add() {
 monitor_remove() {
   xrandr --output HDMI-A-0 --off
   bspc config remove_unplugged_monitors true
-  bpsc config remove_disabled_monitors  true
+  bpsc config remove_disabled_monitors true
 }
-
 
 xev -root -event randr -1 | while read -r event; do
   EVENT="$(echo "$event" | awk -F'[, ]' '/XRROutputChangeNotifyEvent/ { print $(NF-3)}')"
   case "$EVENT" in
-    RR_Connected)
-      monitor_add
-      ;;
-    RR_Disconnected)
-      monitor_remove
-      ;;
-    *) echo ""
+  RR_Connected)
+    monitor_add
+    ;;
+  RR_Disconnected)
+    monitor_remove
+    ;;
+  *)
+    echo ""
     ;;
   esac
 done

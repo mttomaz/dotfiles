@@ -1,10 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 icon_font="Material-Design-Icons"
 font="JetBrains Mono Medium Nerd Font Complete"
 image_path="$(cat ~/.cache/scripts/current_wallpaper)"
 temp_path="/tmp/temp_image.png"
-echo $image_path
 
 background_ring="#1a1b26"
 background_inside="#16161ecc"

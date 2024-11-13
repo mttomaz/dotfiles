@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 STEAM_PATH="$HOME/.local/share/Steam"
 STEAMAPPS_PATH="$STEAM_PATH/steamapps"

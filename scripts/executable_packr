@@ -1,6 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-source "$HOME/scripts/colors.conf"
+# Colors
+END="\033[0m"
+RED="\033[1;31m"
 
 # Compact
 c() {
@@ -25,10 +27,10 @@ c() {
       7z)      7z a "$1.7z" "$1"                                   ;;
       rar)     rar a "$1.rar" "$1"                                 ;;
       *)
-        echo -e "${bold_red}\"$METHOD\" is not available.${end}"   ;;
+        echo -e "${RED}\"$METHOD\" is not available.${END}"   ;;
     esac
   else
-    echo -e "${bold_red}\"$1\" is not a valid file.${end}"
+    echo -e "${RED}\"$1\" is not a valid file.${END}"
   fi
 }
 
@@ -51,10 +53,10 @@ x() {
       *.7z)       7z x    "$1"               ;;
       *.rar)      unrar x "$1"               ;;
       *)
-        echo "${bold_red}\"$1\" cannot be extracted via x().${end}" ;;
+        echo "${RED}\"$1\" cannot be extracted via x().${END}" ;;
     esac
   else
-    echo -e "${bold_red}\"$1\" is not a valid file.${end}"
+    echo -e "${RED}\"$1\" is not a valid file.${END}"
   fi
 }
 

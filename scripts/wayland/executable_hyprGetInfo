@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 path="$HOME/$(date '+%d|%m - %H:%M:%S').txt"
 touch "$path"
-hyprctl activewindow > "$path"
+hyprctl activewindow >"$path"
