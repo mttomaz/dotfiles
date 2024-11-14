@@ -169,6 +169,7 @@ cleanup() {
     doas xbps-remove -Oo
   fi
   flatpak remove --unused
+  docker image prune
   trash-empty
 }
 
