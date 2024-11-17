@@ -192,25 +192,6 @@ mksh() {
   fi
 }
 
-# Python
-mkpy() {
-  if [[ ! -e "$1" ]]; then
-    if [[ -d $(dirname "$1") ]]; then
-      echo -e "#!/usr/bin/env python3" >"$1"
-      if [[ -n "$2" ]]; then
-        echo "import $2" >>"$1"
-      fi
-      echo -e "\n\ndef main() -> None:\n  ...\n\nif __name__ == \"__main__\":\n  main()" >>"$1"
-      chmod +x "$1"
-    fi
-  fi
-}
-
-venv() {
-  if [[ "$1" = "create" ]]; then
-    python -m virtualenv venv
-  elif [[ "$1" = "init" ]]; then
-    # shellcheck disable=SC1091
-    source "venv/bin/activate"
-  fi
-}
+# Dev Script
+# shellcheck disable=SC1091
+source "$HOME/scripts/dev"

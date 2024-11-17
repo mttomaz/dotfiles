@@ -1,0 +1,99 @@
+#!/bin/bash
+
+# Colors
+END="\033[0m"
+GREEN="\033[1;32m"
+
+edit-main() {
+  [[ -f "$1" ]] && "$EDITOR" "$1"
+}
+
+# shellcheck disable=SC2317,SC1091
+python-project() {
+  init() {
+    cd "$1" || return
+    if [[ -d "$PWD/venv" ]]; then
+      source "$PWD/venv/bin/activate"
+    fi
+  }
+  new() {
+    # Creating project directory
+    echo -e "${GREEN}Creating project directory${END}"
+    /bin/mkdir "$1"
+    cd "$1" || return
+    # Creating venv
+    echo -e "${GREEN}Creating venv${END}"
+    CREATE_VENV="$(echo -e "yes\nno" | fzf --prompt "Create venv? ")"
+    [[ "$CREATE_VENV" == "yes" ]] && python -m virtualenv venv
+    # Creating main.py
+    echo -e "${GREEN}Creating main.py${END}"
+    echo -e "#!/usr/bin/env python3\n\n" >"${1}/main.py"
+    echo -e "def main() -> None:\n  ...\n\nif __name__ == \"__main__\":\n  main()" >>"${1}/main.py"
+    chmod +x "${1}/main.py"
+  }
+  "$@"
+  edit-main "main.py"
+}
+
+# shellcheck disable=SC2317
+rust-project() {
+  init() {
+    cd "$1" || return
+  }
+  new() {
+    echo -e "${GREEN}Creating $(basename "$1") project using cargo${END}"
+    cargo new "$1" --bin
+    cd "$1" || return
+  }
+  "$@"
+  edit-main "src/main.rs"
+}
+
+# shellcheck disable=SC2317
+flutter-project() {
+  init() {
+    cd "$1" || return
+  }
+  new() {
+    echo -e "${GREEN}Creating $(basename "$1") project using flutter${END}"
+    flutter create "$1"
+    cd "$1" || return
+  }
+  "$@"
+  edit-main "lib/main.dart"
+}
+
+# shellcheck disable=SC2317
+dev() {
+  DEV_PATH="$HOME/Documents/dev"
+
+  get-project() {
+    declare -a PROJECTS
+    for i in "$DEV_PATH"/*/*; do
+      PROJECTS+=("$(echo "$i" | awk -F/ '{print $(NF-1)"/"$NF}')")
+    done
+
+    PROJECT="$(echo "${PROJECTS[@]}" | tr \  \\n | fzf --prompt="Select a project: ")"
+    echo "$PROJECT"
+  }
+
+  init() {
+    PROJECT="$(get-project)"
+    PROJECT_TYPE="$(echo "$PROJECT" | awk -F/ '{print $1}')"
+    PROJECT_PATH="$DEV_PATH/$PROJECT"
+    echo "$PROJECT_PATH"
+
+    "${PROJECT_TYPE}-project" init "$PROJECT_PATH"
+  }
+
+  new() {
+    PROJECT_TYPE="$(echo python rust flutter | tr \  \\n | fzf --prompt="Select a project type: ")"
+    PROJECT_PATH="$DEV_PATH/$PROJECT_TYPE/${1}"
+    if [[ ! -d "$PROJECT_PATH" ]]; then
+      "${PROJECT_TYPE}-project" new "$PROJECT_PATH"
+    else
+      "${PROJECT_TYPE}-project" init "$PROJECT_PATH"
+    fi
+  }
+  "$@"
+}
