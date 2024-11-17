@@ -36,7 +36,7 @@ alias set-xbg='feh --no-fehbg --bg-fill'
 alias set-wbg='swaybg -i'
 alias sticky='flameshot gui -s --pin'
 alias gdu='gdu --si'
-alias rr='curl -s -L http://bit.ly/10hA8iC | bash'
+alias rr='curl -sL http://bit.ly/10hA8iC | bash'
 
 # GIT Aliases
 alias gits='git status'
@@ -70,11 +70,8 @@ mnt-pendrive() {
 }
 
 mkcd() {
-  if [[ ! -d $1 ]]; then
-    mkdir "$1" && cd "$1" || return
-  else
-    cd "$1" || return
-  fi
+  [[ ! -d $1 ]] && mkdir "$1"
+  cd "$1" || return
 }
 
 grepn() {
@@ -147,6 +144,7 @@ cleanup() {
   ID="$(awk -F= '/^ID=/ {gsub("\"","");print $2}' /etc/os-release)"
   if [[ "$ID" == "arch" ]]; then
     if [[ -n "$(pacman -Qtdq)" ]]; then
+      # shellcheck disable=SC2046
       doas pacman -Rns $(pacman -Qtdq)
     else
       echo -e "             No orphans?
@@ -175,7 +173,7 @@ cleanup() {
 
 video-wallpaper() {
   VIDEO_PATH="/tmp/video.webm"
-  [[ -f "$VIDEO_PATH" ]] && rm
+  [[ -f "$VIDEO_PATH" ]] && rm "$VIDEO_PATH"
   ytdl -o "$VIDEO_PATH" "$1" &&
     mpvpaper -f -o "no-audio loop --speed=3" eDP-1 "$VIDEO_PATH"
 }
@@ -212,6 +210,7 @@ venv() {
   if [[ "$1" = "create" ]]; then
     python -m virtualenv venv
   elif [[ "$1" = "init" ]]; then
+    # shellcheck disable=SC1091
     source "venv/bin/activate"
   fi
 }

@@ -13,10 +13,14 @@ return {
       lua = { "stylua" },
       python = { "ruff_format" },
       yaml = { "prettier" },
+      rust = { "rustfmt" },
     },
     formatters = {
       ruff_format = {
         prepend_args = { "--config", "indent-width=2" },
+      },
+      rustfmt = {
+        prepend_args = { "--config", "tab_spaces=2" },
       },
     },
   },

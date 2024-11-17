@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 INPUT_EXT=".mkv"
 OUTPUT_EXT=".mp4"
