@@ -47,6 +47,11 @@ export TZ="America/Sao_Paulo"
 export PUID=$(id -u)
 export PGID=$(id -g)
 
+## Theming
+export GTK_THEME="Kanagawa-B-LB"
+export XCURSOR_THEME="cz-Hickson-Black"
+export XCURSOR_SIZE=24
+
 # Variables needed to work with flutter
 export _JAVA_AWT_WM_NONREPARENTING=1
 export CHROME_EXECUTABLE="/usr/bin/chromium"
