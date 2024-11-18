@@ -2,7 +2,7 @@
 
 # EWW Path
 CONFIG_PATH="$HOME/.config/eww/"
-EWW="eww -c $CONFIG_PATH"
+export EWW="eww -c $CONFIG_PATH"
 NETWORK_INTERFACE="$(ip route | awk '/default/ {print $5}')"
 export NETWORK_INTERFACE
 

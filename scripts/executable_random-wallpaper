@@ -5,14 +5,11 @@ END="\033[0m"
 WHITE="\033[1;97m"
 GREEN="\033[1;32m"
 
-pidof -q swaybg && killall swaybg
-
 WALL_PATH="$XDG_PICTURES_DIR/wallpapers"
 CACHE_FILE="$XDG_CACHE_HOME/scripts/wallpapers_left"
 
 reset() {
-  WALLPAPERS="$(find "$WALL_PATH" -iname "*.jpg" | shuf)"
-  for image in "${WALLPAPERS[@]}"; do
+  find "$WALL_PATH" -iname "*.jpg" | shuf | while read -r image; do
     echo "$image" >>"$CACHE_FILE"
   done
 }
@@ -21,9 +18,10 @@ reset() {
 [[ -z "$(cat "$CACHE_FILE")" ]] && reset
 
 NEXT_WALLPAPER=$(head -n1 "$CACHE_FILE")
-WALLPAPER_NAME=$(echo "${NEXT_WALLPAPER}" | awk -F'/' '{print $NF}')
+WALLPAPER_NAME="${NEXT_WALLPAPER##*/}"
 
 if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
+  pidof -q swaybg && killall swaybg
   swaybg -i "${NEXT_WALLPAPER}" &
   disown
 else
