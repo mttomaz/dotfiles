@@ -60,7 +60,7 @@ y() {
   yazi --cwd-file "$TMP" "$@"
   if [[ -f "$TMP" ]]; then
     cd "$(cat "$TMP")" || return
-    rm "$TMP"
+    /bin/rm "$TMP"
   fi
 }
 

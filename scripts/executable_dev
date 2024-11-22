@@ -90,7 +90,8 @@ dev() {
     PROJECT_TYPE="$(echo python rust flutter | tr \  \\n | fzf --prompt="Select a project type: ")"
     PROJECT_PATH="$DEV_PATH/$PROJECT_TYPE/${1}"
     if [[ ! -d "$PROJECT_PATH" ]]; then
-      "${PROJECT_TYPE}-project" new "$PROJECT_PATH"
+      "${PROJECT_TYPE}-project" new "$PROJECT_PATH" &&
+        git init && touch README.md
     else
       "${PROJECT_TYPE}-project" init "$PROJECT_PATH"
     fi
