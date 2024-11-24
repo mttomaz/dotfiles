@@ -39,9 +39,9 @@ super + shift + x
 
 # Audio control
 {_,shift +} XF86AudioRaiseVolume
-  ~/scripts/vol spotify set 1%+
+  vol.sh spotify set 1%+
 {_,shift +} XF86AudioLowerVolume
-  ~/scripts/vol spotify set 1%-
+  vol.sh spotify set 1%-
 
 XF86AudioMute
   wpctl set-mute @DEFAULT_SINK@ toggle
@@ -60,7 +60,7 @@ super + shift + d
 
 # Screen brightness control
 XF86MonBrightness{Down,Up}
-  ~/scripts/bright {down,up}
+  bright.sh {down,up}
 
 
 # Screenshot hotkeys
