@@ -117,6 +117,7 @@
 
 (defwidget center []
   (box
+    :class "center"
     :orientation "h"
     :space-evenly false
     :halign "center"

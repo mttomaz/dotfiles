@@ -12,14 +12,18 @@
 }
 
 .workspaces {
+  font-size: 10px;
   font-weight: 900;
-  padding: 2px 6px;
+  padding: 0 6px;
 
   button {
     padding: 0 4px;
   }
   &_focused {
     color: #c8c093;
+    label {
+      font-size: 14px;
+    }
   }
   &_occupied {
     color: #717c7c;
@@ -88,8 +92,15 @@
 
 .left {
   margin: 4px 0 4px 4px;
+  padding-bottom: 1px;
+}
+
+.center {
+  margin: 4px 0;
+  padding-bottom: 1px;
 }
 
 .right {
   margin: 4px 4px 4px 0;
+  padding-bottom: 1px;
 }
