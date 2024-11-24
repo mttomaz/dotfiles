@@ -17,7 +17,6 @@ super + b
 # file manager
 super + f
   pcmanfm
-  # nautilus
 
 # calculator
 XF86Calculator
@@ -41,10 +40,8 @@ super + shift + x
 # Audio control
 {_,shift +} XF86AudioRaiseVolume
   ~/scripts/vol spotify set 1%+
-  # {pactl set-sink-volume @DEFAULT_SINK@ +10%,~/.config/polybar/scripts/spotify-module change-volume up}
 {_,shift +} XF86AudioLowerVolume
   ~/scripts/vol spotify set 1%-
-  # {pactl set-sink-volume @DEFAULT_SINK@ -10%,~/.config/polybar/scripts/spotify-module change-volume down}
 
 XF86AudioMute
   wpctl set-mute @DEFAULT_SINK@ toggle
@@ -53,6 +50,12 @@ XF86AudioMicMute
 
 XF86Audio{Play,Prev,Next}
   playerctl {play-pause,previous,next}
+
+super + shift + p
+  st -e pulsemixer
+
+super + shift + d
+  toggle-vesktop.sh
 
 
 # Screen brightness control

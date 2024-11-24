@@ -17,4 +17,5 @@ case $1 in
       done
       printf "\n"
     done
+    printf "\n"
 esac
