@@ -9,27 +9,7 @@ return {
     local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
     local workspace_dir = home .. "/.local/share/jdtls-workspace/" .. project_name
 
-    local system_os = ""
-
-    -- Determine OS
-    if vim.fn.has("mac") == 1 then
-      system_os = "mac"
-    elseif vim.fn.has("unix") == 1 then
-      system_os = "linux"
-    elseif vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
-      system_os = "win"
-    else
-      print("OS not found, defaulting to 'linux'")
-      system_os = "linux"
-    end
-
-    -- Needed for debugging
-    -- local bundles = {
-    --   vim.fn.glob(home .. "/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar"),
-    -- }
-
-    -- Needed for running/debugging unit tests
-    -- vim.list_extend(bundles, vim.split(vim.fn.glob(1, home .. "/.local/share/nvim/mason/share/java-test/*.jar"), "\n"))
+    local system_os = "linux"
 
     -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
     local config = {
@@ -73,8 +53,6 @@ return {
           },
           configuration = {
             updateBuildConfiguration = "interactive",
-            -- TODO Update this by adding any runtimes that you need to support your Java projects and removing any that you don't have installed
-            -- The runtime name parameters need to match specific Java execution environments.  See https://github.com/tamago324/nlsp-settings.nvim/blob/2a52e793d4f293c0e1d61ee5794e3ff62bfbbb5d/schemas/_generated/jdtls.json#L317-L334
             runtimes = {
               {
                 name = "JavaSE-17",
@@ -101,11 +79,6 @@ return {
           signatureHelp = { enabled = true },
           format = {
             enabled = true,
-            -- Formatting works by default, but you can refer to a specific file/URL if you choose
-            -- settings = {
-            --   url = "https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml",
-            --   profile = "GoogleStyle",
-            -- },
           },
           completion = {
             favoriteStaticMembers = {
@@ -144,15 +117,12 @@ return {
         allow_incremental_sync = true,
       },
       init_options = {
-        -- References the bundles defined above to support Debugging and Unit Testing
-        -- bundles = bundles,
         extendedClientCapabilities = jdtls.extendedClientCapabilities,
       },
     }
 
-    -- Needed for debugging
-    config["on_attach"] = function(client, bufnr)
-      jdtls.setup_dap({ hotcodereplace = "auto" })
+    config["on_attach"] = function()
+      -- jdtls.setup_dap({ hotcodereplace = "auto" })
       require("jdtls.dap").setup_dap_main_class_configs()
     end
 
