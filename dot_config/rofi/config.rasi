@@ -1,0 +1,11 @@
+// config.rasi
+configuration {
+  location: 1;
+  show-icons: true;
+  modi: "drun";
+  display-drun: "";
+  drun-display-format: "{name}";
+}
+@import "themes/kanagawa"
+
+// vim:ft=rasi

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 PRIMARY_MONITOR="$(xrandr | awk '/primary/ {print $1}')"
 SECONDARY_MONITOR="$(xrandr | awk '/HDMI/ {print $1}')"
@@ -27,6 +27,7 @@ bspc config presel_feedback_color "#98c379"
 bspc config external_rules_command "$HOME/.config/bspwm/external_rules"
 
 # Ordering windows
+bspc rule -a st               desktop='^1' follow=on
 bspc rule -a kitty            desktop='^1' follow=on
 bspc rule -a Google-chrome    desktop='^2' follow=on
 bspc rule -a firefox          desktop='^2' follow=on
