@@ -10,7 +10,7 @@ down() {
 
 pull() {
   if [ "$1" = "-a" ]; then
-    find "$DCFG/*" -maxdepth 1 -type f -iname "docker-compose.yaml" -exec docker-compose -f {} pull \;
+    find "$DCFG" -maxdepth 2 -type f -iname "docker-compose.yaml" -exec docker-compose -f {} pull \;
     return
   fi
   docker-compose -f "$DCFG/${1}/docker-compose.yaml" pull

@@ -67,4 +67,4 @@ export GI_TYPELIB_PATH="$DESTDIR/usr/local/lib/:$GI_TYPELIB_PATH"
 # libtorch
 export LIBTORCH="$XDG_DATA_HOME/libtorch"
 export LD_LIBRARY_PATH="${LIBTORCH}/lib:$LD_LIBRARY_PATH"
-. "/home/broa/.local/share/cargo/env"
+[[ -d "$XDG_DATA_HOME/cargo/env" ]] && . "$XDG_DATA_HOME/cargo/env"
