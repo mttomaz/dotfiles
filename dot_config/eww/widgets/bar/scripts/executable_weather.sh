@@ -1,11 +1,10 @@
 #!/bin/bash
 
 declare -a weather
-weather_report="$(curl -s "wttr.in/Curitiba?format=%c+%C+%h+%t+%f+%m+%p")"
-# shellcheck disable=SC2048
-for i in ${weather_report[*]}; do
+request="wttr.in/Curitiba?format=%c%7C%C%7C%h%7C%t%7C%f%7C%m%7C%p"
+while read -r i; do
   weather+=("$i")
-done
+done < <(curl -s "$request" | awk -F '|' '{for(i=1; i<=NF; i++) print $i}')
 
 echo "{
   \"cond\":          \"${weather[0]}\",
