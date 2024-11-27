@@ -11,7 +11,7 @@
 ; Get weather report every 30 minutes
 (defpoll weather_report
   :interval "30m"
-  :initial "-273,15°C 💀"
+  :initial "{ \"feels_like\": \"-273,15°C\", \"cond\": \"💀\" }"
   "widgets/bar/scripts/weather.sh")
 
 ; Reveal variables
@@ -39,7 +39,9 @@
   (box
     :class "weather"
     :visible {weather_report != "" ? true : false}
-    (label :text weather_report)
+    :tooltip "${weather_report.text_cond}, ${weather_report.moon}
+${weather_report.precipitation}, ${weather_report.humidity}"
+    (label :text "${weather_report.feels_like} ${weather_report.cond}")
 ))
 
 
@@ -98,7 +100,7 @@
     :class "battery"
     :orientation "h"
     :space-evenly false
-    :visible { EWW_BATTERY != "" ? true : false}
+    :visible {EWW_BATTERY != "" ? true : false}
     (label :text "${round(EWW_BATTERY["total_avg"], 2)}%")
     (label :class "icon" :text {EWW_BATTERY["total_avg"] <= 50 ? "󰁼" : "󰁹" })
 ))
