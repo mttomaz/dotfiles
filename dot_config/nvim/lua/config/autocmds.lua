@@ -14,10 +14,18 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     vim.bo.expandtab = true
   end,
 })
-
 vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("enable_spell"),
   pattern = { "markdown", "html", "txt" },
   callback = function()
     vim.opt_local.spell = true
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("autoformat"),
+  pattern = { "lua" },
+  callback = function()
+    vim.b.autoformat = true
   end,
 })
