@@ -4,6 +4,7 @@ configuration {
   show-icons: true;
   modi: "drun";
   display-drun: "";
+  display-emoji: "";
   drun-display-format: "{name}";
 }
 @import "themes/kanagawa"

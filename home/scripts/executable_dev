@@ -58,6 +58,7 @@ flutter-project() {
     echo -e "${GREEN}Creating $(basename "$1") project using flutter${END}"
     flutter create "$1"
     cd "$1" || return
+    sed -i '/\/\//d' lib/main.dart
   }
   "$@"
   edit-main "lib/main.dart"

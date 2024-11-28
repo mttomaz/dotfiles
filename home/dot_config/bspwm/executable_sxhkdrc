@@ -76,8 +76,7 @@ XF86MonBrightness{Down,Up}
 #  rofi -show window -theme ~/.config/rofi/window-switcher.rasi
 
 super + period
-  rofi -show emoji -theme ~/.config/rofi/emoji.rasi
-
+  rofi -show emoji
 
 super + KP_Decimal
   ~/scripts/getWindowInfo
