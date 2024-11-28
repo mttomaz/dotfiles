@@ -1,6 +1,2 @@
 README.md
 LICENSE
-.config/nvim/lazy-lock.json
-.config/nvim/lazyvim.json
-.config/zsh/.
-.config/zsh/.zprofile
