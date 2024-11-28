@@ -9,6 +9,21 @@ on   = "Q"
 run  = "quit"
 desc = "Exit the process"
 
+[[manager.prepend_keymap]]
+on = ["g", "b"]
+run = "cd $OLDPWD"
+desc = "Go back to initial directory"
+
+[[manager.prepend_keymap]]
+on = ["g", "D"]
+run = "cd ~/Documents/dev"
+desc = "Go to dev directory"
+
+[[manager.prepend_keymap]]
+on = ["g", "o"]
+run = "cd ~/Documents/Obsidian"
+desc = "Go to Obsidian vault"
+
 # Plugins
 ## Smart Enter
 [[manager.prepend_keymap]]
@@ -29,6 +44,6 @@ desc = "Maximize or restore preview"
 
 # Python sorting script
 [[manager.prepend_keymap]]
-on   = "<C-S>"
+on   = "<C-s>"
 run  = 'shell --confirm "python $HOME/Documents/dev/python/attof/main.py"'
 desc = "Sort Downloads directory"
