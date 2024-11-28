@@ -7,3 +7,5 @@
 (include "widgets/sidebar/sidebar.yuck")
 ;; Calendar
 (include "widgets/calendar/calendar.yuck")
+;; Weather
+(include "widgets/weather/weather.yuck")

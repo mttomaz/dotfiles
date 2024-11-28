@@ -1,0 +1,47 @@
+;; widgets/weather/weather.yuck
+
+;; Widgets
+
+; Main Widget
+(defwidget weather_widget []
+  (box
+    :class "weather_border"
+    (box
+      :orientation "h"
+      :class "weather_widget"
+      :space-evenly false
+      (box
+        :class "cond"
+        :orientation "v"
+        :valign "end"
+        :space-evenly false
+        (label :text "${weather_report.moon}" :class "emoji")
+        (label :text "${weather_report.text_cond}")
+      )
+      (box :class "separator")
+      (box
+        :class "metrics"
+        :orientation "v"
+        :valign "end"
+        :space-evenly false
+        (label :xalign 1 :text "${weather_report.temp} 🌡")
+        (label :xalign 1 :text "${weather_report.humidity} 💧")
+        (label :xalign 1 :text "${weather_report.precipitation} ☔")
+        (label :xalign 1 :text "${weather_report.wind} 💨")
+      )
+)))
+
+
+;; Main Window
+(defwindow weather
+  :monitor 0
+  :windowtype "dock"
+  :stacking "overlay"
+  :geometry
+    (geometry
+      :x "110px"
+      :y "36px"
+      :width "9%"
+      :height "8%"
+      :anchor "top left")
+(weather_widget))

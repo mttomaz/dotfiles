@@ -24,6 +24,7 @@
     :class "clock"
     (button
       :onclick "scripts/pop.sh calendar"
+      :tooltip {formattime(EWW_TIME, "%A, %d/%m/%Y")}
       (label :text "${formattime(EWW_TIME, "%H:%M")}")
 )))
 
@@ -36,11 +37,11 @@
 
 
 (defwidget weather []
-  (box
+  (eventbox
     :class "weather"
+    :onhover "${EWW_CMD} open weather"
+    :onhoverlost "${EWW_CMD} close weather"
     :visible {weather_report != "" ? true : false}
-    :tooltip "${weather_report.text_cond}, ${weather_report.moon}
-${weather_report.precipitation}, ${weather_report.humidity}"
     (label :text "${weather_report.feels_like} ${weather_report.cond}")
 ))
 
