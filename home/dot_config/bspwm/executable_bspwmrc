@@ -20,9 +20,9 @@ bspc config single_monocle       true
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-bspc config focused_border_color  "#61afef"
-bspc config normal_border_color   "#1e222a"
-bspc config presel_feedback_color "#98c379"
+bspc config focused_border_color  "#7E9CD8"
+bspc config normal_border_color   "#1F1F28"
+bspc config presel_feedback_color "#76946A"
 
 bspc config external_rules_command "$HOME/.config/bspwm/external_rules"
 
@@ -38,7 +38,7 @@ bspc rule -a TelegramDesktop  desktop='^3'
 bspc rule -a vlc              desktop='^4'
 bspc rule -a Code             desktop='^5'
 bspc rule -a jetbrains-studio desktop='^5'
-bspc rule -a Steam            desktop='^6'
+bspc rule -a steam            desktop='^6'
 bspc rule -a Lutris           desktop='^7'
 bspc rule -a qBittorrent      desktop='^6'
 bspc rule -a DBeaver          dekstop='^6'
@@ -61,10 +61,10 @@ bspc rule -a Unturned   desktop='^5'
 bspc rule -a Aragami    desktop='^5'
 bspc rule -a ATLauncher desktop='^5'
 bspc rule -a Minecraft  desktop='^5'
-bspc rule -a Sober      desktop='^5'
+bspc rule -a org.vinegarhq.Sober desktop='^5'
 
 steamlib=$HOME/.steam/steam/
-mygames=$(find "${steamlib}/steamapps" -iname "*.acf" | awk -F'[_.]' '{print $(NF-1)}')
+mygames=$(find "${steamlib}/steamapps" -maxdepth 1 -iname "*.acf" | awk -F'[_.]' '{print $(NF-1)}')
 
 for game in $mygames; do
   bspc rule -a steam_app_"$game" desktop='^5'

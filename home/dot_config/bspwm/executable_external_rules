@@ -3,16 +3,13 @@
 wid=$1
 class=$2
 
-
 _xprop() {
   xprop -notype -id "$wid" "$1" | cut -d\" -f"$2"
 }
 
 _steam() {
   wm_name="$(_xprop WM_NAME 2)"
-  if [[ "$wm_name" = "Friends List" ]]; then
-    echo "state=floating"
-  elif [[ "$wm_name" = "Steam Guard - Computer Authorization Required" ]]; then
+  if [[ "$wm_name" != "Steam" ]]; then
     echo "state=floating"
   fi
 }
@@ -30,23 +27,22 @@ _spotify() {
   echo "desktop=^4"
 }
 
-
 main() {
   case "$class" in
-    Steam)
-      _steam
-      ;;
-    steam_app_0)
-      _steam_app_0
-      ;;
-    [Ss]potify)
-      _spotify
-      ;;
-    "")
-      sleep 0.2
-      class="$(_xprop WM_CLASS 4)"
-      [[ -n "$class" ]] && main
-      ;;
+  [Ss]team)
+    _steam
+    ;;
+  steam_app_0)
+    _steam_app_0
+    ;;
+  [Ss]potify)
+    _spotify
+    ;;
+  "")
+    sleep 0.2
+    class="$(_xprop WM_CLASS 4)"
+    [[ -n "$class" ]] && main
+    ;;
   esac
 }
 main

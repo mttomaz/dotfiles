@@ -5,7 +5,7 @@ END="\033[0m"
 GREEN="\033[1;32m"
 
 edit-main() {
-  [[ -f "$1" ]] && "$EDITOR" "$1"
+  [[ -f "$1" ]] && "$EDITOR" "$1" || return
 }
 
 # shellcheck disable=SC2317,SC1091

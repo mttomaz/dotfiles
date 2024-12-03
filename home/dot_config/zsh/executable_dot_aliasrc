@@ -49,6 +49,19 @@ giti() {
   echo "$1" >>"$PWD/.gitignore"
 }
 
+# Interactive git diff
+gitdfzf() {
+  [[ -d ".git" ]] || return
+  diff_file="$(git status --short | awk '/^.M/ {print $NF}' | fzf \
+    --preview="git diff --color=always {}" \
+    --bind "ctrl-a:execute(git add {})+reload(git status --short | awk '/^.M/ {print \$NF}')")"
+  if [[ -n "$diff_file" ]]; then
+    neo "$diff_file"
+    printf "Add file? (y/n)" && read -r addfile
+    [[ "$addfile" = "y" ]] && git add "$diff_file"
+  fi
+}
+
 clone-tmp() {
   cd /tmp/ && git clone "$@"
   cd "$OLDPWD" || return
@@ -56,12 +69,10 @@ clone-tmp() {
 
 ## Functions ##
 y() {
-  TMP="$(mktemp -t yazi-cwd.XXXXX)"
-  yazi --cwd-file "$TMP" "$@"
-  if [[ -f "$TMP" ]]; then
-    cd "$(cat "$TMP")" || return
-    /bin/rm "$TMP"
-  fi
+  tmp="$(mktemp -t yazi-cwd.XXXXX)"
+  yazi --cwd-file "$tmp" "$@"
+  cd "$(cat "$tmp")" || return
+  /bin/rm "$tmp"
 }
 
 mnt-pendrive() {

@@ -49,7 +49,10 @@ XF86AudioMicMute
   wpctl set-mute @DEFAULT_SOURCE@ toggle
 
 XF86Audio{Play,Prev,Next}
-  playerctl {play-pause,previous,next}
+  playerctl --player=spotify,%any {play-pause,previous,next}
+
+shift + XF86Audio{Play,Prev,Next}
+  playerctl --player=%any,spotify {play-pause,previous,next}
 
 super + shift + p
   st -e pulsemixer

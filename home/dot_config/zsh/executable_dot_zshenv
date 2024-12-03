@@ -60,6 +60,11 @@ export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export CXX="clang++"
 
+# Optimization Flags
+CFLAGS="-march=native -O2 -pipe"
+CXXFLAGS="-march=native -O2 -pipe"
+RUSTFLAGS="-C opt-level=2 -C target-cpu=native"
+
 # playerctl
 export LD_LIBRARY_PATH="$DESTDIR/usr/local/lib/:$LD_LIBRARY_PATH"
 export GI_TYPELIB_PATH="$DESTDIR/usr/local/lib/:$GI_TYPELIB_PATH"

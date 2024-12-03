@@ -30,8 +30,9 @@ better_cut() {
 zle -N better_cut
 bindkey "^U" better_cut
 
-zle -N ranger_cd
-bindkey "^O" ranger_cd
+bindkey -s "^y" "y\n"
+bindkey -s "^f" "dev init\n"
+bindkey -s "^g" "gitdfzf\n"
 
 
 ## Plugins (syntax-highlighting and autosuggestions)
