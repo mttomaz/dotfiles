@@ -51,7 +51,6 @@ bspc rule -a gnome-calculator    state=floating
 bspc rule -a Gcolor3             state=floating
 bspc rule -a File-roller         state=floating
 bspc rule -a Pcmanfm             state=floating
-bspc rule -a Picture-in-Picture  state=floating
 bspc rule -a "*:*:Picture-in-Picture" state=floating sticky=on
 
 

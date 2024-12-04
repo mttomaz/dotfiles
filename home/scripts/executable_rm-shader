@@ -10,7 +10,14 @@ for i in "$SHADER_PATH"/*; do
   GAMES["$ID"]="$(awk -F\" '/name/ {print $4}' "$STEAMAPPS_PATH/appmanifest_${ID}.acf")"
 done
 
-APPID=$(for key in "${!GAMES[@]}"; do echo "$key: ${GAMES[$key]}"; done | fzf --prompt="Select a game: " | awk -F: '{print $1}')
+if [[ "$1" = "-a" ]]; then
+  for APPID in "${!GAMES[@]}"; do
+    rm -rf "${SHADER_PATH:?}/${APPID}"
+  done
+  echo "Removed every shader cache." && exit 0
+fi
+
+APPID="$(for key in "${!GAMES[@]}"; do echo "$key: ${GAMES[$key]}"; done | fzf --prompt="Select a game: " | awk -F: '{print $1}')"
 if [[ -n "$APPID" ]]; then
   rm -rf "${SHADER_PATH:?}/${APPID}"
   echo "Shader cache from ${GAMES[$APPID]} (${APPID}) removed."

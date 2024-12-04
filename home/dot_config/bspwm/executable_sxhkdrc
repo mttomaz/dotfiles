@@ -7,7 +7,7 @@ super + Return
   st -c st
 
 # program launcher
-super + backslash
+{super + backslash, XF86Search}
   rofi -show drun
 
 # browser
@@ -74,15 +74,11 @@ XF86MonBrightness{Down,Up}
 # custom bspwm hotkeys
 #
 
-# change to the next workspace active
-#alt + Tab
-#  rofi -show window -theme ~/.config/rofi/window-switcher.rasi
-
 super + period
   rofi -show emoji
 
 super + KP_Decimal
-  ~/scripts/getWindowInfo
+  ~/scripts/xorg/getWindowInfo
 
 #
 # bspwm hotkeys
