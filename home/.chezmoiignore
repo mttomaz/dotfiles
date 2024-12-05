@@ -1,3 +1,4 @@
 .config/nvim/lazy-lock.json
 .config/nvim/lazyvim.json
 .config/zsh/.zprofile
+.config/tmux/saves/
