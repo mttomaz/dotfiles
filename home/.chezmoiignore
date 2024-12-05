@@ -2,3 +2,6 @@
 .config/nvim/lazyvim.json
 .config/zsh/.zprofile
 .config/tmux/saves/
+.config/tmux/plugins/tmux-resurrect/lib/tmux-test/tests
+.config/tmux/plugins/tmux-resurrect/tests
+.config/tmux/plugins/tpm/lib/tmux-test/tests
