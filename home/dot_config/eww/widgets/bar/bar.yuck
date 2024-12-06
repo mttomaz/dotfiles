@@ -20,20 +20,17 @@
 
 ;; Widgets
 (defwidget clock []
-  (box
+  (button
     :class "clock"
-    (button
-      :onclick "scripts/pop.sh calendar"
-      :tooltip {formattime(EWW_TIME, "%A, %d/%m/%Y")}
-      (label :text "${formattime(EWW_TIME, "%H:%M")}")
-)))
+    :onclick "scripts/pop.sh calendar"
+    :tooltip {formattime(EWW_TIME, "%A, %d/%m/%Y")}
+    (label :text "${formattime(EWW_TIME, "%H:%M")}")
+))
 
 
 (defwidget workspaces []
-  (box
-    :valign "center"
-    (literal :content {get_env("XDG_SESSION_TYPE") == "wayland" ? hyprland_workspaces : bspwm_workspaces})
-))
+  (literal :content {get_env("XDG_SESSION_TYPE") == "wayland" ? hyprland_workspaces : bspwm_workspaces})
+)
 
 
 (defwidget weather []
@@ -42,18 +39,17 @@
     :onhover "${EWW_CMD} open weather"
     :onhoverlost "${EWW_CMD} close weather"
     :visible {weather_report != "" ? true : false}
-    (label :text "${weather_report.feels_like} ${weather_report.cond}")
+    "${weather_report.feels_like} ${weather_report.cond}"
 ))
 
 
 (defwidget music []
-  (box
+  (button
     :class "music"
     :visible {music_metadata != "" ? true : false}
-    (button
-      :onclick "playerctl --player=spotify play-pause"
-      music_metadata
-)))
+    :onclick "playerctl --player=spotify play-pause"
+    music_metadata
+))
 
 
 (defwidget tray []
@@ -71,7 +67,7 @@
   (box
     :class "network"
     :visible {get_env("NETWORK_INTERFACE") != "" ? true : false}
-    (label :text "${round((EWW_NET["${get_env("NETWORK_INTERFACE")}"]["NET_DOWN"]/1000) + (EWW_NET["${get_env("NETWORK_INTERFACE")}"]["NET_UP"]/1000), 2)} KB/s")
+    "${round((EWW_NET["${get_env("NETWORK_INTERFACE")}"]["NET_DOWN"]/1000) + (EWW_NET["${get_env("NETWORK_INTERFACE")}"]["NET_UP"]/1000), 2)} KB/s"
 ))
 
 (defwidget memory []
@@ -99,9 +95,9 @@
 (defwidget battery []
   (box
     :class "battery"
-    :orientation "h"
     :space-evenly false
     :visible {EWW_BATTERY != "" ? true : false}
+    :tooltip {EWW_BATTERY["BAT0"]["status"]}
     (label :text "${round(EWW_BATTERY["total_avg"], 2)}%")
     (label :class "icon" :text {EWW_BATTERY["total_avg"] <= 50 ? "󰁼" : "󰁹" })
 ))
@@ -110,9 +106,8 @@
 (defwidget left []
   (box
     :class "left"
-    :orientation "h"
-    :space-evenly false
     :halign "start"
+    :space-evenly false
     (clock)
     (workspaces)
     (weather)
@@ -121,18 +116,16 @@
 (defwidget center []
   (box
     :class "center"
-    :orientation "h"
-    :space-evenly false
     :halign "center"
+    :space-evenly false
     (music)
 ))
 
 (defwidget right []
   (box
     :class "right"
-    :orientation "h"
-    :space-evenly false
     :halign "end"
+    :space-evenly false
     (tray)
     (network)
     (battery)
@@ -143,7 +136,6 @@
 (defwidget bar_widget []
   (centerbox
     :class "bar"
-    :orientation "h"
     (left)
     (center)
     (right)
