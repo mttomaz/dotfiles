@@ -40,6 +40,7 @@ alias rr='curl -sL http://bit.ly/10hA8iC | bash'
 
 # GIT Aliases
 alias gits='git status'
+alias gitss='git status --short'
 alias gita='git add'
 alias gitd='git diff'
 alias gitr='git restore'

@@ -1,6 +1,6 @@
 return {
   -- Add kanagawa
-  { "rebelot/kanagawa.nvim" },
+  { "MatheusTT/kanagawa.nvim" },
 
   -- Configure LazyVim to load kanagawa
   {
