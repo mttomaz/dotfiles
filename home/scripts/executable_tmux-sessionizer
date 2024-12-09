@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# INFO: Based of https://github.com/ThePrimeagen/tmux-sessionizer
+
+SESSIONS_DIR="$XDG_CONFIG_HOME/tmux/sessions"
+
+switch_to() {
+  if [ -z "$TMUX" ]; then
+    tmux attach-session -t "$1"
+  else
+    tmux switch-client -t "$1"
+  fi
+}
+
+hydrate_sh() {
+  SESSION_FILE="$SESSIONS_DIR/$1.sh"
+  if [ -f "$SESSION_FILE" ]; then
+    "$SESSION_FILE" "$1"
+  fi
+}
+
+if [ -z "$TMUX" ]; then
+  selected="$(fzf --prompt="Choose a session: " < "$SESSIONS_DIR/paths" | cut -d: -f1)"
+else
+  tmux popup -E "fzf --prompt=\"Choose a session: \" < $SESSIONS_DIR/paths | cut -d: -f1 > /tmp/.tmux-popup-output"
+  selected="$(cat "/tmp/.tmux-popup-output")"
+fi
+[ -z "$selected" ] && echo "No session selected." && exit 0
+
+if ! tmux has-session -t "$selected" 2>/dev/null; then
+  hydrate_sh "$selected"
+fi
+
+switch_to "$selected"
