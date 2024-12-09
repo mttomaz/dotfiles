@@ -1,11 +1,4 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-## ZSH Configuration
+# ZSH Configuration
 autoload -Uz compinit
 compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump-${ZSH_VERSION}
 HISTFILE=${XDG_CACHE_HOME}/zsh/history
@@ -13,19 +6,21 @@ HISTSIZE=100000
 SAVEHIST=100000
 setopt appendhistory
 
-
-## Aliases
+# Aliases
 source ${ZDOTDIR}/.aliasrc
 
-## Bindings
+# Bindings
 bindkey -e
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 better_cut() {
   zle kill-whole-line
-  [[ "$XDG_SESSION_TYPE" = "wayland" ]] && wl-copy "$CUTBUFFER" ||
-  echo "$CUTBUFFER" | xclip -sel clip
+  if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    wl-copy "$CUTBUFFER"
+  else
+    echo -n "$CUTBUFFER" | xclip -sel clip
+  fi
 }
 zle -N better_cut
 bindkey "^U" better_cut
@@ -34,13 +29,12 @@ bindkey -s "^y" "y\n"
 bindkey -s "^f" "dev init\n"
 bindkey -s "^g" "gitdfzf\n"
 
-
-## Plugins (syntax-highlighting and autosuggestions)
+# Plugins (syntax-highlighting and autosuggestions)
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# Initialize Starship
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 
-## Theme
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-[[ ! -f $XDG_CONFIG_HOME/zsh/.p10k.zsh ]] || source $XDG_CONFIG_HOME/zsh/.p10k.zsh
+# vim:ft=zsh
