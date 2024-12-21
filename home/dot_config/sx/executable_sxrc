@@ -10,7 +10,7 @@ fi
 
 setxkbmap br &
 numlockx on &
-xset r rate 500 30 s 0 -dpms &
+xset r rate 300 40 s 0 -dpms &
 xsetroot -cursor_name left_ptr &
 
 dunst &

@@ -1,5 +1,5 @@
 [plugin]
-deps = [{ use = "yazi-rs/plugins:full-border", rev = "2b001d2" }, { use = "yazi-rs/plugins:max-preview", rev = "d9bfa0b" }, { use = "yazi-rs/plugins:git", rev = "d9bfa0b" }]
+deps = [{ use = "yazi-rs/plugins:full-border", rev = "7afba3a" }, { use = "yazi-rs/plugins:max-preview", rev = "7afba3a" }, { use = "yazi-rs/plugins:git", rev = "7afba3a" }, { use = "yazi-rs/plugins:smart-enter", rev = "7afba3a" }]
 
 [flavor]
-deps = []
+deps = [{ use = "dangooddd/kanagawa", rev = "b32f205" }]
