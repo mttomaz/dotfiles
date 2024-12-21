@@ -39,7 +39,7 @@ desc = "Enter the child directory, or open the file"
 ## Max Preview
 [[manager.prepend_keymap]]
 on   = "T"
-run  = "plugin --sync max-preview"
+run  = "plugin max-preview"
 desc = "Maximize or restore preview"
 
 # Python sorting script

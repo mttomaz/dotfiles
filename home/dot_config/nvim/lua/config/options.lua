@@ -6,6 +6,7 @@ vim.wo.relativenumber = true
 vim.opt.wrap = true
 vim.g.autoformat = false
 vim.g.lazyvim_picker = "telescope"
+vim.g.snacks_animate = false
 
 vim.opt.spell = false
 vim.opt.spelllang = { "en_us", "pt_br" }

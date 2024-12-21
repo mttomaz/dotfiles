@@ -72,6 +72,6 @@ export GI_TYPELIB_PATH="$DESTDIR/usr/local/lib/:$GI_TYPELIB_PATH"
 # libtorch
 export LIBTORCH="$XDG_DATA_HOME/libtorch"
 export LD_LIBRARY_PATH="${LIBTORCH}/lib:$LD_LIBRARY_PATH"
-[[ -d "$XDG_DATA_HOME/cargo/env" ]] && . "$XDG_DATA_HOME/cargo/env"
+[[ -f "$XDG_DATA_HOME/cargo/env" ]] && . "$XDG_DATA_HOME/cargo/env"
 
 # vim:ft=zsh
