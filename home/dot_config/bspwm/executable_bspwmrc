@@ -74,6 +74,6 @@ done
 # "$HOME/.config/polybar/launch.sh" &
 
 # Eww bar
-"$HOME"/.config/eww/launch.sh &
+"$HOME/.config/eww/launch.sh" &
 
-killall -q sxhkd; sxhkd -c "$HOME/.config/bspwm/sxhkdrc" &
+pkill -x sxhkd; sxhkd -c "$HOME/.config/bspwm/sxhkdrc" &
