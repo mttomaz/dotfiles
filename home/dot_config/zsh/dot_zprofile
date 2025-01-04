@@ -1,5 +1,6 @@
 if [[ "$(tty)" = "/dev/tty1" ]]; then
-  # Hyprland
-  clear
-  # pgrep bspwm || sx
+  if ! pidof ssh-agent; then
+    eval "$(ssh-agent -s)"
+  fi
+  source "$HOME/.config/zsh/session.sh"
 fi
