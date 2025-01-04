@@ -20,16 +20,18 @@ They are designed to be lightweight, modular, and easy to manage.
 - **Automation**: Managed with [chezmoi](https://www.chezmoi.io/) for consistent setup across systems.
 
 ## ⚙ Installation
-1. Make sure you have `chezmoi` installed. You can install it by following the [official guide](https://www.chezmoi.io/install/).
+Make sure you have `chezmoi` installed. You can install it by following the [official guide](https://www.chezmoi.io/install/).
 
-2. Run the following command to initialize and apply my dotfiles:
+Run the following command to initialize my dotfiles with chezmoi:
   ```bash
-  chezmoi init MatheusTT
+  chezmoi init --apply MatheusTT
   ```
 
-  Review the changes (if necessary) and apply them:
+If you want to install everything, do this:
   ```bash
-  chezmoi apply
+  curl -fsSl https://raw.githubusercontent.com/MatheusTT/dotfiles/master/install.sh >$HOME/install.sh
+  # verify the script if you don't need/want to install/configure something
+  sh $HOME/install.sh
   ```
 
 ## 🛠 Programs used
@@ -47,7 +49,7 @@ They are designed to be lightweight, modular, and easy to manage.
 
 ## 🏗 Structure
 - `.config/`: Contains configurations for window managers, terminal, and other applications.
-- `.local/share/themes/` && `.local/share/icons/`: Houses cursor and theme files.
+- `.local/share/themes/` && `.local/share/icons/`: Houses theme and cursor files.
 - `.local/bin/`: Simple scripts used across the entire system.
 - `scripts/`: Custom scripts for automation and other tasks.
 
