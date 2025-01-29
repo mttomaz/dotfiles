@@ -13,27 +13,27 @@
 }
 
 .workspaces {
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 900;
-  padding: 0 6px;
+  padding: 0 10px 0 6px;
 
   button {
     padding: 0 4px;
   }
   &_focused {
     color: #c8c093;
-    label {
-      font-size: 14px;
-    }
   }
   &_occupied {
-    color: #717c7c;
+    color: #727169;
   }
   &_urgent {
     color: #ff5d62;
   }
   &_empty {
     color: #363646;
+    label {
+      font-size: 10px;
+    }
   }
 }
 
