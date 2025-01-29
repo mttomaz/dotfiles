@@ -42,8 +42,9 @@ done
 info "Installing packages ..."
 # TODO: add all necessary packages
 if command -v xbps-install &>/dev/null; then
-  sudo xbps-install -Su git gawk dex mesa-vulkan-radeon nodejs gcc chezmoi rofi rofi-emoji zsh-{autosuggestions,syntax-highlighting} starship neovim yazi btop fzf ripgrep papirus-icon-theme brightnessctl font-fira-ttf socat jq
+  sudo xbps-install -Su git gawk dex mesa-vulkan-radeon nodejs gcc chezmoi rofi rofi-emoji zsh-{autosuggestions,syntax-highlighting} starship neovim yazi btop fzf ripgrep papirus-icon-theme brightnessctl font-fira-ttf socat jq flatpak
   sudo ln -s /etc/sv/{dbus,polkit} /var/service/
+  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
   if [ "$WM" = "bspwm" ]; then
     sudo xbps-install xf86-video-amdgpu bspwm sxhkd sx xorg-minimal xdo xdotool xrandr xkill xset xsetroot redshift elogind polkit
     echo -e "#!/bin/sh\npreg -x bspwm || exec dbus-run-session sx" >"$HOME/.config/zsh/session.sh"
@@ -54,7 +55,8 @@ if command -v xbps-install &>/dev/null; then
   fi
 
 elif command -v pacman &>/dev/null; then
-  sudo pacman -Syu git awk dex mesa npm gcc chezmoi rofi-wayland rofi-emoji zsh-{autosuggestions,syntax-highlighting} starship neovim yazi btop fzf ripgrep papirus-icon-theme brightnessctl ttf-fira-sans curl wget socat jq
+  sudo pacman -Syu git awk dex mesa npm gcc chezmoi rofi-wayland rofi-emoji zsh-{autosuggestions,syntax-highlighting} starship neovim yazi btop fzf ripgrep papirus-icon-theme brightnessctl ttf-fira-sans curl wget socat jq flatpak
+  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
   if [ "$WM" = "bspwm" ]; then
     sudo pacman -S xf86-video-amdgpu bspwm sxhkd sx xorg-server xdo xdotool xorg-xrandr xorg-xkill xorg-xset xorg-xsetroot redshift xorg-xclip
     echo -e "#!/bin/sh\npreg -x bspwm || exec sx" >"$HOME/.config/zsh/session.sh"

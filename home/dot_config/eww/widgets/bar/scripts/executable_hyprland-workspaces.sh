@@ -13,7 +13,7 @@ workspace() {
       icon="$ws"
     else
       class="occupied"
-      icon="󰝥"
+      icon="$ws"
     fi
     buf="${buf} (button :class \"workspaces_${class}\" :onclick \"hyprctl dispatch workspace ${ws}\" \"${icon}\")"
   done

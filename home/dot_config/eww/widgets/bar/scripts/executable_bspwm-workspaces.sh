@@ -22,7 +22,7 @@ workspace() {
       icon="$ws"
     elif contains "$occupied_desktops" "$ws"; then
       class="occupied"
-      icon="󰝥"
+      icon="$ws"
     else
       class="empty"
       icon="󰝥"
