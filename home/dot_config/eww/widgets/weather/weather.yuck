@@ -24,7 +24,7 @@
         :orientation "v"
         :valign "end"
         :space-evenly false
-        (label :xalign 1 :text "${weather_report.temp} 🌡")
+        (label :xalign 1 :text "${weather_report.feels_like} 🌡")
         (label :xalign 1 :text "${weather_report.humidity} 💧")
         (label :xalign 1 :text "${weather_report.precipitation} ☔")
         (label :xalign 1 :text "${weather_report.wind} 💨")

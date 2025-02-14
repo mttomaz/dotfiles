@@ -11,7 +11,7 @@
 ; Get weather report every 30 minutes
 (defpoll weather_report
   :interval "30m"
-  :initial "{ \"feels_like\": \"-273,15°C\", \"cond\": \"💀\" }"
+  :initial "{ \"temp\": \"-273,15°C\", \"cond\": \"💀\" }"
   "widgets/bar/scripts/weather.sh")
 
 ; Reveal variables
@@ -39,7 +39,7 @@
     :onhover "${EWW_CMD} open weather"
     :onhoverlost "${EWW_CMD} close weather"
     :visible {weather_report != "" ? true : false}
-    "${weather_report.feels_like} ${weather_report.cond}"
+    "${weather_report.temp} ${weather_report.cond}"
 ))
 
 
