@@ -110,8 +110,8 @@ sed 's/\.spicetify/\.local\/share\/spicetify/' /tmp/spicetify.sh | sh
 # Installing Zen Browser, the new "Arc like" browser based on firefox
 info "Installing Zen Browser ..."
 cd "$HOME/Downloads/" || error "Could not change dir to ~/Downloads/"
-wget https://github.com/zen-browser/desktop/releases/latest/download/zen.linux-x86_64.tar.bz2
-tar xvf zen.linux-x86_64.tar.bz2
+wget https://github.com/zen-browser/desktop/releases/latest/download/zen.linux-x86_64.tar.xz
+tar xvf zen.linux-x86_64.tar.xz
 mv zen ~/.local/share/zen
 ln -s ~/.local/share/zen/zen ~/.local/bin/zen
 
