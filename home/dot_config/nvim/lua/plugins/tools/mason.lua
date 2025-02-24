@@ -7,6 +7,7 @@ return {
       "lua-language-server", -- lua
       "shellcheck", -- sh, bash
       "bash-language-server", -- bash
+      "pyright", -- python
       "ruff", -- python
       "rust-analyzer", -- rust
       "yaml-language-server", -- yaml

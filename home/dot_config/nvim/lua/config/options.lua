@@ -5,11 +5,11 @@
 vim.wo.relativenumber = true
 vim.opt.wrap = true
 vim.g.autoformat = false
-vim.g.lazyvim_picker = "telescope"
+vim.g.lazyvim_picker = "snacks"
 vim.g.snacks_animate = false
 
 vim.opt.spell = false
 vim.opt.spelllang = { "en_us", "pt_br" }
 -- Set to "basedpyright" to use basedpyright instead of pyright.
-vim.g.lazyvim_python_lsp = "ruff"
+vim.g.lazyvim_python_lsp = "pyright"
 vim.g.lazyvim_python_ruff = "ruff"
