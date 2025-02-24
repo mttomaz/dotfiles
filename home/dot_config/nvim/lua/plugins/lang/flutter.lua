@@ -3,7 +3,13 @@ return {
   ft = "dart",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "stevearc/dressing.nvim", -- optional for vim.ui.select
+  },
+  keys = {
+    {
+      "<leader>fd",
+      "<cmd>FlutterDevices<cr>",
+      desc = "Select a flutter device to run.",
+    },
   },
   config = {
     decorations = {

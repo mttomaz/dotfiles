@@ -18,6 +18,7 @@ return {
       "regex",
       "vim",
       "yaml",
+      "kdl",
     },
   },
 }

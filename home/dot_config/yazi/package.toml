@@ -1,24 +1,24 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "beb586a"
+rev = "5186af7"
 hash = "ae9e1d0c6bfd68cdebc98cc684c22b45"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:max-preview"
-rev = "beb586a"
-hash = "15b2ff7f6563c14d5b2e93b3e9da35de"
+rev = "5186af7"
+hash = "a8025f2bb311e869069364fba01abffc"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "beb586a"
+rev = "5186af7"
 hash = "771f18427fb75fb19990ce602bb322f4"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "beb586a"
+rev = "5186af7"
 hash = "aef2b1a805b80cce573bb766f1459d88"
 
 [[flavor.deps]]
 use = "dangooddd/kanagawa"
-rev = "d98f0c3"
-hash = "cada780385f75abbcfbf5343256b441"
+rev = "31167ed"
+hash = "a04e157148549bacbb2831aab0e6e8cb"
