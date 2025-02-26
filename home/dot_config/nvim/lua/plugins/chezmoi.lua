@@ -6,24 +6,14 @@ return {
     {
       "<leader>cz",
       function()
-        pcall(require("telescope").extensions.chezmoi.find_files)
+        require("snacks.picker").files({
+          cwd = os.getenv("HOME") .. "/.local/share/chezmoi",
+          title = "Chezmoi Files",
+        })
       end,
       desc = "Find Chezmoi File",
     },
   },
-  opts = {
-    edit = {
-      watch = true,
-      force = false,
-    },
-  },
-  config = function()
-    local telescope = require("telescope")
-
-    pcall(function()
-      telescope.load_extension("chezmoi")
-    end)
-  end,
   init = function()
     -- run chezmoi edit on file enter
     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
