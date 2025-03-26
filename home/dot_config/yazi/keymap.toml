@@ -36,11 +36,16 @@ on   = "<Right>"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
-## Max Preview
+## Toggle Pane
+[[manager.prepend_keymap]]
+on   = "t"
+run  = "plugin toggle-pane min-preview"
+desc = "Show or hide the preview pane"
+
 [[manager.prepend_keymap]]
 on   = "T"
-run  = "plugin max-preview"
-desc = "Maximize or restore preview"
+run  = "plugin toggle-pane max-preview"
+desc = "Maximize or restore the preview pane"
 
 # Python sorting script
 [[manager.prepend_keymap]]

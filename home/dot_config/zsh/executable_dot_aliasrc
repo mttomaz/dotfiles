@@ -153,29 +153,13 @@ back-edit() {
 }
 
 cleanup() {
-  ID="$(awk -F= '/^ID=/ {gsub("\"","");print $2}' /etc/os-release)"
-  if [[ "$ID" == "arch" ]]; then
+# shellcheck disable=SC2046
+  if command -v pacman &>/dev/null; then
     if [[ -n "$(pacman -Qtdq)" ]]; then
-      # shellcheck disable=SC2046
       doas pacman -Rns $(pacman -Qtdq)
-    else
-      echo -e "             No orphans?
-        ${BLUE}\r    ⣞⢽⢪⢣⢣⢣⢫⡺⡵⣝⡮⣗⢷⢽⢽⢽⣮⡷⡽⣜⣜⢮⢺⣜⢷⢽⢝⡽⣝
-               \r   ⠸⡸⠜⠕⠕⠁⢁⢇⢏⢽⢺⣪⡳⡝⣎⣏⢯⢞⡿⣟⣷⣳⢯⡷⣽⢽⢯⣳⣫⠇
-               \r   ⠀⠀⢀⢀⢄⢬⢪⡪⡎⣆⡈⠚⠜⠕⠇⠗⠝⢕⢯⢫⣞⣯⣿⣻⡽⣏⢗⣗⠏⠀
-               \r   ⠀⠪⡪⡪⣪⢪⢺⢸⢢⢓⢆⢤⢀⠀⠀⠀⠀⠈⢊⢞⡾⣿⡯⣏⢮⠷⠁⠀⠀⠀
-               \r   ⠀⠀⠀⠈⠊⠆⡃⠕⢕⢇⢇⢇⢇⢇⢏⢎⢎⢆⢄⠀⢑⣽⣿⢝⠲⠉⠀⠀⠀⠀
-               \r   ⠀⠀⠀⠀⠀⡿⠂⠠⠀⡇⢇⠕⢈⣀⠀⠁⠡⠣⡣⡫⣂⣿⠯⢪⠰⠂⠀⠀⠀⠀
-               \r   ⠀⠀⠀⠀⡦⡙⡂⢀⢤⢣⠣⡈⣾⡃⠠⠄⠀⡄⢱⣌⣶⢏⢊⠂⠀⠀⠀⠀⠀⠀
-               \r   ⠀⠀⠀⠀⢝⡲⣜⡮⡏⢎⢌⢂⠙⠢⠐⢀⢘⢵⣽⣿⡿⠁⠁⠀⠀⠀⠀⠀⠀⠀
-               \r   ⠀⠀⠀⠀⠨⣺⡺⡕⡕⡱⡑⡆⡕⡅⡕⡜⡼⢽⡻⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-               \r   ⠀⠀⠀⠀⣼⣳⣫⣾⣵⣗⡵⡱⡡⢣⢑⢕⢜⢕⡝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-               \r   ⠀⠀⠀⣴⣿⣾⣿⣿⣿⡿⡽⡑⢌⠪⡢⡣⣣⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-               \r   ⠀⠀⠀⡟⡾⣿⢿⢿⢵⣽⣾⣼⣘⢸⢸⣞⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-               \r   ⠀⠀⠀⠀⠁⠇⠡⠩⡫⢿⣝⡻⡮⣒⢽⠋⠀⠀⠀⠀⠀⠀⠀${END}"
     fi
     doas paccache -r
-  elif [[ "$ID" == "void" ]]; then
+  elif command -v xbps-install &>/dev/null; then
     doas xbps-remove -Oo
   fi
   flatpak remove --unused
@@ -195,7 +179,7 @@ video-wallpaper() {
 mksh() {
   if [[ ! -e "$1" ]]; then
     if [[ -d $(dirname "$1") ]]; then
-      echo -e "#!/bin/bash\n\n" >"$1"
+      echo -e "#!/bin/sh\n\n" >"$1"
       chmod +x "$1"
       if [[ "$2" = "-e" ]]; then
         neo "$1"
