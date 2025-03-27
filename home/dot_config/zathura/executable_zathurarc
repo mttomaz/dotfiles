@@ -1,7 +1,7 @@
 # $HOME/.config/zathura/zathurarc
 
-set recolor-lightcolor          "#1a1b26" # Background
-set recolor-darkcolor           "#a9b1d6" # Foreground
+set recolor-lightcolor          "#1F1F28" # Background
+set recolor-darkcolor           "#DCD7BA" # Foreground
 
 set adjust-open width
 set recolor false
