@@ -17,7 +17,7 @@
   :stacking "overlay"
   :geometry
     (geometry
-      :x "4px"
+      :x "8px"
       :y "36px"
       :width "14%"
       :height "18%"

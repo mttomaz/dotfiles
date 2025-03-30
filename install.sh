@@ -43,7 +43,6 @@ PKGS=(
   dex
   gcc
   chezmoi
-  rofi-emoji
   zsh-autosuggestions
   zsh-syntax-highlighting
   starship
@@ -80,26 +79,26 @@ PKGS=(
 info_msg "Installing packages ..."
 # TODO: add all necessary packages
 if command -v xbps-install &>/dev/null; then
-  sudo xbps-install -Su "${PKGS[@]}" dbus elogind polkit gawk nodejs rofi font-fira-ttf alsa-pipewire libjack-pipewire pcmanfm
+  sudo xbps-install -Su "${PKGS[@]}" dbus elogind polkit gawk nodejs font-fira-ttf alsa-pipewire libjack-pipewire pcmanfm
   sudo ln -s /etc/sv/{dbus,polkit} /var/service/
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
   if [ "$WM" = "bspwm" ]; then
-    sudo xbps-install xf86-video-amdgpu bspwm sxhkd sx xorg-minimal xdo xdotool xrandr xkill xset xsetroot redshift setxkbmap
+    sudo xbps-install xf86-video-amdgpu bspwm sxhkd sx rofi-emoji xorg-minimal xdo xdotool xrandr xkill xset xsetroot redshift setxkbmap
     echo -e "#!/bin/sh\npgreg -x bspwm || exec dbus-run-session sx" >"$HOME/.config/zsh/session.sh"
   elif [ "$WM" = "hyprland" ]; then
     echo "repository=https://raw.githubusercontent.com/Makrennel/hyprland-void/repository-x86_64-glibc" | sudo tee /etc/xbps.d/hyprland-void.conf
-    sudo xbps-install -S hyprland xdg-desktop-portal-hyprland foot swaybg wl-clipboard wlsunset
+    sudo xbps-install -S hyprland xdg-desktop-portal-hyprland foot wofi-emoji swaybg wl-clipboard wlsunset
     echo -e "#!/bin/sh\nexec dbus-run-session Hyprland" >"$HOME/.config/zsh/session.sh"
   fi
 
 elif command -v pacman &>/dev/null; then
-  sudo pacman -Syu "${PKGS[@]}" awk npm rofi-wayland ttf-fira-sans pipewire-{alsa,audio,jack,pulse} pcmanfm-gtk3
+  sudo pacman -Syu "${PKGS[@]}" awk npm ttf-fira-sans pipewire-{alsa,audio,jack,pulse} pcmanfm-gtk3
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
   if [ "$WM" = "bspwm" ]; then
-    sudo pacman -S xf86-video-amdgpu bspwm sxhkd sx xorg-server xdo xdotool xorg-xrandr xorg-xkill xorg-xset xorg-xsetroot redshift xorg-xclip xorg-setxkbmap
+    sudo pacman -S xf86-video-amdgpu bspwm sxhkd sx rofi-emoji xorg-server xdo xdotool xorg-xrandr xorg-xkill xorg-xset xorg-xsetroot redshift xorg-xclip xorg-setxkbmap
     echo -e "#!/bin/sh\npgreg -x bspwm || exec sx" >"$HOME/.config/zsh/session.sh"
   elif [ "$WM" = "hyprland" ]; then
-    sudo pacman -S hyprland xdg-desktop-portal-hyprland foot swaybg wl-clipboard hyprsunset
+    sudo pacman -S hyprland xdg-desktop-portal-hyprland foot wofi-emoji swaybg wl-clipboard hyprsunset
     echo -e "#!/bin/sh\nexec Hyprland" >"$HOME/.config/zsh/session.sh"
   fi
 else
