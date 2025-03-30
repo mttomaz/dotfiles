@@ -1,5 +1,5 @@
 width=1920
-height=43
+height=28
 location=top_left
 show=drun
 prompt=Search...
@@ -13,5 +13,4 @@ content_halign=start
 insensitive=true
 allow_images=true
 hide_scroll=true
-image_size=28
-gtk_dark=true
+image_size=24

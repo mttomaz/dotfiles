@@ -40,19 +40,19 @@ window {
   padding:          0;
   border:           0;
   width:            100.0000%;
-  height:           32px;
+  height:           28px;
   background-color: var(background);
 }
 
 mainbox {
-  padding:     0px 0px 0px 4px;
   border:      0;
   orientation: horizontal;
   children:    [ "inputbar","listview" ];
 }
 
 listview {
-  padding:      1px 0 0 0;
+  margin: 0 0 0 -2px;
+  padding: 1px 0 1px 0;
   spacing:      0;
   border:       0;
   fixed-height: 0;
@@ -63,8 +63,6 @@ listview {
 }
 
 inputbar {
-  padding:    1px;
-  margin:     4px 4px 4px 0px;
   spacing:    0;
   width:      7.0000%;
   text-color: var(normal-foreground);
@@ -72,32 +70,29 @@ inputbar {
 }
 
 entry {
-  padding:           2px 0px 0px 4px;
+  padding: 4px 0 0 8px;
   spacing:           0;
   width:             10.0000%;
   cursor:            text;
-  placeholder:       "Search";
+  placeholder:       "search";
   placeholder-color: Gray;
-  background-color:  var(entrybg);
+  background-color:  var(lightbg);
   text-color:        var(normal-foreground);
 }
 
 element {
-  padding: 2px;
   margin:  0;
   spacing: 0;
   cursor:  pointer;
 }
 
 element selected.normal {
-  border:           3px;
-  background-color: inherit;
-  text-color:       var(selected-normal-foreground);
-  border-color:     var(highlight);
+  background-color: #2A2A37;
+  text-color:       var(lightfg);
 }
 
 element-text {
-  padding:          4px 0px;
+  padding:          3px 0px;
   background-color: transparent;
   cursor:           inherit;
   highlight:        inherit;
