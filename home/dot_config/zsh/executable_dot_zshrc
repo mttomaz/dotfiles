@@ -27,7 +27,6 @@ bindkey "^U" better_cut
 
 bindkey -s "^y" "y\n"
 bindkey -s "^f" "tmux-sessionizer\n"
-bindkey -s "^g" "gitdfzf\n"
 
 # Plugins (syntax-highlighting and autosuggestions)
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -26,7 +26,6 @@ bspc config presel_feedback_color "#76946A"
 
 bspc config external_rules_command "$HOME/.config/bspwm/external_rules"
 
-# Ordering windows
 bspc rule -a st               desktop='^1' follow=on
 bspc rule -a kitty            desktop='^1' follow=on
 bspc rule -a Google-chrome    desktop='^2' follow=on
@@ -69,11 +68,7 @@ for game in $mygames; do
   bspc rule -a steam_app_"$game" desktop='^5'
 done
 
-## Autostart
-# Polybar
-# "$HOME/.config/polybar/launch.sh" &
-
-# Eww bar
+# Autostart
 "$HOME/.config/eww/launch.sh" &
 
 pkill -x sxhkd; sxhkd -c "$HOME/.config/bspwm/sxhkdrc" &

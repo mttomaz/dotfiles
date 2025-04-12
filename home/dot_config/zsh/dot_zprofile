@@ -4,3 +4,5 @@ if [[ "$(tty)" = "/dev/tty1" ]]; then
   fi
   source "$HOME/.config/zsh/session.sh"
 fi
+
+# vim:ft=zsh

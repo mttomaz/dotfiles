@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Colors
-END="\033[0m"
-GREEN="\033[1;32m"
-BLUE="\033[0;34m"
-
 ## Aliases ##
 # Utility commands
 alias ls='lsd -X --group-dirs first'
@@ -12,18 +7,17 @@ alias ll='ls -l'
 alias la='ls -A'
 alias lla='ls -lA'
 
-alias mkdir='printf "${GREEN}" && mkdir -pv'
+alias mkdir='mkdir -pv'
 alias back='cd $OLDPWD'
 alias :q='exit'
 
 # System
-alias grub-edit='doas nvim /etc/default/grub'
+alias grub-edit='doasedit /etc/default/grub'
 alias grub-update='doas grub-mkconfig -o /boot/grub/grub.cfg'
-alias ua='~/scripts/updates -v get'
 
 # Other commands
 alias neo='nvim'
-alias bat='bat --number --theme Dracula'
+alias bat='bat --number --theme base16'
 alias cat='bat -p'
 alias wget='wget --hsts-file=${XDG_DATA_HOME}/.wget-hsts'
 alias clipboard='wl-copy'
@@ -31,7 +25,6 @@ alias ytdl='yt-dlp -f "bv*+ba/b" -o "~/Downloads/%(title)s.%(ext)s"'
 alias ytdla='yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 -o "~/Downloads/%(title)s.%(ext)s"'
 alias rm='trash'
 alias ip='ip --color=auto'
-alias close='killall -s SIGTERM'
 alias set-xbg='feh --no-fehbg --bg-fill'
 alias set-wbg='swaybg -i'
 alias sticky='flameshot gui -s --pin'
@@ -63,18 +56,9 @@ y() {
   /bin/rm "$tmp"
 }
 
-mnt-pendrive() {
-  sudo chmod 777 /mnt/pendrive
-  sudo mount -o uid=1000,gid=1000 "$1" /mnt/pendrive
-}
-
 mkcd() {
   [[ ! -d $1 ]] && mkdir "$1"
   cd "$1" || return
-}
-
-grepn() {
-  grep -n "$1" "$2" | cut -d ":" -f 1
 }
 
 get-ip() {
@@ -140,12 +124,13 @@ back-edit() {
 }
 
 cleanup() {
-# shellcheck disable=SC2046
   if command -v pacman &>/dev/null; then
     if [[ -n "$(pacman -Qtdq)" ]]; then
-      doas pacman -Rns $(pacman -Qtdq)
+      pacman -Qtdq | doas pacman -Rns -
     fi
-    doas paccache -r
+    if command -v paru &>/dev/null; then
+      paru -Sc
+    fi
   elif command -v xbps-install &>/dev/null; then
     doas xbps-remove -Oo
   fi
