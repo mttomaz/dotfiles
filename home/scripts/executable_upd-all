@@ -1,0 +1,51 @@
+#!/bin/bash
+
+END="\033[0m"
+GREEN="\033[1;32m"
+
+is_installed() {
+  command -v "$1" &>/dev/null
+}
+
+info_msg() {
+  echo -e "\n${GREEN}$1${END}"
+}
+
+
+if is_installed xbps-install; then
+  info_msg "Updating void packages."
+  doas xbps-install -Su
+elif is_installed pacman; then
+  if is_installed paru; then
+    info_msg "Updating arch and AUR packages."
+    paru -Syu
+  else
+    info_msg "Updating arch packages."
+    doas pacman -Syu
+  fi
+fi
+
+if is_installed flatpak; then
+  info_msg "Updating flatpak packages."
+  flatpak upgrade -y
+fi
+
+if is_installed rustup; then
+  info_msg "Updating rustup."
+  rustup update
+fi
+
+if is_installed flutter; then
+  info_msg "Updating flutter."
+  flutter upgrade
+fi
+
+if is_installed tldr; then
+  info_msg "Updating tldr cache."
+  tldr --update
+fi
+
+if is_installed spicetify; then
+  info_msg "Updating spicetify."
+  spicetify update
+fi

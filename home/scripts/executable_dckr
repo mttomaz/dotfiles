@@ -8,6 +8,10 @@ down() {
   docker-compose -f "$DCFG/${1}/docker-compose.yaml" down
 }
 
+reset() {
+  down "$1" && up "$1"
+}
+
 pull() {
   if [ "$1" = "-a" ]; then
     find "$DCFG" -maxdepth 2 -type f -iname "docker-compose.yaml" -exec docker-compose -f {} pull \;
