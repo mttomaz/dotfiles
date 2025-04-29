@@ -2,7 +2,7 @@
 
 # INFO: Based of https://github.com/ThePrimeagen/tmux-sessionizer
 
-SESSIONS_DIR="$XDG_CONFIG_HOME/tmux/sessions"
+SESSIONS_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/tmux/sessions"
 
 switch_to() {
   if [ -z "$TMUX" ]; then
@@ -19,16 +19,50 @@ hydrate_sh() {
   fi
 }
 
+get_session_list() {
+  active_sessions="$(tmux list-sessions -F '#S' 2>/dev/null || true)"
+  predefined_sessions="$(cut -d: -f1 "$SESSIONS_DIR/paths" 2>/dev/null || true)"
+  all_sessions=$(printf "%s\n%s\n" "$active_sessions" "$predefined_sessions" | sort -u)
+
+  for session in $all_sessions; do
+    if echo "$active_sessions" | grep -qx "$session"; then
+      echo "[●] $session"
+    else
+      echo "[ ] $session"
+    fi
+  done
+}
+
+extract_session_name() {
+  echo "$1" | sed 's/^\[[^]]*\] //'
+}
+
 if [ -z "$TMUX" ]; then
-  selected="$(fzf --prompt="Choose a session: " < "$SESSIONS_DIR/paths" | cut -d: -f1)"
+  selected="$(get_session_list | fzf --prompt='Choose a session: ')"
 else
-  tmux popup -E "fzf --prompt=\"Choose a session: \" < $SESSIONS_DIR/paths | cut -d: -f1 > /tmp/.tmux-popup-output"
-  selected="$(cat "/tmp/.tmux-popup-output")"
+  tmux popup -E "sh -c '
+    get_session_list() {
+      active_sessions=\$(tmux list-sessions -F \"#S\" 2>/dev/null || true)
+      predefined_sessions=\$(cut -d: -f1 $SESSIONS_DIR/paths 2>/dev/null || true)
+      all_sessions=\$(printf \"%s\n%s\n\" \"\$active_sessions\" \"\$predefined_sessions\" | sort -u)
+      for session in \$all_sessions; do
+        if echo \"\$active_sessions\" | grep -qx \"\$session\"; then
+          echo \"[●] \$session\"
+        else
+          echo \"[ ] \$session\"
+        fi
+      done
+    }
+    get_session_list | fzf --prompt=\"Choose a session: \" > /tmp/.tmux-popup-output'"
+  selected="$(cat /tmp/.tmux-popup-output)"
 fi
+
 [ -z "$selected" ] && echo "No session selected." && exit 0
 
-if ! tmux has-session -t "$selected" 2>/dev/null; then
-  hydrate_sh "$selected"
+selected_name="$(extract_session_name "$selected")"
+
+if ! tmux has-session -t "$selected_name" 2>/dev/null; then
+  hydrate_sh "$selected_name"
 fi
 
-switch_to "$selected"
+switch_to "$selected_name"
