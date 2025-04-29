@@ -1,6 +1,15 @@
-# dotfiles
+<div align="center">
 
-Welcome to my dotfiles!
+# dotfiles 🐧
+[![stars](https://img.shields.io/github/stars/MatheusTT/dotfiles?color=7E9CD8&style=for-the-badge)](https://github.com/MatheusTT/dotfiles/stargazers)
+[![issues](https://img.shields.io/github/issues/MatheusTT/dotfiles?color=FF5D62&style=for-the-badge)](https://github.com/MatheusTT/dotfiles/issues)
+[![size](https://img.shields.io/github/repo-size/MatheusTT/dotfiles?color=76946A&style=for-the-badge)](https://github.com/MatheusTT/dotfiles)
+[![license](https://img.shields.io/github/license/MatheusTT/dotfiles?color=957FB8&style=for-the-badge)](https://github.com/MatheusTT/dotfiles/blob/master/LICENSE)
+
+</div>
+
+<br>
+
 ![](./assets/screenshots/0.jpg)
 
 <details>
@@ -27,11 +36,9 @@ Run the following command to initialize my dotfiles with chezmoi:
   chezmoi init --apply MatheusTT
   ```
 
-If you want to install everything, do this:
+If you want to install everything (including rust, zen, and wallpapers) do this:
   ```bash
-  curl -fsSl https://raw.githubusercontent.com/MatheusTT/dotfiles/master/install.sh >$HOME/install.sh
-  # verify the script if you don't need/want to install/configure something
-  sh $HOME/install.sh
+  curl -fsSl https://raw.githubusercontent.com/MatheusTT/dotfiles/master/install.sh | sh
   ```
 
 ## 🛠 Programs used
