@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("autoformat"),
-  pattern = { "lua" },
+  pattern = { "lua", "scss" },
   callback = function()
     vim.b.autoformat = true
   end,
