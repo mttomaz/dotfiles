@@ -3,6 +3,8 @@
 # INFO: Based of https://github.com/ThePrimeagen/tmux-sessionizer
 
 SESSIONS_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/tmux/sessions"
+SCRIPTS_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/tmux/scripts"
+. "$SCRIPTS_DIR/utils.sh"
 
 switch_to() {
   if [ -z "$TMUX" ]; then
@@ -19,41 +21,10 @@ hydrate_sh() {
   fi
 }
 
-get_session_list() {
-  active_sessions="$(tmux list-sessions -F '#S' 2>/dev/null || true)"
-  predefined_sessions="$(cut -d: -f1 "$SESSIONS_DIR/paths" 2>/dev/null || true)"
-  all_sessions=$(printf "%s\n%s\n" "$active_sessions" "$predefined_sessions" | sort -u)
-
-  for session in $all_sessions; do
-    if echo "$active_sessions" | grep -qx "$session"; then
-      echo "[●] $session"
-    else
-      echo "[ ] $session"
-    fi
-  done
-}
-
-extract_session_name() {
-  echo "$1" | sed 's/^\[[^]]*\] //'
-}
-
 if [ -z "$TMUX" ]; then
   selected="$(get_session_list | fzf --prompt='Choose a session: ')"
 else
-  tmux popup -E "sh -c '
-    get_session_list() {
-      active_sessions=\$(tmux list-sessions -F \"#S\" 2>/dev/null || true)
-      predefined_sessions=\$(cut -d: -f1 $SESSIONS_DIR/paths 2>/dev/null || true)
-      all_sessions=\$(printf \"%s\n%s\n\" \"\$active_sessions\" \"\$predefined_sessions\" | sort -u)
-      for session in \$all_sessions; do
-        if echo \"\$active_sessions\" | grep -qx \"\$session\"; then
-          echo \"[●] \$session\"
-        else
-          echo \"[ ] \$session\"
-        fi
-      done
-    }
-    get_session_list | fzf --prompt=\"Choose a session: \" > /tmp/.tmux-popup-output'"
+  tmux popup -E "$SCRIPTS_DIR/popup.sh"
   selected="$(cat /tmp/.tmux-popup-output)"
 fi
 

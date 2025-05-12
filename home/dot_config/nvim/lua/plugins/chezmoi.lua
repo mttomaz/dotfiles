@@ -9,6 +9,7 @@ return {
         require("snacks.picker").files({
           cwd = os.getenv("HOME") .. "/.local/share/chezmoi",
           title = "Chezmoi Files",
+          hidden = true,
         })
       end,
       desc = "Find Chezmoi File",
