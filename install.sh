@@ -87,7 +87,7 @@ if command -v xbps-install &>/dev/null; then
     echo -e "#!/bin/sh\npgreg -x bspwm || exec dbus-run-session sx" >"$HOME/.config/zsh/session.sh"
   elif [ "$WM" = "hyprland" ]; then
     echo "repository=https://raw.githubusercontent.com/Makrennel/hyprland-void/repository-x86_64-glibc" | sudo tee /etc/xbps.d/hyprland-void.conf
-    sudo xbps-install -S hyprland xdg-desktop-portal-hyprland foot wofi-emoji swaybg wl-clipboard wlsunset
+    sudo xbps-install -S hyprland xdg-desktop-portal-hyprland foot wofi-emoji swww wl-clipboard wlsunset
     echo -e "#!/bin/sh\nexec dbus-run-session Hyprland" >"$HOME/.config/zsh/session.sh"
   fi
 
@@ -98,7 +98,7 @@ elif command -v pacman &>/dev/null; then
     sudo pacman -S xf86-video-amdgpu bspwm sxhkd sx rofi-emoji xorg-server xdo xdotool xorg-xrandr xorg-xkill xorg-xset xorg-xsetroot redshift xorg-xclip xorg-setxkbmap
     echo -e "#!/bin/sh\npgreg -x bspwm || exec sx" >"$HOME/.config/zsh/session.sh"
   elif [ "$WM" = "hyprland" ]; then
-    sudo pacman -S hyprland xdg-desktop-portal-hyprland foot wofi-emoji swaybg wl-clipboard hyprsunset
+    sudo pacman -S hyprland xdg-desktop-portal-hyprland foot wofi-emoji swww wl-clipboard hyprsunset
     echo -e "#!/bin/sh\nexec Hyprland" >"$HOME/.config/zsh/session.sh"
   fi
 else

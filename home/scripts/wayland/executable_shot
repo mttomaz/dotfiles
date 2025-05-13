@@ -1,33 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 
-get-date() {
-  date "+%A-%R-%d-%m-%y"
-}
+OUTPUT="$HOME/Pictures/screenshots/$(date "+%A-%R-%d-%m-%y").png"
 
-freeze-select() {
-  grim - | imv -f -w "imv-screenshot" - &
-  imv_pid=$!
-}
-
-outline_color="0.38,0.68,0.93"
-
-while [[ "$1" ]]; do
+while [ "$1" ]; do
   case "$1" in
   select | s)
-    freeze-select
-    grim -g "$(slurp -d)" "$HOME/Pictures/screenshots/$(get-date).png"
-    kill $imv_pid
-    ;;
-  select-copy | scp)
-    freeze-select
-    maim -us -c $outline_color -b 4 | xclip -selection clipboard -t image/png
-    kill $imv_pid
+    grim -t ppm - | satty -f - -o "$OUTPUT"
+    hyprctl dispatcher workspace previous
     ;;
   full | f)
-    maim -u "$HOME/Pictures/screenshots/$(get-date).png"
-    ;;
-  full-copy | fcp)
-    maim -u | xclip -selection clipboard -t image/png
+    grim "$OUTPUT"
     ;;
   esac
   exit

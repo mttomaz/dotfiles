@@ -1,0 +1,9 @@
+#!/bin/sh
+
+player_status="$(playerctl status)"
+
+[ "$player_status" = "Playing" ] && playerctl pause
+
+hyprlock
+
+[ "$player_status" = "Playing" ] && playerctl play
