@@ -124,16 +124,7 @@ back-edit() {
 }
 
 cleanup() {
-  if command -v pacman &>/dev/null; then
-    if [[ -n "$(pacman -Qtdq)" ]]; then
-      pacman -Qtdq | doas pacman -Rns -
-    fi
-    if command -v paru &>/dev/null; then
-      paru -Sc
-    fi
-  elif command -v xbps-install &>/dev/null; then
-    doas xbps-remove -Oo
-  fi
+  doas xbps-remove -Oo
   flatpak remove --unused
   docker image prune
   trash-empty

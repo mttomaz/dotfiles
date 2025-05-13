@@ -38,6 +38,15 @@ select opt in "bspwm" "hyprland" "none"; do
 done
 
 PKGS=(
+  dbus
+  elogind
+  polkit
+  gawk
+  nodejs
+  font-fira-ttf
+  alsa-pipewire
+  libjack-pipewire
+  pcmanfm
   mesa
   lazygit
   dex
@@ -75,11 +84,10 @@ PKGS=(
   tealdeer
 )
 
-# Installing packages, if you are on void or arch
+# Installing packages
 info_msg "Installing packages ..."
-# TODO: add all necessary packages
 if command -v xbps-install &>/dev/null; then
-  sudo xbps-install -Su "${PKGS[@]}" dbus elogind polkit gawk nodejs font-fira-ttf alsa-pipewire libjack-pipewire pcmanfm
+  sudo xbps-install -Su "${PKGS[@]}"
   sudo ln -s /etc/sv/{dbus,polkit} /var/service/
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
   if [ "$WM" = "bspwm" ]; then
@@ -90,19 +98,8 @@ if command -v xbps-install &>/dev/null; then
     sudo xbps-install -S hyprland xdg-desktop-portal-hyprland foot wofi-emoji swww wl-clipboard wlsunset
     echo -e "#!/bin/sh\nexec dbus-run-session Hyprland" >"$HOME/.config/zsh/session.sh"
   fi
-
-elif command -v pacman &>/dev/null; then
-  sudo pacman -Syu "${PKGS[@]}" awk npm ttf-fira-sans pipewire-{alsa,audio,jack,pulse} pcmanfm-gtk3
-  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-  if [ "$WM" = "bspwm" ]; then
-    sudo pacman -S xf86-video-amdgpu bspwm sxhkd sx rofi-emoji xorg-server xdo xdotool xorg-xrandr xorg-xkill xorg-xset xorg-xsetroot redshift xorg-xclip xorg-setxkbmap
-    echo -e "#!/bin/sh\npgreg -x bspwm || exec sx" >"$HOME/.config/zsh/session.sh"
-  elif [ "$WM" = "hyprland" ]; then
-    sudo pacman -S hyprland xdg-desktop-portal-hyprland foot wofi-emoji swww wl-clipboard hyprsunset
-    echo -e "#!/bin/sh\nexec Hyprland" >"$HOME/.config/zsh/session.sh"
-  fi
 else
-  error_msg "Could not find xbps-install or pacman, no package was installed."
+  error_msg "Could not find xbps-install, no package was installed."
 fi
 
 # Creating directories needed for applications and scripts (and my personal use)
