@@ -23,6 +23,12 @@
 These are my personal configurations for Linux, tailored to enhance productivity and streamline workflows.
 They are designed to be lightweight, modular, and easy to manage.
 
+## ⚠️ Notice: Void Linux Configuration (Deprecated)
+
+This `void` branch contains dotfiles tailored for Void Linux. Please note that this branch is no longer actively maintained, as I have transitioned away from using Void Linux. Consequently, updates to this branch will be infrequent or nonexistent.
+
+For the most up-to-date configurations and active maintenance, please refer to the [`master`](https://github.com/MatheusTT/dotfiles/tree/master) branch.
+
 ## ⚡ Features
 - **Window Managers**: Configurations for Hyprland and BSPWM.
 - **Development Tools**: Pre-configured for Python, Rust, Flutter, and more).
@@ -38,7 +44,7 @@ Run the following command to initialize my dotfiles with chezmoi:
 
 If you want to install everything (including rust, zen, and wallpapers) do this:
   ```bash
-  curl -fsSl https://raw.githubusercontent.com/MatheusTT/dotfiles/master/install.sh | sh
+  curl -fsSl https://raw.githubusercontent.com/MatheusTT/dotfiles/void/install.sh | sh
   ```
 
 ## 🛠 Programs used
