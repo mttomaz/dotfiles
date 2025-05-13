@@ -12,17 +12,12 @@ info_msg() {
 }
 
 
-if is_installed xbps-install; then
-  info_msg "Updating void packages."
-  doas xbps-install -Su
-elif is_installed pacman; then
-  if is_installed paru; then
-    info_msg "Updating arch and AUR packages."
-    paru -Syu
-  else
-    info_msg "Updating arch packages."
-    doas pacman -Syu
-  fi
+if is_installed paru; then
+  info_msg "Updating arch and AUR packages."
+  paru -Syu
+else
+  info_msg "Updating arch packages."
+  doas pacman -Syu
 fi
 
 if is_installed flatpak; then
