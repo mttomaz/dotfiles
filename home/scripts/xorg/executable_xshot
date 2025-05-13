@@ -1,8 +1,6 @@
 #!/bin/bash
 
-get-date() {
-  date "+%A_%R_%d-%m-%y"
-}
+OUTPUT="$HOME/Pictures/screenshots/$(date "+%A-%R-%d-%m-%y").png"
 
 freeze-select() {
   maim -u | feh -F - &
@@ -18,7 +16,7 @@ while [[ "$1" ]]; do
   case "$1" in
   select | s)
     freeze-select
-    maim -usk -c $outline_color -b 4 "$HOME/Pictures/screenshots/$(get-date).png"
+    maim -usk -c $outline_color -b 4 "$OUTPUT"
     kill $feh_pid
     ;;
   select-copy | scp)
@@ -27,7 +25,7 @@ while [[ "$1" ]]; do
     kill $feh_pid
     ;;
   full | f)
-    maim -u "$HOME/Pictures/screenshots/$(get-date).png"
+    maim -u "$OUTPUT"
     ;;
   full-copy | fcp)
     maim -u | xclip -selection clipboard -t image/png

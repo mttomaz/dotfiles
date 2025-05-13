@@ -21,14 +21,14 @@ NEXT_WALLPAPER=$(head -n1 "$CACHE_FILE")
 WALLPAPER_NAME="${NEXT_WALLPAPER##*/}"
 
 if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
-  pidof -q swaybg && killall swaybg
-  swaybg -i "${NEXT_WALLPAPER}" &
-  disown
+  pgrep -x swww-daemon || swww-daemon & disown
+  swww img "$NEXT_WALLPAPER" --transition-type wipe \
+    --transition-fps 60 --transition-duration 1.5
 else
-  feh --no-fehbg --bg-fill "${NEXT_WALLPAPER}"
+  feh --no-fehbg --bg-fill "$NEXT_WALLPAPER"
 fi
 
-sed -i "/${WALLPAPER_NAME}/d" "$CACHE_FILE"
+sed -i "/$WALLPAPER_NAME/d" "$CACHE_FILE"
 echo "$NEXT_WALLPAPER" >"$XDG_CACHE_HOME/scripts/current_wallpaper"
 
 echo -e "  Selected the wallpaper: ${GREEN}\"${WALLPAPER_NAME}\"${END},

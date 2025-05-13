@@ -1,4 +1,3 @@
 #!/bin/sh
 
-path="$HOME/$(date '+%d|%m - %H:%M:%S').txt"
-hyprctl activewindow >"$path"
+hyprctl activewindow >"$HOME/$(date '+%d|%m - %H:%M:%S').txt"
