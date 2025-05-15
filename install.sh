@@ -81,6 +81,7 @@ PKGS=(
   meson
   ninja
   tealdeer
+  base-devel
 )
 
 # Installing packages
@@ -95,6 +96,14 @@ if command -v pacman &>/dev/null; then
   elif [ "$WM" = "hyprland" ]; then
     sudo pacman -S hyprland xdg-desktop-portal-hyprland foot wofi-emoji swww wl-clipboard hyprsunset
     echo -e "#!/bin/sh\nexec Hyprland" >"$HOME/.config/zsh/session.sh"
+  fi
+
+  if ! command -v paru &>/dev/null; then
+    git clone https://aur.archlinux.org/paru-bin "$HOME/paru-bin"
+    cd "$HOME/paru-bin" || error_msg "Could not cd into \"$HOME/paru-bin\""
+    sudo makepkg -sic
+    cd "$OLDPWD" || return
+    rm -rf "$HOME/paru-bin"
   fi
 else
   error_msg "Could not find pacman, no package was installed."
