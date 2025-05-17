@@ -29,6 +29,9 @@ return {
       rustfmt = {
         prepend_args = { "--config", "tab_spaces=2", "--config", "max_width=100" },
       },
+      prettier = {
+        prepend_args = { "--print-width", "100" },
+      },
     },
   },
 }
