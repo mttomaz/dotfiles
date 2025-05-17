@@ -11,14 +11,7 @@
 <br>
 
 ![](./assets/screenshots/0.jpg)
-
-<details>
-<summary>More Screenshots</summary>
-  <img src="./assets/screenshots/1.jpg"/>
-  <img src="./assets/screenshots/2.jpg"/>
-  <img src="./assets/screenshots/3.jpg"/>
-</details>
-
+![](./assets/screenshots/1.jpg)
 
 These are my personal configurations for Linux, tailored to enhance productivity and streamline workflows.
 They are designed to be lightweight, modular, and easy to manage.
