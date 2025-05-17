@@ -1,0 +1,79 @@
+@use "../../theme" as *;
+
+window.Bar {
+  border: none;
+  box-shadow: none;
+  color: $fg1;
+  background-color: $bg1;
+  font-family: $font1;
+  font-size: 14px;
+  font-weight: 700;
+  min-height: 28px;
+
+  .Workspaces {
+    margin-left: 2px;
+    transition-duration: 150ms;
+    button {
+      all: unset;
+      color: #727169;
+      background-color: transparent;
+      padding: 0 4px;
+      &:hover {
+        color: $fg2;
+      }
+    }
+    .focused label {
+      color: $fg1;
+    }
+  }
+
+  .SysTray {
+    padding: 0 2px;
+    button {
+      background-color: transparent;
+      padding: 0px 3px;
+    }
+  }
+
+  .TimeAndWeather {
+    all: unset;
+    background-color: transparent;
+    border-radius: 6px;
+    transition-duration: 200ms;
+    margin: 4px 0px;
+    &:hover {
+      color: $bg1;
+      background-color: rgba(#9cabca, 0.7);
+    }
+  }
+
+  .Time,
+  .Network,
+  .Memory,
+  .Weather,
+  .Battery,
+  .Bluetooth,
+  .NotificationBell {
+    padding: 0 6px;
+  }
+
+  .Battery label {
+    padding-right: 6px;
+  }
+
+  .Bluetooth label {
+    padding-right: 2px;
+  }
+
+  .Media {
+    all: unset;
+    font-weight: 700;
+    transition-duration: 150ms;
+    .playing {
+      color: inherit;
+    }
+    .paused {
+      color: #727169;
+    }
+  }
+}

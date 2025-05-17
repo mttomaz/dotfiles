@@ -1,0 +1,30 @@
+@use "../../theme" as *;
+
+window.OSD {
+  box.OSD {
+    font-family: $font1;
+    font-weight: 900;
+    border-radius: 16px;
+    background-color: $bg1;
+    padding: 6px;
+    margin: 12px 8px 12px 12px;
+    box-shadow: 0px 0px 7px 0px rgba(black, 0.8);
+  }
+  icon {
+    font-size: 20px;
+    color: $fg1;
+  }
+  label {
+    font-size: 12px;
+    color: $fg1;
+  }
+  levelbar {
+    trough {
+      margin: 1px 0.6rem;
+    }
+    block {
+      min-width: 16px;
+      border-radius: 8px;
+    }
+  }
+}
