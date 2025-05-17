@@ -7,7 +7,7 @@ vim.opt.wrap = true
 vim.g.autoformat = false
 vim.g.lazyvim_picker = "snacks"
 vim.g.snacks_animate = false
-vim.wo.colorcolumn = "90"
+vim.wo.colorcolumn = "100"
 
 vim.opt.spell = false
 vim.opt.spelllang = { "en_us", "pt_br" }
