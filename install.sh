@@ -91,19 +91,20 @@ if command -v pacman &>/dev/null; then
   sudo pacman -Syu "${PKGS[@]}"
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
   if [ "$WM" = "bspwm" ]; then
-    sudo pacman -S xf86-video-amdgpu bspwm sxhkd sx rofi-emoji xorg-server xdo xdotool xorg-xrandr xorg-xkill xorg-xset xorg-xsetroot redshift xorg-xclip xorg-setxkbmap
+    sudo pacman -S xf86-video-amdgpu bspwm sxhkd sx rofi-emoji xorg-server xdo xdotool \
+      xorg-xrandr xorg-xkill xorg-xset xorg-xsetroot redshift xorg-xclip xorg-setxkbmap
     echo -e "#!/bin/sh\npgreg -x bspwm || exec sx" >"$HOME/.config/zsh/session.sh"
   elif [ "$WM" = "hyprland" ]; then
-    sudo pacman -S hyprland xdg-desktop-portal-hyprland foot wofi-emoji swww wl-clipboard hyprsunset
+    sudo pacman -S hyprland xdg-desktop-portal-hyprland foot wofi-emoji swww wl-clipboard \
+      hyprsunset
     echo -e "#!/bin/sh\nexec Hyprland" >"$HOME/.config/zsh/session.sh"
   fi
 
   if ! command -v paru &>/dev/null; then
-    git clone https://aur.archlinux.org/paru-bin "$HOME/paru-bin"
-    cd "$HOME/paru-bin" || error_msg "Could not cd into \"$HOME/paru-bin\""
-    sudo makepkg -sic
-    cd "$OLDPWD" || return
-    rm -rf "$HOME/paru-bin"
+    info_msg "Installing paru ..."
+    cd /tmp && git clone https://aur.archlinux.org/paru-bin
+    cd paru-bin && sudo makepkg -sic --noconfirm
+    cd "$OLDPWD" && rm -rf /tmp/paru-bin
   fi
 else
   error_msg "Could not find pacman, no package was installed."
@@ -115,7 +116,7 @@ mkdir -p "$HOME"/.local/{share,state} "$HOME"/.cache/{zsh,scripts}
 mkdir -p "$HOME"/{Documents/{dev,github},Downloads,Pictures/screenshots}
 
 # Changing shell to ZSH
-if [ "$(echo "$SHELL" | awk -F/ '{print $NF}')" != "zsh" ]; then
+if [ "$(echo "$SHELL" | awk -F'/' '{print $NF}')" != "zsh" ]; then
   info_msg "Changing shell to ZSH ..."
   chsh -s /usr/bin/zsh
 fi
@@ -140,19 +141,24 @@ gsettings set org.gnome.desktop.interface gtk-theme "Kanagawa-B-LB"
 gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 gsettings set org.gnome.desktop.interface cursor-theme "cz-Hickson-Black"
 
-# Installing rust via rustup (needed for eww)
+# Installing rust via rustup
 info_msg "Installing rust ..."
 rustup toolchain install nightly
 rustup default nightly
 
 # TODO: automate flutter installation
 
-# Compiling eww
-info_msg "Installing eww ..."
-git clone https://github.com/elkowar/eww "$HOME/Documents/github/eww"
-cd "$HOME/Documents/github/eww" || error_msg "Could not change dir to ~/Documents/github/eww"
-cargo build --release --no-default-features
-cp target/release/eww ~/.local/bin/eww
+if [ "$WM" = "hyprland" ]; then
+  info_msg "Installing AGS ..."
+  paru -S aylurs-gtk-shell-git libastal-meta gvfs
+elif [ "$WM" = "bspwm" ]; then
+  # Compiling eww
+  info_msg "Installing EWW ..."
+  git clone https://github.com/elkowar/eww "$HOME/Documents/github/eww"
+  cd "$HOME/Documents/github/eww" || error_msg "Could not change dir to ~/Documents/github/eww"
+  cargo build --release --no-default-features
+  cp target/release/eww ~/.local/bin/eww
+fi
 
 # Installing Zen Browser, the new "Arc like" browser based on firefox
 info_msg "Installing Zen Browser ..."
@@ -165,7 +171,8 @@ ln -s ~/.local/share/zen/zen ~/.local/bin/zen
 # Installing my fork of playerctl
 info_msg "Installing my fork of playerctl ..."
 git clone https://github.com/MatheusTT/playerctl "$HOME/Documents/github/playerctl"
-cd "$HOME/Documents/github/playerctl" || error_msg "Could not change dir to ~/Documents/github/playerctl"
+cd "$HOME/Documents/github/playerctl" || \
+  error_msg "Could not change dir to ~/Documents/github/playerctl"
 meson mesonbuild
 sudo ninja -C mesonbuild install
 

@@ -1,0 +1,10 @@
+window.Crosshair {
+  background-color: rgba(black, 0.4);
+  border-radius: 20px;
+  .Dot {
+    background-color: white;
+    margin: 2px;
+    padding: 3px;
+    border-radius: 20px;
+  }
+}
