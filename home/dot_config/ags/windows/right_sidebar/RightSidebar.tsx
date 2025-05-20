@@ -119,10 +119,10 @@ function DoNotDisturbModule() {
 
 function toggleNightLight() {
   if (nightLightEnabled.get()) {
-    execAsync("pkill hyprsunset")
+    execAsync("pkill -x hyprsunset")
     nightLightEnabled.set(false)
   } else {
-    execAsync("bash -c 'hyprsunset -t 5000 & disown'")
+    execAsync("hyprsunset -t 5000")
     nightLightEnabled.set(true)
   }
 }
@@ -212,7 +212,7 @@ function Actions() {
   return (
     <box className="sidebarActions">
       {actionButton("󰌾", "lock", "~/scripts/wayland/lock")}
-      {actionButton("󰤄", "hibernate", "systemctl hibernate; ~/scripts/wayland/lock")}
+      {actionButton("󰤄", "hibernate", ["sh", "-c", "systemctl hibernate; ~/scripts/wayland/lock"])}
       {actionButton("󰐥", "poweroff", "poweroff")}
     </box>
   )
