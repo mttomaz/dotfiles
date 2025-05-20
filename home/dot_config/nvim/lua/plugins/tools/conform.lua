@@ -17,6 +17,7 @@ return {
       scss = { "prettier" },
       javascript = { "prettier" },
       json = { "prettier" },
+      jsonc = { "prettier" },
       lua = { "stylua" },
       python = { "ruff_format" },
       yaml = { "prettier" },
