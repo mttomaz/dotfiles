@@ -28,6 +28,7 @@ export const uptime = Variable("").poll(5 * 60 * 1000, async () => {
     .replace(/ minutes| minute/, "m")
     .replace(/ hours| hour/, "h")
     .replace(/ days| day/, "d")
+    .replace(/ weeks| week/, "w")
 })
 
 export const memoryUsage = Variable<string>("").poll(5 * 1000, async () => {

@@ -1,3 +1,8 @@
+import { Astal } from "astal/gtk3"
+
+export const isIcon = (icon: string) =>
+  !!Astal.Icon.lookup_icon(icon)
+
 export function getWeatherEmoji(desc: string): string {
   desc = desc.toLowerCase()
 
