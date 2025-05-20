@@ -1,0 +1,82 @@
+//    ______           __  ______      __
+//   / ____/___ ______/ /_/ ____/___ _/ /_
+//  / /_  / __ `/ ___/ __/ /   / __ `/ __/
+// / __/ / /_/ (__  ) /_/ /___/ /_/ / /_
+///_/    \__,_/____/\__/\____/\__,_/\__/
+//  https://github.com/m3tozz/FastCat
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": "arch2",
+  "display": {
+    "separator": "  ",
+  },
+  "modules": [
+    {
+      "key": "╭──────────────╮",
+      "type": "custom",
+    },
+    {
+      "key": "│ {#31} user@hname {#keys}│",
+      "type": "title",
+      "format": "{user-name}@{host-name}",
+    },
+    {
+      "key": "│ {#32}󰅐 uptime     {#keys}│",
+      "type": "uptime",
+    },
+    {
+      "key": "│ {#33}{icon} distro     {#keys}│",
+      "type": "os",
+    },
+    {
+      "key": "│ {#34} kernel     {#keys}│",
+      "type": "kernel",
+    },
+    {
+      "key": "│ {#35} term       {#keys}│",
+      "type": "terminal",
+    },
+    {
+      "key": "│ {#36} shell      {#keys}│",
+      "type": "shell",
+    },
+    {
+      "key": "│ {#31}󰍛 cpu        {#keys}│",
+      "type": "cpu",
+      "showPeCoreCount": true,
+    },
+    {
+      "type": "gpu",
+      "key": "│ {#32}󱤓 gpu        {#keys}│",
+      "format": "{2} [{6}]",
+    },
+    {
+      "key": "│ {#33} memory     {#keys}│",
+      "type": "memory",
+    },
+    {
+      "key": "│ {#34}󰩟 network    {#keys}│",
+      "type": "localip",
+      "format": "{ipv4} ({ifname})",
+    },
+    {
+      "key": "│ {#35}󰺎 installed  {#keys}│",
+      "type": "command",
+      "shell": "install_date.sh",
+      "format": "{result} days ago",
+    },
+    {
+      "key": "├──────────────┤",
+      "type": "custom",
+    },
+    {
+      "key": "│ {#39} colors     {#keys}│",
+      "type": "colors",
+      "symbol": "circle",
+    },
+    {
+      "key": "╰──────────────╯",
+      "type": "custom",
+    },
+  ],
+}
