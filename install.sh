@@ -82,6 +82,7 @@ PKGS=(
   ninja
   tealdeer
   base-devel
+  fastfetch
 )
 
 # Installing packages
@@ -151,6 +152,7 @@ rustup default nightly
 if [ "$WM" = "hyprland" ]; then
   info_msg "Installing AGS ..."
   paru -S aylurs-gtk-shell-git libastal-meta gvfs
+  cd "$HOME/.config/ags/" && ags types Astal*
 elif [ "$WM" = "bspwm" ]; then
   # Compiling eww
   info_msg "Installing EWW ..."
