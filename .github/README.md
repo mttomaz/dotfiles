@@ -53,6 +53,13 @@ If you want to install everything (including rust, zen, and wallpapers) do this:
 - `.local/bin/`: Simple scripts used across the entire system.
 - `scripts/`: Custom scripts for automation and other tasks.
 
+## 🌟 Inspirations
+- [dharmx/vile](https://github.com/dharmx/vile)
+- [Battlesquid/dotfiles](https://github.com/Battlesquid/dotfiles)
+- [qxb3/conf](https://github.com/qxb3/conf)
+- [end-4/dots-hyprland](https://github.com/end-4/dots-hyprland)
+- [koeqaife/hyprland-material-you](https://github.com/koeqaife/hyprland-material-you)
+
 ## 🤝 Contributing
 If you have suggestions or improvements, feel free to open an issue or submit a pull request.
 
