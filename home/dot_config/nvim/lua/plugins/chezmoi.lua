@@ -6,11 +6,11 @@ return {
     {
       "<leader>cz",
       function()
-        require("snacks.picker").files({
-          cwd = os.getenv("HOME") .. "/.local/share/chezmoi",
+        require("snacks.picker").files {
+          cwd = os.getenv "HOME" .. "/.local/share/chezmoi",
           title = "Chezmoi Files",
           hidden = true,
-        })
+        }
       end,
       desc = "Find Chezmoi File",
     },
@@ -18,7 +18,7 @@ return {
   init = function()
     -- run chezmoi edit on file enter
     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-      pattern = { os.getenv("HOME") .. "/.local/share/chezmoi/*" },
+      pattern = { os.getenv "HOME" .. "/.local/share/chezmoi/home/*" },
       callback = function()
         vim.schedule(require("chezmoi.commands.__edit").watch)
       end,
