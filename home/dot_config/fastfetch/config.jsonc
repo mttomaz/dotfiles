@@ -21,11 +21,11 @@
       "format": "{user-name}@{host-name}",
     },
     {
-      "key": "│ {#32}󰅐 uptime     {#keys}│",
+      "key": "│ {#32}󰥔 uptime     {#keys}│",
       "type": "uptime",
     },
     {
-      "key": "│ {#33}{icon} distro     {#keys}│",
+      "key": "│ {#33} distro     {#keys}│",
       "type": "os",
     },
     {
