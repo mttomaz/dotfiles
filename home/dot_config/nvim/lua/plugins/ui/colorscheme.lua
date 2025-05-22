@@ -1,6 +1,11 @@
 return {
   -- Add kanagawa
-  { "MatheusTT/kanagawa.nvim" },
+  {
+    "MatheusTT/kanagawa.nvim",
+    opts = {
+      transparent = true,
+    },
+  },
 
   -- Configure LazyVim to load kanagawa
   {
