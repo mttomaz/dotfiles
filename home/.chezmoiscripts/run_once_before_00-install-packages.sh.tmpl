@@ -57,18 +57,8 @@ PKGS=(
 # Installing packages
 info_msg "Installing packages ..."
 if command -v pacman &>/dev/null; then
-  sudo pacman -Syu "${PKGS[@]}"
+  sudo pacman -Syu --needed "${PKGS[@]}"
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-  {{ if eq .wm "hyprland" }}
-  sudo pacman -S xf86-video-amdgpu bspwm sxhkd sx rofi-emoji xorg-server xdo xdotool \
-    xorg-xrandr xorg-xkill xorg-xset xorg-xsetroot redshift xorg-xclip xorg-setxkbmap
-  echo -e "#!/bin/sh\npgrep -x bspwm || exec sx" >>"$HOME/.config/zsh/session.sh"
-  {{ else if .wm "bspwm" }}
-  sudo pacman -S hyprland xdg-desktop-portal-hyprland foot wofi-emoji swww wl-clipboard \
-    hyprsunset
-  echo -e "#!/bin/sh\nexec Hyprland" >>"$HOME/.config/zsh/session.sh"
-  {{ end -}}
-
   if ! command -v paru &>/dev/null; then
     info_msg "Installing paru ..."
     cd /tmp && git clone https://aur.archlinux.org/paru-bin

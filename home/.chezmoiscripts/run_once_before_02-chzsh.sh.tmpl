@@ -13,6 +13,7 @@ fi
 
 if ! grep -q ZDOTDIR /etc/zsh/zshenv; then
   info_msg "Setting \$ZDOTDIR ..."
+  [ -d "/etc/zsh" ] || sudo mkdir /etc/zsh
   echo "ZDOTDIR=\"\$HOME/.config/zsh\"" | sudo tee -a /etc/zsh/zshenv
 fi
 {{ end -}}
