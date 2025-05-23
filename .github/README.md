@@ -25,11 +25,11 @@ They are designed to be lightweight, modular, and easy to manage.
 Make sure you have `chezmoi` installed. You can install it by following the [official guide](https://www.chezmoi.io/install/).
 
 Run the following command to initialize my dotfiles with chezmoi:
-  ```bash
-  chezmoi init --apply mttomaz
-  ```
 
-If you want to install everything (including rust, zen, and wallpapers) do this:
+> [!Caution]
+> This will install and configure most applications that i use daily,
+> if you just want the files you might wanna copy them from [here](https://github.com/mttomaz/dotfiles/tree/master/home).
+
   ```bash
   curl -fsSl https://raw.githubusercontent.com/mttomaz/dotfiles/master/install.sh | sh
   ```
@@ -61,7 +61,6 @@ If you want to install everything (including rust, zen, and wallpapers) do this:
 - [dharmx/vile](https://github.com/dharmx/vile)
 - [Battlesquid/dotfiles](https://github.com/Battlesquid/dotfiles)
 - [qxb3/conf](https://github.com/qxb3/conf)
-- [end-4/dots-hyprland](https://github.com/end-4/dots-hyprland)
 - [koeqaife/hyprland-material-you](https://github.com/koeqaife/hyprland-material-you)
 
 ## 🤝 Contributing
