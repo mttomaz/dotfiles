@@ -2,13 +2,9 @@
 #!/bin/sh
 # vim:ft=sh
 
-info_msg() {
-  echo -e "\n\033[1;32m${1}\033[0m"
-}
-
 # Installing Zen Browser, the new "Arc like" browser based on firefox
 if ! command -v zen; then
-  info_msg "Installing Zen Browser ..."
+  echo -e "\n\033[1;32mInstalling Zen Browser ...\033[0m"
   cd "$HOME/Downloads/" &&
   wget https://github.com/zen-browser/desktop/releases/latest/download/zen.linux-x86_64.tar.xz
   tar xvf zen.linux-x86_64.tar.xz

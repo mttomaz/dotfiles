@@ -2,12 +2,8 @@
 #!/bin/sh
 # vim:ft=sh
 
-info_msg() {
-  echo -e "\n\033[1;32m${1}\033[0m"
-}
-
 # Installing rust via rustup
-info_msg "Installing rust ..."
+echo -e "\n\033[1;32mInstalling rust ...\033[0m"
 rustup toolchain install nightly
 rustup default nightly
 {{ end -}}
