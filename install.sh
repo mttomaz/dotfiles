@@ -130,7 +130,7 @@ fi
 
 # Initializing and applying dotfiles
 info_msg "Initialing chezmoi ..."
-chezmoi init --apply MatheusTT
+chezmoi init --apply mttomaz
 
 # Regenerating font cache
 info_msg "Regenerating font cache ..."
@@ -172,7 +172,7 @@ ln -s ~/.local/share/zen/zen ~/.local/bin/zen
 
 # Installing my fork of playerctl
 info_msg "Installing my fork of playerctl ..."
-git clone https://github.com/MatheusTT/playerctl "$HOME/Documents/github/playerctl"
+git clone https://github.com/mttomaz/playerctl "$HOME/Documents/github/playerctl"
 cd "$HOME/Documents/github/playerctl" || \
   error_msg "Could not change dir to ~/Documents/github/playerctl"
 meson mesonbuild
@@ -180,4 +180,4 @@ sudo ninja -C mesonbuild install
 
 # Downloading my wallpapers, theres a script named "random-wallpaper" that sets my wallpaper
 info_msg "Donwloading my collection of wallpapers ..."
-git clone https://github.com/MatheusTT/wallpapers "$HOME/Pictures/wallpapers"
+git clone https://github.com/mttomaz/wallpapers "$HOME/Pictures/wallpapers"
