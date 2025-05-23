@@ -1,10 +1,10 @@
 <div align="center">
 
 # dotfiles 🐧
-[![stars](https://img.shields.io/github/stars/MatheusTT/dotfiles?color=7E9CD8&style=for-the-badge)](https://github.com/MatheusTT/dotfiles/stargazers)
-[![issues](https://img.shields.io/github/issues/MatheusTT/dotfiles?color=FF5D62&style=for-the-badge)](https://github.com/MatheusTT/dotfiles/issues)
-[![size](https://img.shields.io/github/repo-size/MatheusTT/dotfiles?color=76946A&style=for-the-badge)](https://github.com/MatheusTT/dotfiles)
-[![license](https://img.shields.io/github/license/MatheusTT/dotfiles?color=957FB8&style=for-the-badge)](https://github.com/MatheusTT/dotfiles/blob/master/LICENSE)
+[![stars](https://img.shields.io/github/stars/mttomaz/dotfiles?color=7E9CD8&style=for-the-badge)](https://github.com/mttomaz/dotfiles/stargazers)
+[![issues](https://img.shields.io/github/issues/mttomaz/dotfiles?color=FF5D62&style=for-the-badge)](https://github.com/mttomaz/dotfiles/issues)
+[![size](https://img.shields.io/github/repo-size/mttomaz/dotfiles?color=76946A&style=for-the-badge)](https://github.com/mttomaz/dotfiles)
+[![license](https://img.shields.io/github/license/mttomaz/dotfiles?color=957FB8&style=for-the-badge)](https://github.com/mttomaz/dotfiles/blob/master/LICENSE)
 
 </div>
 
@@ -26,21 +26,25 @@ Make sure you have `chezmoi` installed. You can install it by following the [off
 
 Run the following command to initialize my dotfiles with chezmoi:
   ```bash
-  chezmoi init --apply MatheusTT
+  chezmoi init --apply mttomaz
   ```
 
 If you want to install everything (including rust, zen, and wallpapers) do this:
   ```bash
-  curl -fsSl https://raw.githubusercontent.com/MatheusTT/dotfiles/master/install.sh | sh
+  curl -fsSl https://raw.githubusercontent.com/mttomaz/dotfiles/master/install.sh | sh
   ```
 
 ## 🛠 Programs used
-- Window Manager: [BSPWM](https://github.com/baskerville/bspwm)
-- Wayland Compositor: [Hyprland](https://hyprland.org/)
-- Xorg Terminal: [st](https://github.com/bakkeby/st-flexipatch)
-- Wayland Terminal: [foot](https://codeberg.org/dnkl/foot)
-- AppLauncher: [rofi](https://github.com/lbonn/rofi)
-- Bar and Widgets: [eww](https://github.com/elkowar/eww)
+- Wayland
+  - Compositor: [Hyprland](https://hyprland.org/)
+  - Terminal: [foot](https://codeberg.org/dnkl/foot)
+  - AppLauncher: [wofi](https://hg.sr.ht/~scoopta/wofi)
+  - Bar and Widgets: [ags](https://aylur.github.io/ags/)
+- Xorg **(deprecated)**
+  - Window Manager: [BSPWM](https://github.com/baskerville/bspwm)
+  - Terminal: [kitty](https://github.com/kovidgoyal/kitty)
+  - AppLauncher: [rofi](https://github.com/lbonn/rofi)
+  - Bar and Widgets: [eww](https://github.com/elkowar/eww)
 - Neovim Distro: [LazyVim](https://www.lazyvim.org/)
 - GTK Theme: [Kanagawa](https://www.pling.com/p/1810560/)
 - Icon Theme: [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/)
