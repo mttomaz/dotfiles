@@ -1,0 +1,4 @@
+{{- $choices := list "hyprland" "bspwm" "none" -}}
+{{- $wm := promptChoice "What Compositor/WM do you want" $choices -}}
+[data]
+  wm = {{- $wm | quote -}}
