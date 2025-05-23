@@ -1,0 +1,79 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+# vim:ft=sh
+
+info_msg() {
+  echo -e "\n\033[1;32m${1}\033[0m"
+}
+
+PKGS=(
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  starship
+  awk
+  npm
+  playerctl
+  ttf-fira-sans
+  pipewire-alsa
+  pipewire-audio
+  pipewire-jack
+  pipewire-pulse
+  pcmanfm-gtk3
+  mesa
+  lazygit
+  dex
+  gcc
+  neovim
+  yazi
+  btop
+  fzf
+  ripgrep
+  papirus-icon-theme
+  brightnessctl
+  curl
+  wget
+  socat
+  jq
+  flatpak
+  zathura-pdf-poppler
+  lsd
+  tmux
+  trash-cli
+  imv
+  mpv
+  dunst
+  wireplumber
+  sof-firmware
+  pulsemixer
+  opendoas
+  rustup
+  meson
+  ninja
+  tealdeer
+  base-devel
+  fastfetch
+)
+
+# Installing packages
+info_msg "Installing packages ..."
+if command -v pacman &>/dev/null; then
+  sudo pacman -Syu "${PKGS[@]}"
+  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+  {{ if eq .wm "hyprland" }}
+  sudo pacman -S xf86-video-amdgpu bspwm sxhkd sx rofi-emoji xorg-server xdo xdotool \
+    xorg-xrandr xorg-xkill xorg-xset xorg-xsetroot redshift xorg-xclip xorg-setxkbmap
+  echo -e "#!/bin/sh\npgrep -x bspwm || exec sx" >>"$HOME/.config/zsh/session.sh"
+  {{ else if .wm "bspwm" }}
+  sudo pacman -S hyprland xdg-desktop-portal-hyprland foot wofi-emoji swww wl-clipboard \
+    hyprsunset
+  echo -e "#!/bin/sh\nexec Hyprland" >>"$HOME/.config/zsh/session.sh"
+  {{ end -}}
+
+  if ! command -v paru &>/dev/null; then
+    info_msg "Installing paru ..."
+    cd /tmp && git clone https://aur.archlinux.org/paru-bin
+    cd paru-bin && sudo makepkg -sic --noconfirm
+    cd "$OLDPWD" && rm -rf /tmp/paru-bin
+  fi
+fi
+{{ end -}}

@@ -1,0 +1,18 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+# vim:ft=sh
+
+info_msg() {
+  echo -e "\n\033[1;32m${1}\033[0m"
+}
+
+if ! echo "$SHELL" | grep -q zsh; then
+  info_msg "Changing shell to ZSH ..."
+  chsh -s /usr/bin/zsh
+fi
+
+if ! grep -q ZDOTDIR /etc/zsh/zshenv; then
+  info_msg "Setting \$ZDOTDIR ..."
+  echo "ZDOTDIR=\"\$HOME/.config/zsh\"" | sudo tee -a /etc/zsh/zshenv
+fi
+{{ end -}}

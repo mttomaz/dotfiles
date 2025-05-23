@@ -1,0 +1,27 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+# vim:ft=sh
+
+info_msg() {
+  echo -e "\n\033[1;32m${1}\033[0m"
+}
+
+# Creating directories needed for applications and scripts (and my personal use)
+info_msg "Creating directories ..."
+mkdir -p "$HOME"/.local/{share,state} "$HOME"/.cache/{zsh,scripts}
+mkdir -p "$HOME"/{Documents/{dev,github},Downloads,Pictures/screenshots}
+
+# Regenerating font cache
+info_msg "Regenerating font cache ..."
+fc-cache -frv
+
+# Setting themes using gsettings
+info_msg "Setting themes using gsettings ..."
+gsettings set org.gnome.desktop.interface gtk-theme "Kanagawa-B-LB"
+gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
+gsettings set org.gnome.desktop.interface cursor-theme "cz-Hickson-Black"
+
+# Downloading my wallpapers, theres a script named "random-wallpaper" that sets my wallpaper
+info_msg "Donwloading my collection of wallpapers ..."
+[ -d "$HOME/Pictures/wallpapers" ] || git clone https://github.com/mttomaz/wallpapers "$HOME/Pictures/wallpapers"
+{{ end -}}
