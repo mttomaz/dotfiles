@@ -1,15 +1,21 @@
 # ~/.config/hypr/hyprland.conf
 
-# PC
+{{ $kb_layout := "us" }}
+{{- if eq .device_type "desktop" -}}
+
 monitor=DP-1,1920x1080@120,0x0,1
 
-# Laptop
+{{- else if eq .device_type "laptop" -}}
+{{-   $kb_layout = "br" -}}
+
+## Laptop Monitor
 monitor=eDP-1,1920x1080@60,0x0,1
-## Second Monitor
+## External Monitor
 monitor=HDMI-A-1,1920x1080@60,0x-1080,1
-## Mirror First
+## Mirror Laptop Monitor
 # monitor=HDMI-A-1, 1920x1080@60, 0x0, 1, mirror, eDP-1
 
+{{ end -}}
 # Startup config
 source = ~/.config/hypr/startup.conf
 
@@ -62,7 +68,7 @@ misc {
 }
 
 input {
-  kb_layout = us
+  kb_layout = {{ $kb_layout }}
   kb_options = compose:menu
   follow_mouse = true
   mouse_refocus = false

@@ -1,4 +1,7 @@
-{{- $choices := list "hyprland" "bspwm" "none" -}}
-{{- $wm := promptChoice "What Compositor/WM do you want" $choices -}}
+{{- $wmChoices := list "hyprland" "bspwm" "none" -}}
+{{- $wm := promptChoice "What Compositor/WM do you want" $wmChoices -}}
+{{- $deviceChoices := list "desktop" "laptop" -}}
+{{- $deviceType := promptChoice "What type of device are you using" $deviceChoices -}}
 [data]
-  wm = {{- $wm | quote -}}
+  wm = {{ $wm | quote }}
+  device_type = {{ $deviceType | quote }}
