@@ -7,19 +7,24 @@ info_msg() {
 }
 
 # Installing Hyprland with AGS or BSPWM with EWW
-{{ if eq .wm "hyprland" }}
+{{- if eq .wm "hyprland" }}
+
 info_msg "Installing Hyprland ..."
 paru -S --needed hyprland xdg-desktop-portal-hyprland foot wofi-emoji swww wl-clipboard \
   hyprsunset
+
 info_msg "Installing AGS ..."
 paru -S --needed aylurs-gtk-shell-git libastal-meta gvfs
 cd "$HOME/.config/ags/" && ags types Astal*
+
 {{ else if eq .wm "bspwm" }}
+
 info_msg "Installing BSPWM ..."
 paru -S --needed xf86-video-amdgpu bspwm sxhkd sx rofi-emoji xorg-server xdo xdotool \
   xorg-xrandr xorg-xkill xorg-xset xorg-xsetroot redshift xorg-xclip xorg-setxkbmap
+
 info_msg "Installing EWW ..."
 paru -S --needed eww-git
-{{ end -}}
 
+{{- end -}}
 {{- end -}}
