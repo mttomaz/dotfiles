@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.os "linux" -}}
+{{- if eq .chezmoi.os "linux" -}}
 #!/bin/sh
 # vim:ft=sh
 
@@ -6,4 +6,4 @@
 echo -e "\n\033[1;32mInstalling rust ...\033[0m"
 rustup toolchain install nightly
 rustup default nightly
-{{ end -}}
+{{- end -}}
