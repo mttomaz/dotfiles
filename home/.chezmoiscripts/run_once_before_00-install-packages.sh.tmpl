@@ -57,14 +57,18 @@ PKGS=(
 
 # Installing packages
 info_msg "Installing packages ..."
-if command -v pacman &>/dev/null; then
-  sudo pacman -Syu --needed "${PKGS[@]}"
-  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-  if ! command -v paru &>/dev/null; then
-    info_msg "Installing paru ..."
-    cd /tmp && git clone https://aur.archlinux.org/paru-bin
-    cd paru-bin && sudo makepkg -sic --noconfirm
-    cd "$OLDPWD" && rm -rf /tmp/paru-bin
-  fi
-fi
+{{- if lookPath "pacman" }}
+
+sudo pacman -Syu --needed "${PKGS[@]}"
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+{{- if not (lookPath "paru") }}
+
+info_msg "Installing paru ..."
+cd /tmp && git clone https://aur.archlinux.org/paru-bin
+cd paru-bin && sudo makepkg -sic --noconfirm
+cd "$OLDPWD" && rm -rf /tmp/paru-bin
+
+{{- end -}}
+{{- end -}}
 {{- end -}}
