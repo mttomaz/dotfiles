@@ -1,8 +1,0 @@
-if [[ "$(tty)" = "/dev/tty1" ]]; then
-  if ! pidof ssh-agent; then
-    eval "$(ssh-agent -s)"
-  fi
-  source "$HOME/.config/zsh/session.sh"
-fi
-
-# vim:ft=zsh

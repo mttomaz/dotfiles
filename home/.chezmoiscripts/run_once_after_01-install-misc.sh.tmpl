@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.os "linux" -}}
+{{- if eq .chezmoi.os "linux" -}}
 #!/bin/sh
 # vim:ft=sh
 
@@ -21,7 +21,12 @@ gsettings set org.gnome.desktop.interface gtk-theme "Kanagawa-B-LB"
 gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 gsettings set org.gnome.desktop.interface cursor-theme "cz-Hickson-Black"
 
+# Enabling and starting services
+info_msg "Enabling and starting services"
+systemctl enable --now --user gcr-ssh-agent.socket
+systemctl enable --now --user gnome-keyring-daemon.socket
+
 # Downloading my wallpapers, theres a script named "random-wallpaper" that sets my wallpaper
-info_msg "Donwloading my collection of wallpapers ..."
+info_msg "Downloading my collection of wallpapers ..."
 [ -d "$HOME/Pictures/wallpapers" ] || git clone https://github.com/mttomaz/wallpapers "$HOME/Pictures/wallpapers"
-{{ end -}}
+{{- end -}}

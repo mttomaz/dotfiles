@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.os "linux" -}}
+{{- if eq .chezmoi.os "linux" -}}
 #!/bin/sh
 # vim:ft=sh
 
@@ -11,4 +11,4 @@ if ! command -v zen; then
   mv zen ~/.local/share/zen
   ln -s ~/.local/share/zen/zen ~/.local/bin/zen
 fi
-{{ end -}}
+{{- end -}}

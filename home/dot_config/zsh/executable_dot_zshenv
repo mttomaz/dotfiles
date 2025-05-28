@@ -40,6 +40,7 @@ export MANPAGER='nvim +Man!'
 export MANGOHUD=1
 export QT_QPA_PLATFORMTHEME=gtk2
 export HDD="$HOME/.local/hdd"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
 
 ## Docker
 export DCFG="$XDG_CONFIG_HOME/docker"

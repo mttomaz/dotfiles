@@ -1,0 +1,9 @@
+if [[ "$(tty)" = "/dev/tty1" ]]; then
+{{- if eq .wm "hyprland" }}
+  exec Hyprland
+{{ else if eq .wm "bspwm" }}
+  pgrep -x bspwm || exec sx
+{{ end -}}
+fi
+
+# vim:ft=zsh
