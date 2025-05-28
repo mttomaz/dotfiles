@@ -56,13 +56,21 @@ y() {
   /bin/rm "$tmp"
 }
 
+chezmoi() {
+  if [ "$1" = "apply" ]; then
+    if ! bw login --check >/dev/null; then
+      BW_SESSION="$(bw login --raw)"
+    else
+      BW_SESSION="$(bw unlock --raw)"
+    fi
+    export BW_SESSION
+  fi
+  /usr/bin/chezmoi "$@"
+}
+
 mkcd() {
   [[ ! -d $1 ]] && mkdir "$1"
   cd "$1" || return
-}
-
-get-ip() {
-  ip -f inet address show wlp1s0 | awk -F'[/ ]' '/inet/ { print $6 }'
 }
 
 fix-pacman() {
@@ -109,18 +117,6 @@ bt() {
     fi
     ;;
   esac
-}
-
-reload() {
-  killall -q "$1"
-  "$@" &
-  disown
-}
-
-back-edit() {
-  if [[ -f $1 ]]; then
-    cp "$1" "$1.backup" && nvim "$1"
-  fi
 }
 
 cleanup() {

@@ -1,0 +1,8 @@
+Host *
+  AddKeysToAgent yes
+
+Host github.com
+  IdentityFile ~/.ssh/github
+
+Host gitlab.com
+  IdentityFile ~/.ssh/gitlab
