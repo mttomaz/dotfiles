@@ -1,11 +1,12 @@
 # ~/.config/hypr/hyprland.conf
 
-{{ $kb_layout := "us" }}
-{{- if eq .device_type "desktop" -}}
+{{ $kb_layout := "us" -}}
+# Monitors
+{{ if eq .device_type "desktop" -}}
 
 monitor=DP-1,1920x1080@120,0x0,1
 
-{{- else if eq .device_type "laptop" -}}
+{{ else if eq .device_type "laptop" -}}
 {{-   $kb_layout = "br" -}}
 
 ## Laptop Monitor

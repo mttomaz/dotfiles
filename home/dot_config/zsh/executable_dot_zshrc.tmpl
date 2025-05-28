@@ -1,4 +1,5 @@
-# ZSH Configuration
+# ~/.config/zsh/.zshrc
+
 autoload -Uz compinit
 compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump-${ZSH_VERSION}
 HISTFILE=${XDG_CACHE_HOME}/zsh/history
@@ -7,7 +8,7 @@ SAVEHIST=100000
 setopt appendhistory
 
 # Aliases
-source ${ZDOTDIR}/.aliasrc
+source "${ZDOTDIR}/.aliasrc"
 
 # Bindings
 bindkey -e
@@ -16,11 +17,11 @@ bindkey "^[[1;5D" backward-word
 
 better_cut() {
   zle kill-whole-line
-  if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    wl-copy "$CUTBUFFER"
-  else
-    echo -n "$CUTBUFFER" | xclip -sel clip
-  fi
+{{- if eq .wm "hyprland" }}
+  wl-copy "$CUTBUFFER"
+{{ else }}
+  echo -n "$CUTBUFFER" | xclip -sel clip
+{{ end -}}
 }
 zle -N better_cut
 bindkey "^U" better_cut
