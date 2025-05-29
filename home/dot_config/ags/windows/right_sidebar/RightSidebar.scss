@@ -234,6 +234,9 @@ window.RightSidebar {
       border-radius: 16px;
       padding: 4px 8px 8px 8px;
       margin-top: 8px;
+      viewport {
+        border: none;
+      }
       switch:checked {
         background-color: $accent;
         border: 2px solid transparent;
@@ -248,6 +251,7 @@ window.RightSidebar {
         padding-left: 8px;
       }
       .Item {
+        margin-bottom: 8px;
         button {
           background-color: transparent;
           padding: 4px 3px 4px 1px;
