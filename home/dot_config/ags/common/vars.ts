@@ -10,6 +10,7 @@ export const showLauncher = Variable<boolean>(false)
 export const doNotDisturb = Variable<boolean>(false)
 export const nightLightEnabled = Variable<boolean>(false)
 export const notificationsLength = Variable<number>(0)
+export const sidebarPanel = Variable<string>("main")
 export const spotifyPlayer = Mpris.Player.new("spotify")
 
 execAsync('pgrep -x hyprsunset')
