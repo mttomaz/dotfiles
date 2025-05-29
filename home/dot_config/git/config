@@ -1,6 +1,6 @@
 [user]
 	email = mttomaz@duck.com
-  name = MatheusTT
+  name = mttomaz
 [core]
   editor = nvim
 [init]
