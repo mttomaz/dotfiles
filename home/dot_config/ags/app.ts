@@ -26,7 +26,6 @@ App.start({
   requestHandler: requestHandler,
   main() {
     const monitors = App.get_monitors()
-
     const targetMonitor = getTargetMonitor(monitors)
 
     Bar(targetMonitor, showBar)

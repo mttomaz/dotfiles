@@ -37,7 +37,6 @@ window.RightSidebar {
         font-size: 12px;
       }
     }
-
     .Wifi,
     .Bluetooth,
     .doNotDisturb,
@@ -209,6 +208,90 @@ window.RightSidebar {
         &:hover {
           color: $bg1;
           background-color: $error;
+        }
+      }
+    }
+    .SidebarPanelsButtons {
+      margin: 6px 4px;
+      button {
+        font-weight: 700;
+        padding: 0px 8px;
+        margin: 0px 4px;
+        transition-duration: 250ms;
+      }
+      .enabled {
+        color: $bg1;
+        background-color: $accent;
+      }
+      .disabled {
+        color: $fg1;
+        background-color: $bg2;
+      }
+    }
+    .SidebarBluetoothPanel,
+    .SidebarWifiPanel {
+      background-color: $bg2;
+      border-radius: 16px;
+      padding: 4px 8px 8px 8px;
+      margin-top: 8px;
+      switch:checked {
+        background-color: $accent;
+        border: 2px solid transparent;
+      }
+      switch {
+        background-color: $bg1;
+        border: 2px solid $fg1;
+      }
+      .Title {
+        font-weight: 700;
+        font-size: 18px;
+        padding-left: 8px;
+      }
+      .Item {
+        button {
+          background-color: transparent;
+          padding: 4px 3px 4px 1px;
+          color: rgba($fg1, 0.8);
+        }
+      }
+      .ItemList {
+        background-color: $bg1;
+        border-radius: 16px;
+        padding: 8px;
+        margin-top: 4px;
+      }
+    }
+
+    .SidebarBluetoothPanel {
+      .Item {
+        icon {
+          font-size: 24px;
+          padding-right: 8px;
+        }
+        .Name,
+        .Battery,
+        .Status {
+          font-weight: 600;
+        }
+        .Status {
+          color: rgba($fg1, 0.8);
+        }
+      }
+    }
+
+    .SidebarWifiPanel {
+      .Item {
+        font-weight: 600;
+        padding-left: 4px;
+        .icon {
+          font-size: 24px;
+          padding-right: 16px;
+        }
+        .ssid {
+          font-weight: 700;
+        }
+        .status {
+          color: rgba($fg1, 0.8);
         }
       }
     }

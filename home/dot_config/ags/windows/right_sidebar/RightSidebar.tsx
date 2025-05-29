@@ -8,7 +8,7 @@ import Notifd from "gi://AstalNotifd"
 import MediaPlayer from "@widgets/MediaPlayer/MediaPlayer"
 import Notification from "@widgets/Notification/Notification"
 import { getWifiIcon } from "@common/functions"
-import { doNotDisturb, nightLightEnabled, notificationsLength, uptime } from "@common/vars"
+import { doNotDisturb, nightLightEnabled, notificationsLength, sidebarPanel, uptime } from "@common/vars"
 
 
 function UserModule() {
@@ -240,39 +240,188 @@ function ScrollableMediaPlayers() {
       {bind(mpris, "players").as(ps => {
         playersLenght.set(ps.length)
         if (ps.length > 0) return (
-        <box vertical>
-          <stack
-            transitionType={Gtk.StackTransitionType.SLIDE_LEFT_RIGHT}
-            transitionDuration={300}
-            visibleChildName={bind(currentPlayer).as(current => ps[current].entry)}>
-            {ps.map(player => {
-              return <box name={player.entry}>
-                {MediaPlayer(player)}
-              </box>
-            })}
-          </stack>
-          <box
-            className="playersButtons"
-            halign={Gtk.Align.CENTER}
-            visible={ps.length > 1 ? true : false}
-          >
-            {ps.map(player => (
-              <button
-                className={bind(currentPlayer).as(current =>
-                  ps[current].entry == player.entry
-                    ? "enabled"
-                    : "disabled"
-                )}
-                onClicked={() => currentPlayer.set(ps.indexOf(player))}>
-                <icon icon={player.entry.replace(/zen/, "zen-browser")}/>
-              </button>
-            ))}
-          </box>
-        </box>)
-        return <box/>
+          <box vertical>
+            <stack
+              transitionType={Gtk.StackTransitionType.SLIDE_LEFT_RIGHT}
+              transitionDuration={300}
+              visibleChildName={bind(currentPlayer).as(current => ps[current].entry)}>
+              {ps.map(player => {
+                return <box name={player.entry}>
+                  {MediaPlayer(player)}
+                </box>
+              })}
+            </stack>
+            <box
+              className="playersButtons"
+              halign={Gtk.Align.CENTER}
+              visible={ps.length > 1 ? true : false}
+            >
+              {ps.map(player => (
+                <button
+                  className={bind(currentPlayer).as(current =>
+                    ps[current].entry == player.entry
+                      ? "enabled"
+                      : "disabled"
+                  )}
+                  onClicked={() => currentPlayer.set(ps.indexOf(player))}>
+                  <icon icon={player.entry.replace(/zen/, "zen-browser")} />
+                </button>
+              ))}
+            </box>
+          </box>)
+        return <box />
       })}
     </eventbox>
   )
+}
+
+function SidebarBluetoothPanel() {
+  const bluetooth = Bluetooth.get_default()
+  function listItem(device: Bluetooth.Device) {
+    const battery = bind(device, "batteryPercentage").as(p =>
+      p > 0 ? ` (${Math.floor(p * 100)}%)` : "")
+    return <box className="Item">
+      <box>
+        <icon icon={device.icon} />
+        <box vertical>
+          <box halign={Gtk.Align.START}>
+            <label label={device.name} className="Name" />
+            <label label={battery} className="Battery" />
+          </box>
+          <label
+            className="Status"
+            halign={Gtk.Align.START}
+            label={bind(device, "connected").as(conn => conn ? "Connected" : "Disconnected")}
+          />
+        </box>
+      </box>
+      <box hexpand />
+      <box className="Actions">
+        <button
+          label="󱘖"
+          onClicked={() => {
+            if (device.get_connected()) {
+              device.disconnect_device((res) => console.log(res))
+            } else {
+              device.connect_device((res) => console.log(res))
+            }
+          }}
+        />
+      </box>
+    </box>
+  }
+
+  return <box
+    name="bluetooth"
+    className="SidebarBluetoothPanel"
+    vertical
+  >
+    <box>
+      <label label="Bluetooth" className="Title" />
+      <box hexpand />
+      <switch
+        active={bind(bluetooth, "isPowered").as(p => p)}
+        onButtonPressEvent={() => execAsync("rfkill toggle bluetooth")
+        } />
+    </box>
+    <box
+      vertical
+      vexpand
+      className="ItemList"
+    >
+      {bind(bluetooth, "devices").as(devs => devs.map(d => listItem(d)))}
+    </box>
+  </box>
+}
+
+function SidebarWifiPanel() {
+  const network = Network.get_default()
+  const wifi = network.wifi
+  function itemList(ap: Network.AccessPoint) {
+    return <box className="Item">
+      <label label={bind(ap, "iconName").as(i => getWifiIcon(i))} className="icon" />
+      <box vertical valign={Gtk.Align.CENTER}>
+        <label label={ap.ssid} className="ssid" halign={Gtk.Align.START}/>
+        <label
+          visible={bind(wifi, "ssid").as(ssid => ssid === ap.ssid)}
+          halign={Gtk.Align.START}
+          label="Connected"
+          className="status" />
+      </box>
+      <box hexpand />
+      <button
+        label="󱘖"
+        onClicked={() => execAsync(`nmcli device wifi connect ${ap.ssid}`)}
+      />
+    </box>
+  }
+
+  return <box
+    name="wifi"
+    vertical
+    className="SidebarWifiPanel"
+  >
+    <box>
+      <label label="Wifi" className="Title" />
+      <box hexpand />
+      <switch
+        active={bind(wifi, "enabled")}
+        onButtonPressEvent={() => wifi.set_enabled(!wifi.get_enabled())}
+      />
+    </box>
+    <box vertical vexpand className="ItemList">
+      {bind(wifi, "access_points").as(aps =>
+        aps
+          .sort((a, b) => b.strength - a.strength)
+          .map(ap => itemList(ap))
+      )}
+    </box>
+  </box>
+}
+
+function SidebarMainPanel() {
+  return <box
+    name="main"
+    vertical
+    className="SidebarMainPanel"
+  >
+    <box>
+      <WifiModule />
+      <box widthRequest={8} />
+      <BluetoothModule />
+    </box>
+    <box>
+      <DoNotDisturbModule />
+      <box widthRequest={8} />
+      <NightLightModule />
+    </box>
+    <ScrollableMediaPlayers />
+  </box>
+}
+
+function SidebarPanels() {
+  return <stack
+    transitionType={Gtk.StackTransitionType.SLIDE_LEFT_RIGHT}
+    visibleChildName={bind(sidebarPanel).as(sp => sp)}
+  >
+    <SidebarMainPanel />
+    <SidebarBluetoothPanel />
+    <SidebarWifiPanel />
+  </stack>
+}
+
+function SidebarPanelsButtons() {
+  const actions = ["main", "bluetooth", "wifi"]
+  return <centerbox className="SidebarPanelsButtons">
+    {actions.map(action =>
+      <button
+        hexpand
+        label={action}
+        className={bind(sidebarPanel).as(sp => sp === action ? "enabled" : "disabled")}
+        onClicked={() => sidebarPanel.set(action)}
+      />
+    )}
+  </centerbox>
 }
 
 
@@ -293,20 +442,10 @@ export default function RightSidebar(monitor: Gdk.Monitor, visible: Variable<boo
       className="sidebar">
       <box>
         <UserModule />
-        <box hexpand />
-        <Actions />
+        {/* <Actions /> */}
+        <SidebarPanelsButtons />
       </box>
-      <box>
-        <WifiModule />
-        <box widthRequest={8} />
-        <BluetoothModule />
-      </box>
-      <box>
-        <DoNotDisturbModule />
-        <box widthRequest={8} />
-        <NightLightModule />
-      </box>
-      <ScrollableMediaPlayers />
+      <SidebarPanels />
       <NotificationList />
     </box>
   </window>
