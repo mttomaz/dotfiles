@@ -324,13 +324,14 @@ function SidebarBluetoothPanel() {
         onButtonPressEvent={() => execAsync("rfkill toggle bluetooth")
         } />
     </box>
-    <box
-      vertical
+    <scrollable
       vexpand
       className="ItemList"
     >
-      {bind(bluetooth, "devices").as(devs => devs.map(d => listItem(d)))}
-    </box>
+      <box vertical>
+        {bind(bluetooth, "devices").as(devs => devs.map(d => listItem(d)))}
+      </box>
+    </scrollable>
   </box>
 }
 
@@ -343,7 +344,7 @@ function SidebarWifiPanel() {
       <box vertical valign={Gtk.Align.CENTER}>
         <label label={ap.ssid} className="ssid" halign={Gtk.Align.START}/>
         <label
-          visible={bind(wifi, "ssid").as(ssid => ssid === ap.ssid)}
+          visible={bind(wifi, "activeAccessPoint").as(aap => aap === ap)}
           halign={Gtk.Align.START}
           label="Connected"
           className="status" />
@@ -369,13 +370,18 @@ function SidebarWifiPanel() {
         onButtonPressEvent={() => wifi.set_enabled(!wifi.get_enabled())}
       />
     </box>
-    <box vertical vexpand className="ItemList">
-      {bind(wifi, "access_points").as(aps =>
-        aps
-          .sort((a, b) => b.strength - a.strength)
-          .map(ap => itemList(ap))
-      )}
-    </box>
+    <scrollable
+      vexpand
+      className="ItemList"
+    >
+      <box vertical>
+        {bind(wifi, "access_points").as(aps =>
+          aps
+            .sort((a, b) => b.strength - a.strength)
+            .map(ap => itemList(ap))
+        )}
+      </box>
+    </scrollable>
   </box>
 }
 
@@ -396,6 +402,7 @@ function SidebarMainPanel() {
       <NightLightModule />
     </box>
     <ScrollableMediaPlayers />
+    <NotificationList />
   </box>
 }
 
@@ -446,7 +453,6 @@ export default function RightSidebar(monitor: Gdk.Monitor, visible: Variable<boo
         <SidebarPanelsButtons />
       </box>
       <SidebarPanels />
-      <NotificationList />
     </box>
   </window>
 }
