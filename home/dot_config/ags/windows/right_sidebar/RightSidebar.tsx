@@ -25,7 +25,7 @@ function UserModule() {
   </box>
 }
 
-function newSidebarButton(icon: string, name: string, status: string) {
+function sidebarButton(icon: string, name: string, status: string) {
   return (
     <box>
       <label className="Icon" label={icon} />
@@ -56,7 +56,7 @@ function WifiModule() {
             <button
               className={enabled ? "enabled" : "disabled"}
               onClicked={() => wifi.set_enabled(!enabled)}>
-              {newSidebarButton(icon, name, status)}
+              {sidebarButton(icon, name, status)}
             </button>
           )
         })}
@@ -91,7 +91,7 @@ function BluetoothModule() {
         {bind(bluetooth, "isConnected").as(conn => {
           const icon = conn ? "󰂱" : "󰂯"
           const { name, status } = getConnectedDevice(powered)
-          return newSidebarButton(icon, name, status)
+          return sidebarButton(icon, name, status)
         })}
       </button>
     ))}
@@ -110,7 +110,7 @@ function DoNotDisturbModule() {
         <button
           className={dnd ? "enabled" : "disabled"}
           onClicked={() => doNotDisturb.set(!dnd)}>
-          {newSidebarButton(icon, name, status)}
+          {sidebarButton(icon, name, status)}
         </button>
       </box>
     )
@@ -139,7 +139,7 @@ function NightLightModule() {
         <button
           className={enabled ? "enabled" : "disabled"}
           onClicked={toggleNightLight}>
-          {newSidebarButton(icon, name, status)}
+          {sidebarButton(icon, name, status)}
         </button>
       </box>
     )
@@ -195,27 +195,6 @@ function NotificationList() {
       </box>
     })}
   </box>
-}
-
-function actionButton(icon: string, className: string, exec: string | Array<string>) {
-  return (
-    <box className={className}>
-      <button
-        onClicked={() => execAsync(exec)}
-        label={icon}
-      />
-    </box>
-  )
-}
-
-function Actions() {
-  return (
-    <box className="sidebarActions">
-      {actionButton("󰌾", "lock", "~/scripts/wayland/lock")}
-      {actionButton("󰤄", "hibernate", ["sh", "-c", "systemctl hibernate; ~/scripts/wayland/lock"])}
-      {actionButton("󰐥", "poweroff", "poweroff")}
-    </box>
-  )
 }
 
 function ScrollableMediaPlayers() {
@@ -277,21 +256,30 @@ function ScrollableMediaPlayers() {
 
 function SidebarBluetoothPanel() {
   const bluetooth = Bluetooth.get_default()
+  const adapter = bluetooth.adapter
   function listItem(device: Bluetooth.Device) {
+    if (device.name === null) return <box/>
+    const visibleBinding = Variable.derive(
+        [bind(device, 'connected'), bind(device, 'paired')],
+        (connected, paired) => {
+            return connected || paired;
+        },
+    );
     const battery = bind(device, "batteryPercentage").as(p =>
       p > 0 ? ` (${Math.floor(p * 100)}%)` : "")
     return <box className="Item">
       <box>
-        <icon icon={device.icon} />
+        <icon icon={device.icon || "help-browser"} />
         <box vertical>
           <box halign={Gtk.Align.START}>
             <label label={device.name} className="Name" />
             <label label={battery} className="Battery" />
           </box>
           <label
+            visible={visibleBinding()}
             className="Status"
             halign={Gtk.Align.START}
-            label={bind(device, "connected").as(conn => conn ? "Connected" : "Disconnected")}
+            label={bind(device, "connected").as(conn => conn ? "Connected" : "Paired")}
           />
         </box>
       </box>
@@ -319,10 +307,27 @@ function SidebarBluetoothPanel() {
     <box>
       <label label="Bluetooth" className="Title" />
       <box hexpand />
+      <button
+        className="Discover"
+        css={bind(adapter, "discovering").as(disc =>
+          disc ? "color: #7e9cd8;"
+               : "color: #c8c093;"
+        )}
+        label="󰓦"
+        tooltipText={bind(adapter, "discovering").as(disc => disc ? "Discovering" : "Discover")}
+        onClicked={() => {
+          if (adapter.get_discovering()) {
+            adapter.stop_discovery()
+          } else {
+            adapter.start_discovery()
+          }
+        }}
+      >
+      </button>
       <switch
-        active={bind(bluetooth, "isPowered").as(p => p)}
-        onButtonPressEvent={() => execAsync("rfkill toggle bluetooth")
-        } />
+        active={bind(bluetooth, "isPowered")}
+        onButtonPressEvent={() => execAsync("rfkill toggle bluetooth")}
+      />
     </box>
     <scrollable
       vexpand
@@ -339,6 +344,7 @@ function SidebarWifiPanel() {
   const network = Network.get_default()
   const wifi = network.wifi
   function itemList(ap: Network.AccessPoint) {
+    if (ap.ssid === null) return <box/>
     return <box className="Item">
       <label label={bind(ap, "iconName").as(i => getWifiIcon(i))} className="icon" />
       <box vertical valign={Gtk.Align.CENTER}>
@@ -449,7 +455,6 @@ export default function RightSidebar(monitor: Gdk.Monitor, visible: Variable<boo
       className="sidebar">
       <box>
         <UserModule />
-        {/* <Actions /> */}
         <SidebarPanelsButtons />
       </box>
       <SidebarPanels />

@@ -267,6 +267,12 @@ window.RightSidebar {
     }
 
     .SidebarBluetoothPanel {
+      .Discover {
+        padding: 0px 2px;
+        background-color: transparent;
+        margin-right: 8px;
+        font-size: 22px;
+      }
       .Item {
         icon {
           font-size: 24px;
