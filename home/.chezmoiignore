@@ -3,4 +3,3 @@
 .config/ags/TODO.md
 .config/nvim/lazy-lock.json
 .config/nvim/lazyvim.json
-.config/zsh/session.sh
