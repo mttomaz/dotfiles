@@ -20,14 +20,10 @@ alias neo='nvim'
 alias bat='bat --number --theme base16'
 alias cat='bat -p'
 alias wget='wget --hsts-file=${XDG_DATA_HOME}/.wget-hsts'
-alias clipboard='wl-copy'
 alias ytdl='yt-dlp -f "bv*+ba/b" -o "~/Downloads/%(title)s.%(ext)s"'
 alias ytdla='yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 -o "~/Downloads/%(title)s.%(ext)s"'
 alias rm='trash'
 alias ip='ip --color=auto'
-alias set-xbg='feh --no-fehbg --bg-fill'
-alias set-wbg='swaybg -i'
-alias sticky='flameshot gui -s --pin'
 alias gdu='gdu --si'
 alias rr='curl -sL http://bit.ly/10hA8iC | bash'
 
@@ -43,11 +39,6 @@ giti() {
   echo "$1" >>"$PWD/.gitignore"
 }
 
-clone-tmp() {
-  cd /tmp/ && git clone "$@"
-  cd "$OLDPWD" || return
-}
-
 ## Functions ##
 y() {
   tmp="$(mktemp -t yazi-cwd.XXXXX)"
@@ -56,21 +47,18 @@ y() {
   /bin/rm "$tmp"
 }
 
-chezmoi() {
-  if [ "$1" = "apply" ]; then
-    if ! bw login --check >/dev/null; then
-      BW_SESSION="$(bw login --raw)"
-    else
-      BW_SESSION="$(bw unlock --raw)"
-    fi
-    export BW_SESSION
-  fi
-  /usr/bin/chezmoi "$@"
-}
-
-mkcd() {
-  [[ ! -d $1 ]] && mkdir "$1"
-  cd "$1" || return
+cz() {
+  case "$1" in
+    apply|update|diff)
+      if ! bw login --check >/dev/null; then
+        BW_SESSION="$(bw login --raw)"
+      else
+        BW_SESSION="$(bw unlock --raw)"
+      fi
+      export BW_SESSION
+      ;;
+  esac
+  chezmoi "$@"
 }
 
 fix-pacman() {
