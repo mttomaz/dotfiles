@@ -49,7 +49,7 @@ export PUID=$(id -u)
 export PGID=$(id -g)
 
 ## Theming
-export GTK_THEME="Kanagawa-B-LB"
+export GTK_THEME="Kanagawa-Dark-B-MB"
 export XCURSOR_THEME="cz-Hickson-Black"
 export XCURSOR_SIZE=24
 
