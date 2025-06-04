@@ -124,7 +124,7 @@ function Weather() {
 function NotificationBell() {
   return <revealer
     transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
-    revealChild={bind(notificationsLength).as(l => l > 0)}>
+    revealChild={bind(notificationsLength).as(l => l > 1)}>
     <label className="NotificationBell" label="󱅫" />
   </revealer>
 }

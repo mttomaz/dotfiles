@@ -14,7 +14,7 @@ function AppButton({ app }: { app: Apps.Application }) {
     className="AppButton"
     onClicked={() => { hide(); app.launch() }}>
     <box>
-      <icon icon={app.iconName} />
+      <icon icon={app.iconName || "help-browser"} />
       <box valign={Gtk.Align.CENTER} vertical>
         <label
           className="name"

@@ -1,54 +1,54 @@
 # Rebinding the quit keys to not create a cwd file by default.
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "q"
 run  = "quit --no-cwd-file"
 desc = "Exit the process without writing cwd-file"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "Q"
 run  = "quit"
 desc = "Exit the process"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["g", "b"]
 run = "cd $OLDPWD"
 desc = "Go back to initial directory"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["g", "D"]
 run = "cd ~/Documents/dev"
 desc = "Go to dev directory"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["g", "o"]
 run = "cd ~/Documents/Obsidian"
 desc = "Go to Obsidian vault"
 
 # Plugins
 ## Smart Enter
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "l"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<Right>"
 run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
 ## Toggle Pane
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "t"
 run  = "plugin toggle-pane min-preview"
 desc = "Show or hide the preview pane"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "T"
 run  = "plugin toggle-pane max-preview"
 desc = "Maximize or restore the preview pane"
 
 # Python sorting script
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<C-s>"
 run  = 'shell --confirm "python $HOME/Documents/dev/python/attof/main.py"'
 desc = "Sort Downloads directory"

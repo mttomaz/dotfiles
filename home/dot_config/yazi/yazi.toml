@@ -1,6 +1,6 @@
 # yazi.toml
 
-[manager]
+[mgr]
 sort_dir_first = true
 sort_by = "natural"
 linemode = "size"
