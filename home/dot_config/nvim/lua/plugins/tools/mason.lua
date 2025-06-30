@@ -9,7 +9,7 @@ return {
       "bash-language-server", -- bash
       "pyright", -- python
       "ruff", -- python
-      "rust-analyzer", -- rust
+      -- "rust-analyzer", -- rust
       "yaml-language-server", -- yaml
       "jdtls", -- java
       "hadolint", -- docker

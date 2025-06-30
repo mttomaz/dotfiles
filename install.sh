@@ -10,7 +10,7 @@ if command -v pacman >/dev/null; then
 fi
 
 if ! bw login --check >/dev/null; then
-  BW_SESSION="$(bw login --raw)"
+  BW_SESSION="$(bw login "mttomaz@duck.com" --raw)"
 else
   BW_SESSION="$(bw unlock --raw)"
 fi

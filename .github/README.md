@@ -22,8 +22,7 @@ They are designed to be lightweight, modular, and easy to manage.
 - **Automation**: Managed with [chezmoi](https://www.chezmoi.io/) for consistent setup across systems.
 
 ## ⚙ Installation
-Make sure you have `chezmoi` installed. You can install it by following the [official guide](https://www.chezmoi.io/install/).
-
+The install script assumes you have a minimal [arch installation](https://wiki.archlinux.org/title/Installation_guide).
 Run the following command to initialize my dotfiles with chezmoi:
 
 > [!Caution]
