@@ -4,6 +4,7 @@
 
 # Installing rust via rustup
 echo -e "\n\033[1;32mInstalling rust ...\033[0m"
+export RUSTUP_HOME="$HOME/.local/share/rustup"
 rustup toolchain install nightly
 rustup default nightly
 {{- end -}}

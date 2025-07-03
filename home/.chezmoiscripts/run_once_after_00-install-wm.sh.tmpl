@@ -6,6 +6,8 @@ info_msg() {
   echo -e "\n\033[1;32m${1}\033[0m"
 }
 
+XDG_DATA_HOME="$HOME/.local/share"
+
 # Installing Hyprland with AGS or BSPWM with EWW
 {{- if eq .wm "hyprland" }}
 
@@ -14,6 +16,7 @@ paru -S --needed hyprland xdg-desktop-portal-hyprland foot wofi-emoji swww wl-cl
   hyprsunset
 
 info_msg "Installing AGS ..."
+export GOPATH="$XDG_DATA_HOME/go"
 paru -S --needed aylurs-gtk-shell-git libastal-meta gvfs dart-sass
 cd "$HOME/.config/ags/" && ags types Astal*
 
@@ -24,6 +27,7 @@ paru -S --needed xf86-video-amdgpu bspwm sxhkd sx rofi-emoji xorg-server xdo xdo
   xorg-xrandr xorg-xkill xorg-xset xorg-xsetroot redshift xorg-xclip xorg-setxkbmap
 
 info_msg "Installing EWW ..."
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 paru -S --needed eww-git
 
 {{- end -}}

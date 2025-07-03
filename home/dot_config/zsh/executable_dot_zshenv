@@ -17,6 +17,7 @@ export XDG_VIDEOS_DIR="$HOME/Videos"
 # Variables to have less dotfiles on home
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export GOPATH="$XDG_DATA_HOME/go"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
 export WINEPREFIX="$XDG_DATA_HOME/wine"
