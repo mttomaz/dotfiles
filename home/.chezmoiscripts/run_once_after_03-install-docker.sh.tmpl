@@ -1,0 +1,10 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+# vim:ft=sh
+
+echo -e "\n\033[1;32mInstalling Docker ...\033[0m"
+sudo pacman -S --needed docker docker-compose
+sudo systemctl enable --now docker
+sudo usermod -aG docker broa
+
+{{- end -}}

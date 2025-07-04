@@ -44,7 +44,7 @@ export HDD="$HOME/.local/hdd"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
 
 ## Docker
-export DCFG="$XDG_CONFIG_HOME/docker"
+export DCFG="$HDD/docker"
 export TZ="America/Sao_Paulo"
 export PUID=$(id -u)
 export PGID=$(id -g)
