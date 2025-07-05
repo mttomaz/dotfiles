@@ -22,15 +22,24 @@ gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 gsettings set org.gnome.desktop.interface cursor-theme "cz-Hickson-Black"
 
 # Enabling and starting services
-info_msg "Enabling and starting services"
+info_msg "Enabling and starting services ..."
 systemctl enable --now --user gcr-ssh-agent.socket
 systemctl enable --now --user gnome-keyring-daemon.socket
+systemctl enable --now cronie
 
 # Downloading my wallpapers, theres a script named "random-wallpaper" that sets my wallpaper
 info_msg "Downloading my collection of wallpapers ..."
 [ -d "$HOME/Pictures/wallpapers" ] || git clone https://github.com/mttomaz/wallpapers "$HOME/Pictures/wallpapers"
 
 # Adding StevenBlack's hosts file to /etc/hosts
-info_msg "Adding StevenBlack's hosts file to /etc/hosts"
+info_msg "Adding StevenBlack's hosts file to /etc/hosts ..."
 echo -e "\n\n$(curl -fsSl "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts")" | sudo tee -a /etc/hosts
+
+info_msg "Linking files ..."
+sudo ln ~/.config/keyd/keyd.conf /etc/keyd/default.conf
+
+info_msg "Creating GnuPG dir ..."
+mkdir -p "$HOME"/.local/share/gnupg
+chmod 700 "$HOME"/.local/share/gnupg
+
 {{- end -}}
