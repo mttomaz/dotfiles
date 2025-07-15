@@ -2,6 +2,11 @@
 {{- $wm := promptChoice "What Compositor/WM do you want" $wmChoices -}}
 {{- $deviceChoices := list "desktop" "laptop" -}}
 {{- $deviceType := promptChoice "What type of device are you using" $deviceChoices -}}
+{{- $osID := .chezmoi.os -}}
+{{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
+{{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
 [data]
-  wm = {{ $wm | quote }}
+  osid = {{ $osID | quote }}
   device_type = {{ $deviceType | quote }}
+  wm = {{ $wm | quote }}

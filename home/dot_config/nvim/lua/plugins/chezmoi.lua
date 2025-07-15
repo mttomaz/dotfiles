@@ -19,7 +19,14 @@ return {
     -- run chezmoi edit on file enter
     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
       pattern = { os.getenv "HOME" .. "/.local/share/chezmoi/home/*" },
-      callback = function()
+      callback = function(args)
+        local filepath = args.file
+
+        -- ignore files inside ".chezmoiscripts"
+        if filepath:find "/%.chezmoiscripts/" then
+          return
+        end
+
         vim.schedule(require("chezmoi.commands.__edit").watch)
       end,
     })

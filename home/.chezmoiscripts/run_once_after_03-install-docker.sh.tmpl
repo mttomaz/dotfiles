@@ -1,10 +1,13 @@
-{{- if eq .chezmoi.os "linux" -}}
+{{- if eq .osid "linux-cachyos" "linux-arch" -}}
 #!/bin/sh
 # vim:ft=sh
+
+{{- if not (lookPath "docker") }}
 
 echo -e "\n\033[1;32mInstalling Docker ...\033[0m"
 sudo pacman -S --needed docker docker-compose
 sudo systemctl enable --now docker
-sudo usermod -aG docker broa
+sudo usermod -aG docker {{ .chezmoi.username }}
 
+{{- end -}}
 {{- end -}}

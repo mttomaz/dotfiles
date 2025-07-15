@@ -1,4 +1,4 @@
-{{- if eq .chezmoi.os "linux" -}}
+{{- if eq .osid "linux-cachyos" "linux-arch" -}}
 #!/bin/sh
 # vim:ft=sh
 
@@ -56,12 +56,11 @@ PKGS=(
   7zip
   mangohud
   cronie
+  yt-dlp
 )
 
 # Installing packages
 info_msg "Installing packages ..."
-{{- if lookPath "pacman" }}
-
 sudo pacman -Syu --needed "${PKGS[@]}"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
@@ -70,8 +69,7 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 info_msg "Installing paru ..."
 cd /tmp && git clone https://aur.archlinux.org/paru-bin
 cd paru-bin && sudo makepkg -sic --noconfirm
-cd "$OLDPWD" && rm -rf /tmp/paru-bin
+cd /tmp && rm -rf /tmp/paru-bin
 
-{{- end -}}
 {{- end -}}
 {{- end -}}

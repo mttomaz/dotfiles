@@ -1,4 +1,4 @@
-{{- if eq .chezmoi.os "linux" -}}
+{{- if eq .osid "linux-cachyos" "linux-arch" -}}
 #!/bin/sh
 # vim:ft=sh
 
@@ -13,7 +13,7 @@ XDG_DATA_HOME="$HOME/.local/share"
 
 info_msg "Installing Hyprland ..."
 paru -S --needed hyprland xdg-desktop-portal-hyprland foot wofi-emoji swww wl-clipboard \
-  hyprsunset
+  hyprsunset grim satty
 
 info_msg "Installing AGS ..."
 export GOPATH="$XDG_DATA_HOME/go"
@@ -24,7 +24,7 @@ cd "$HOME/.config/ags/" && ags types Astal*
 
 info_msg "Installing BSPWM ..."
 paru -S --needed xf86-video-amdgpu bspwm sxhkd sx rofi-emoji xorg-server xdo xdotool \
-  xorg-xrandr xorg-xkill xorg-xset xorg-xsetroot redshift xorg-xclip xorg-setxkbmap
+  xorg-xrandr xorg-xkill xorg-xset xorg-xsetroot redshift xorg-xclip xorg-setxkbmap flameshot
 
 info_msg "Installing EWW ..."
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
