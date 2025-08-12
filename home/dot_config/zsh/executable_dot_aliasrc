@@ -126,7 +126,3 @@ mksh() {
     fi
   fi
 }
-
-# Dev Script
-# shellcheck disable=SC1091
-source "$HOME/scripts/dev"

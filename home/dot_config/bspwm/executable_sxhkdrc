@@ -28,7 +28,7 @@ super + Escape
 
 # Lock the screen
 super + shift + o
-  ~/scripts/lock
+  ~/.local/bin/xorg/lock
 
 super + KP_{End,Down,Next,Left}
   ~/.config/eww/scripts/pop.sh {sidebar,calendar,battery,music}
@@ -78,7 +78,7 @@ super + period
   rofi -show emoji
 
 super + KP_Decimal
-  ~/scripts/xorg/getWindowInfo
+  ~/.local/bin/xorg/getWindowInfo
 
 #
 # bspwm hotkeys

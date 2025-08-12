@@ -1,0 +1,5 @@
+#!/bin/sh
+
+magick "$1" -resize 3840x2160\! -strip "$1-(4K).jpg"
+magick "$1" -resize 2560x1440\! -strip "$1-(QHD).jpg"
+magick "$1" -resize 1920x1080\! -strip "$1-(FHD).jpg"
