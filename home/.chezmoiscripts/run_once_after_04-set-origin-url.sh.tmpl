@@ -1,0 +1,10 @@
+{{ if .personal -}}
+#!/bin/sh
+# vim:ft=sh
+
+set -eufo pipefail
+
+git -C "${CHEZMOI_WORKING_TREE}" remote set-url origin git@github.com:mttomaz/dotfiles.git
+WALLS_PATH="$HOME/Pictures/wallpapers/"
+[ -d "$WALLS_PATH" ] && git -C "$WALLS_PATH" remote set-url origin git@github.com:mttomaz/wallpapers.git
+{{ end -}}

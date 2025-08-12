@@ -2,6 +2,7 @@
 {{- $wm := promptChoice "What Compositor/WM do you want" $wmChoices -}}
 {{- $deviceChoices := list "desktop" "laptop" -}}
 {{- $deviceType := promptChoice "What type of device are you using" $deviceChoices -}}
+{{- $personal := promptBool "Is this a personal device" -}}
 {{- $osID := .chezmoi.os -}}
 {{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
 {{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
@@ -9,6 +10,7 @@
 [data]
   osid = {{ $osID | quote }}
   device_type = {{ $deviceType | quote }}
+  personal = {{ $personal }}
   wm = {{ $wm | quote }}
 
 [bitwarden]
