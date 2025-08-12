@@ -47,19 +47,6 @@ y() {
   /bin/rm "$tmp"
 }
 
-cz() {
-  case "$1" in
-    apply|update|diff)
-      if ! bw login --check >/dev/null; then
-        BW_SESSION="$(bw login --raw)"
-      else
-        BW_SESSION="$(bw unlock --raw)"
-      fi
-      export BW_SESSION
-      ;;
-  esac
-  chezmoi "$@"
-}
 
 fix-pacman() {
   if [[ "$1" == "nopgp" ]]; then
