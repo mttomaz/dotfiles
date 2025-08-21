@@ -5,3 +5,4 @@ initial-tool = "crop"
 copy-command = "wl-copy"
 action-on-enter = "save-to-clipboard"
 default-hide-toolbars = true
+disable-notifications = true

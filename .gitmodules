@@ -1,0 +1,3 @@
+[submodule "home/dot_config/ags"]
+	path = home/dot_config/ags
+	url = https://github.com/mttomaz/ags.git
