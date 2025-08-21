@@ -33,12 +33,12 @@ Run the following command to initialize my dotfiles with chezmoi:
   curl -fsSl https://raw.githubusercontent.com/mttomaz/dotfiles/master/install.sh | sh
   ```
 
-## 🛠 Programs used
+## 🛠 Software used
 - Wayland
   - Compositor: [Hyprland](https://hyprland.org/)
   - Terminal: [foot](https://codeberg.org/dnkl/foot)
   - AppLauncher: [wofi](https://hg.sr.ht/~scoopta/wofi)
-  - Bar and Widgets: [ags](https://aylur.github.io/ags/)
+  - Bar and Widgets: [mttomaz/ags](https://github.com/mttomaz/ags)
 - Xorg **(deprecated)**
   - Window Manager: [BSPWM](https://github.com/baskerville/bspwm)
   - Terminal: [kitty](https://github.com/kovidgoyal/kitty)
@@ -49,6 +49,7 @@ Run the following command to initialize my dotfiles with chezmoi:
 - Icon Theme: [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/)
 - Cursor Theme: [cz-Hickson-Black](https://www.gnome-look.org/p/1503665)
 - Fonts: JetBrains Mono, Caskaydia Cove (both [Nerd Fonts](https://www.nerdfonts.com/))
+- Wallpapers: [mttomaz/wallpapers](https://github.com/mttomaz/wallpapers)
 
 ## 🏗 Structure
 - `.config/`: Contains configurations for window managers, terminal, and other applications.
@@ -61,6 +62,7 @@ Run the following command to initialize my dotfiles with chezmoi:
 - [Battlesquid/dotfiles](https://github.com/Battlesquid/dotfiles)
 - [qxb3/conf](https://github.com/qxb3/conf)
 - [koeqaife/hyprland-material-you](https://github.com/koeqaife/hyprland-material-you)
+- [retrozinndev/colorshell](https://github.com/retrozinndev/colorshell)
 
 ## 🤝 Contributing
 If you have suggestions or improvements, feel free to open an issue or submit a pull request.
