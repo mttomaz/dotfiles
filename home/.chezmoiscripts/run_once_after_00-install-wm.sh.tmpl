@@ -19,7 +19,9 @@ info_msg "Installing AGS ..."
 export GOPATH="$XDG_DATA_HOME/go"
 paru -S --needed aylurs-gtk-shell-git libastal-meta gvfs dart-sass
 cd "$HOME/.config/ags/" && ags types Astal*
-[ -f "$HOME/.config/ags/app" ] || ags bundle app.ts app
+npm install
+ags bundle app.ts app
+chmod +x app
 
 {{ else if eq .wm "bspwm" }}
 

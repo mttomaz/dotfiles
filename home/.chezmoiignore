@@ -1,5 +1,5 @@
 .config/ags/@girs
 .config/ags/node_modules
-.config/ags/TODO.md
+.config/ags/app
 .config/nvim/lazy-lock.json
 .config/nvim/lazyvim.json
