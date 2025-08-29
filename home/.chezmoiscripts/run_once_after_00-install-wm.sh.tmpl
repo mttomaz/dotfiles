@@ -18,7 +18,7 @@ paru -S --needed hyprland xdg-desktop-portal-hyprland foot swww wl-clipboard \
 info_msg "Installing AGS ..."
 export GOPATH="$XDG_DATA_HOME/go"
 paru -S --needed aylurs-gtk-shell-git libastal-meta gvfs dart-sass
-cd "$HOME/.config/ags/" && ags types Astal*
+cd "$HOME/.config/ags/" && ags types -u
 npm install
 ags bundle app.ts app
 chmod +x app
