@@ -9,9 +9,9 @@ return {
       "bash-language-server", -- bash
       "pyright", -- python
       "ruff", -- python
-      -- "rust-analyzer", -- rust
       "yaml-language-server", -- yaml
       "jdtls", -- java
+      "typescript-language-server", -- typescript, javascript
       "hadolint", -- docker
       "css-lsp", -- css
       "prettier", -- html, css, javascript, json

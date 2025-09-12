@@ -22,8 +22,13 @@ return {
       callback = function(args)
         local filepath = args.file
 
-        -- ignore files inside ".chezmoiscripts"
+        -- ignore files inside ".chezmoiscripts/"
         if filepath:find "/%.chezmoiscripts/" then
+          return
+        end
+
+        -- ignore files inside ".ssh/"
+        if filepath:find "/%.ssh/" then
           return
         end
 

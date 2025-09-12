@@ -1,7 +1,7 @@
 return {
   -- Add kanagawa
   {
-    "MatheusTT/kanagawa.nvim",
+    "mttomaz/kanagawa.nvim",
     opts = {
       transparent = true,
     },
