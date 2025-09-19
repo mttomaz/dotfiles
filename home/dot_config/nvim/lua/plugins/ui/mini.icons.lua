@@ -1,5 +1,5 @@
 return {
-  "echasnovski/mini.icons",
+  "nvim-mini/mini.icons",
   opts = {
     file = {
       [".chezmoiignore"] = { glyph = "", hl = "MiniIconsGrey" },
