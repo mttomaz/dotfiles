@@ -1,24 +1,24 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "de53d90"
+rev = "80cd5b5"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "de53d90"
-hash = "63b6c222bf2103b3023389dde5e2ecfe"
+rev = "80cd5b5"
+hash = "170317244d60fbe70ad3cc3353358480"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "de53d90"
+rev = "80cd5b5"
 hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "de53d90"
-hash = "d6f60c24d8c0cf57a855bf46115b2502"
+rev = "80cd5b5"
+hash = "8a7c58225816a163a6e8730c0adafbc8"
 
 [[flavor.deps]]
 use = "dangooddd/kanagawa"
-rev = "31167ed"
-hash = "a04e157148549bacbb2831aab0e6e8cb"
+rev = "a0b1d9d"
+hash = "b33673cdc5d3d68b478085e3e06182d9"

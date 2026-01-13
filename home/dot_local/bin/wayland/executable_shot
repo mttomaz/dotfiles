@@ -1,6 +1,6 @@
 #!/bin/sh
 
-OUTPUT="$HOME/Pictures/screenshots/$(date "+%A-%R-%d-%m-%y").png"
+OUTPUT="$HOME/Pictures/screenshots/$(date "+%A_%R_%d.%m.%y").png"
 
 while [ "$1" ]; do
   case "$1" in

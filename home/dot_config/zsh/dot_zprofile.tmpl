@@ -1,6 +1,6 @@
 if [[ "$(tty)" = "/dev/tty1" ]]; then
 {{- if eq .wm "hyprland" }}
-  exec Hyprland
+  exec start-hyprland
 {{ else if eq .wm "bspwm" }}
   pgrep -x bspwm || exec sx
 {{ end -}}

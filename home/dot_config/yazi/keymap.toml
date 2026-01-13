@@ -50,5 +50,5 @@ desc = "Maximize or restore the preview pane"
 # Python sorting script
 [[mgr.prepend_keymap]]
 on   = "<C-s>"
-run  = 'shell --confirm "python $HOME/Documents/dev/python/attof/main.py"'
+run  = 'shell --confirm "python $HOME/Documents/dev/py/attof/main.py"'
 desc = "Sort Downloads directory"
