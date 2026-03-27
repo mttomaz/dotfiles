@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUTPUT="$HOME/Pictures/screenshots/$(date "+%A-%R-%d-%m-%y").png"
+OUTPUT="$HOME/Pictures/screenshots/$(date "+%A_%R_%d.%m.%y").png"
 
 freeze-select() {
   maim -u | feh -F - &

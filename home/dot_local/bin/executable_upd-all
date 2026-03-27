@@ -39,8 +39,3 @@ if is_installed tldr; then
   info_msg "Updating tldr cache."
   tldr --update
 fi
-
-if is_installed spicetify; then
-  info_msg "Updating spicetify."
-  spicetify update
-fi

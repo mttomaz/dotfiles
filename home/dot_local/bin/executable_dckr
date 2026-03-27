@@ -1,5 +1,7 @@
 #!/bin/sh
 
+DCFG="$XDG_CONFIG_HOME/docker"
+
 up() {
   docker-compose -f "$DCFG/${1}/docker-compose.yaml" up -d
 }

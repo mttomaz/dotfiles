@@ -31,10 +31,6 @@ sudo systemctl enable --now cronie
 info_msg "Downloading my collection of wallpapers ..."
 [ -d "$HOME/Pictures/wallpapers" ] || git clone https://github.com/mttomaz/wallpapers "$HOME/Pictures/wallpapers"
 
-# Adding StevenBlack's hosts file to /etc/hosts
-info_msg "Adding StevenBlack's hosts file to /etc/hosts ..."
-echo -e "\n\n$(curl -fsSl "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts")" | sudo tee -a /etc/hosts >/dev/null
-
 info_msg "Linking files ..."
 sudo ln ~/.config/keyd/keyd.conf /etc/keyd/default.conf
 

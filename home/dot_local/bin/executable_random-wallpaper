@@ -21,8 +21,8 @@ NEXT_WALLPAPER=$(head -n1 "$CACHE_FILE")
 WALLPAPER_NAME="${NEXT_WALLPAPER##*/}"
 
 if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
-  pgrep -x swww-daemon >/dev/null || swww-daemon & disown
-  swww img "$NEXT_WALLPAPER" --transition-type wipe \
+  pgrep -x awww-daemon >/dev/null || awww-daemon & disown
+  awww img "$NEXT_WALLPAPER" --transition-type wipe \
     --transition-fps 60 --transition-duration 1.5
 else
   feh --no-fehbg --bg-fill "$NEXT_WALLPAPER"

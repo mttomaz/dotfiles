@@ -1,6 +1,5 @@
 # Paths
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
-export PATH=$HOME/.local/share/spicetify:$PATH
 export PATH=$HOME/scripts:$PATH
 
 # XDG
@@ -42,12 +41,6 @@ export MANGOHUD=1
 export QT_QPA_PLATFORMTHEME=gtk2
 export HDD="$HOME/.local/hdd"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gcr/ssh"
-
-## Docker
-export DCFG="$HDD/docker"
-export TZ="America/Sao_Paulo"
-export PUID=$(id -u)
-export PGID=$(id -g)
 
 ## Theming
 export GTK_THEME="Kanagawa-Dark-B-MB"
