@@ -2,8 +2,13 @@
 #!/bin/sh
 # vim:ft=sh
 
-# Installing Zen Browser, the new "Arc like" browser based on firefox
 {{- if not (lookPath "zen") }}
+
+{{- if eq .osid "linux-cachyos" -}}
+
+sudo pacman -S zen-browser-bin
+
+{{- else if eq .osid "linux-arch" -}}
 
 echo -e "\n\033[1;32mInstalling Zen Browser ...\033[0m"
 cd "$HOME/Downloads/" &&
@@ -12,5 +17,14 @@ tar xvf zen.linux-x86_64.tar.xz
 mv zen ~/.local/share/zen
 ln -s ~/.local/share/zen/zen ~/.local/bin/zen
 
+cat << EOF > "$HOME/.local/share/applications/zen.desktop"
+[Desktop Entry]
+Type=Application
+Name=Zen Browser
+Icon=zen-browser
+Exec=$HOME/.local/share/zen/zen %u
+EOF
+
+{{- end -}}
 {{- end -}}
 {{- end -}}
