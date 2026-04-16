@@ -35,9 +35,9 @@ Run the following command to initialize my dotfiles with chezmoi:
 
 ## 🛠 Software used
 - Wayland
-  - Compositor: [Hyprland](https://hyprland.org/)
+  - Compositor: [Niri](https://github.com/niri-wm/niri) or [Hyprland](https://hyprland.org/)
   - Terminal: [foot](https://codeberg.org/dnkl/foot)
-  - AppLauncher: [wofi](https://hg.sr.ht/~scoopta/wofi)
+  - AppLauncher: [anyrun](https://github.com/anyrun-org/anyrun)
   - Bar and Widgets: [mttomaz/ags](https://github.com/mttomaz/ags)
 - Xorg **(deprecated)**
   - Window Manager: [BSPWM](https://github.com/baskerville/bspwm)

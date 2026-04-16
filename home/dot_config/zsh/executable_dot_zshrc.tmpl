@@ -17,7 +17,7 @@ bindkey "^[[1;5D" backward-word
 
 better_cut() {
   zle kill-whole-line
-{{- if eq .wm "hyprland" }}
+{{- if eq .wm "niri" "hyprland" }}
   wl-copy "$CUTBUFFER"
 {{ else }}
   echo -n "$CUTBUFFER" | xclip -sel clip

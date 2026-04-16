@@ -8,8 +8,24 @@ info_msg() {
 
 XDG_DATA_HOME="$HOME/.local/share"
 
+# Installing Niri with AGS
+{{- if eq .wm "niri" }}
+
+info_msg "Installing Niri ..."
+paru -S --needed niri xwayland-satellite xdg-desktop-portal-gtk xdg-desktop-portal-gnome foot \
+  awww wl-clipboard
+
+{{- if not (lookPath "nsticky") }}
+info_msg "Installing Nsticky ..."
+mkdir -p "$HOME/Documents/github"
+git clone https://github.com/lonerOrz/nsticky.git "$HOME/Documents/github/nsticky" &&
+  cd "$HOME/Documents/github/nsticky"
+cargo build --release
+cp target/release/nsticky "$HOME/.local/bin"
+{{- end }}
+
 # Installing Hyprland with AGS or BSPWM with EWW
-{{- if eq .wm "hyprland" }}
+{{ else if eq .wm "hyprland" }}
 
 info_msg "Installing Hyprland ..."
 paru -S --needed hyprland xdg-desktop-portal-hyprland foot awww wl-clipboard \
@@ -23,6 +39,7 @@ npm install
 ags bundle app.ts app
 chmod +x app
 
+# Installing BSPWM with EWW
 {{ else if eq .wm "bspwm" }}
 
 info_msg "Installing BSPWM ..."
@@ -33,5 +50,21 @@ info_msg "Installing EWW ..."
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 paru -S --needed eww-git
 
+{{- end -}}
+
+# Installing Anyrun
+{{- if eq .wm "niri" "hyprland" -}}
+{{-   if not (lookPath "anyrun") }}
+info_msg "Installing Anyrun ..."
+git clone https://github.com/anyrun-org/anyrun "$HOME/Documents/github/anyrun" &&
+  cd "$HOME/Documents/github/anyrun"
+
+cargo build --release
+cargo install --path anyrun/
+
+mkdir -p "$HOME/.config/anyrun/plugins"
+cp target/release/*.so "$HOME/.config/anyrun/plugins"
+
+{{-   end -}}
 {{- end -}}
 {{- end -}}

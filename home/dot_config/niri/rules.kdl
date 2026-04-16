@@ -1,0 +1,104 @@
+// $HOME/.config/niri/rules.kdl
+
+// Workspaces
+workspace "1" // terminal
+workspace "2" // zen, finamp
+workspace "3" // vesktop, telegram, obsidian
+workspace "4" // steam, obs
+workspace "5" // games
+
+
+// Terminals
+window-rule {
+  match app-id=r#"^(footclient)$"#
+  match app-id=r#"^(kitty)$"#
+
+  open-on-workspace "1"
+  tiled-state true
+  // block-out-from "screen-capture"
+}
+
+// Browsers and music
+window-rule {
+  match app-id=r#"^(zen)$"#
+  match app-id=r#"^(finamp)$"#
+
+  open-on-workspace "2"
+}
+
+// Chats and others
+window-rule {
+  match app-id=r#"^(vesktop)$"#
+  match app-id=r#"^(org\.telegram\.desktop)$"#
+  match app-id=r#"^(obsidian)$"#
+
+  open-on-workspace "3"
+  open-focused false
+}
+
+// Steam and OBS
+window-rule {
+  match app-id=r#"^(steam)$"#
+  match app-id=r#"^(com.obsproject.Studio)$"#
+
+  open-on-workspace "4"
+}
+
+// Gaming related
+window-rule {
+  match app-id=r#"^(gamescope)$"#
+  match app-id=r#"^(steam_app_)(.*)$"#
+  match app-id=r#"^(tf_linux64)$"#
+  match app-id=r#"^(com-atlauncher-App)$"#
+  match app-id=r#"^(Minecraft.*)$"#
+  match app-id=r#"^(org\.vinegarhq\.Sober)$"#
+
+  open-on-workspace "5"
+  open-maximized true
+  variable-refresh-rate true
+}
+
+// All windows that need to be floating
+window-rule {
+  match app-id=r#"^(pcmanfm)$"#
+  match app-id=r#"^(org\.gnome\.Nautilus)$"#
+  match app-id=r#"^(imv)$"#
+  match app-id=r#"^(org\.telegram\.desktop)$"# title=r#"^(Media viewer)$"#
+  match app-id=r#"^(steam)$"#
+  exclude app-id=r#"^(steam)$"# title=r#"^(Steam)$"#
+
+  open-floating true
+}
+
+// Picture-in-Picture
+window-rule {
+  match app-id=r#"^(zen)$"# title=r#"^(Picture-in-.icture)$"#
+
+  open-floating true
+  min-width 350
+  min-height 200
+  default-floating-position x=8 y=8 relative-to="bottom-left"
+}
+
+// Indicate screencasted windows with red colors.
+window-rule {
+  match is-window-cast-target=true
+
+  focus-ring {
+    active-color "#f38ba8"
+    inactive-color "#7d0d2d"
+  }
+
+  border {
+    inactive-color "#7d0d2d"
+  }
+
+  shadow {
+    color "#7d0d2d70"
+  }
+
+  tab-indicator {
+    active-color "#f38ba8"
+    inactive-color "#7d0d2d"
+  }
+}

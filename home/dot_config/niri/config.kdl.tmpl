@@ -1,0 +1,100 @@
+// ~/.config/niri/config.kdl
+
+{{ $kb_layout := "us" -}}
+{{ if eq .device_type "laptop" -}}
+{{-   $kb_layout = "br" -}}
+{{ end -}}
+
+input {
+  keyboard {
+    xkb {
+      layout "{{ $kb_layout }}"
+      options "compose:menu"
+    }
+    repeat-delay 300
+    repeat-rate 40
+  }
+
+  touchpad {
+    tap
+    natural-scroll
+    // accel-speed 0.2
+    accel-profile "flat"
+  }
+
+  mouse {
+    accel-profile "flat"
+  }
+}
+
+cursor {
+  xcursor-theme "cz-Hickson-Black"
+  xcursor-size 24
+  hide-when-typing
+  hide-after-inactive-ms 5000
+}
+
+output "DP-1" {
+  mode "1920x1080@120"
+  scale 1
+  transform "normal"
+  position x=0 y=0
+  variable-refresh-rate on-demand=true
+}
+
+{{ if eq .device_type "desktop" -}}
+// Laptop Monitor
+output "eDP-1" {
+  mode "1920x1080@60"
+  scale 1
+  transform "normal"
+  position x=0 y=0
+}
+
+// External Monitor
+output "HDMI-A-1" {
+  mode "1920x1080@60"
+  scale 1
+  transform "normal"
+  position x=0 y=1080
+}
+
+{{ end -}}
+
+layout {
+  gaps 0
+  center-focused-column "never"
+  always-center-single-column
+  preset-column-widths {
+    proportion 0.5
+    proportion 0.75
+    proportion 1.0
+  }
+
+  default-column-width { proportion 1.0; }
+  focus-ring {
+    width 2
+    active-color "#7E9CD8"
+    inactive-color "#1F1F28"
+  }
+
+  border {
+    off
+  }
+
+  shadow {
+    off
+  }
+}
+
+// Startup
+include "startup.kdl"
+
+prefer-no-csd
+screenshot-path "~/Pictures/screenshots/%A_%R_%d.%m.%y.png"
+
+// Window rules
+include "rules.kdl"
+
+// Key bindings
+include "binds.kdl"

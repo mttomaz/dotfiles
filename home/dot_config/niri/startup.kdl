@@ -1,0 +1,10 @@
+// $HOME/.config/niri/startup.kdl
+
+spawn-sh-at-startup "tmux ls >/dev/null || tmux new -d"
+spawn-sh-at-startup "dconf write /org/gnome/desktop/interface/color-scheme \"prefer-dark\""
+spawn-sh-at-startup "~/.local/bin/random-wallpaper"
+spawn-sh-at-startup "sh ~/.config/ags/launch.sh"
+spawn-at-startup "foot" "--server"
+spawn-at-startup "~/.local/bin/nsticky"
+
+spawn-at-startup "dex" "-a" "-s" "$HOME/.config/autostart:$HOME/.config/autostart/wayland"

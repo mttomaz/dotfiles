@@ -1,5 +1,7 @@
 if [[ "$(tty)" = "/dev/tty1" ]]; then
-{{- if eq .wm "hyprland" }}
+{{- if eq .wm "niri" }}
+  exec niri-session -l
+{{ else if eq .wm "hyprland" }}
   exec start-hyprland
 {{ else if eq .wm "bspwm" }}
   pgrep -x bspwm || exec sx
