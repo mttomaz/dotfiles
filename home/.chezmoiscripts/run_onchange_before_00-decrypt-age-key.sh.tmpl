@@ -1,0 +1,11 @@
+#!/bin/sh
+# vim:ft=sh
+
+KEY_PATH="$HOME/.config/chezmoi/key.txt"
+ENCRYPTED_KEY="{{ .chezmoi.sourceDir }}/key.txt.age"
+
+if [ ! -f "$KEY_PATH" ]; then
+  mkdir -p "$(dirname "$KEY_PATH")"
+  chezmoi age decrypt --passphrase --output "$KEY_PATH" "$ENCRYPTED_KEY"
+  chmod 600 "$KEY_PATH"
+fi

@@ -30,7 +30,7 @@ Run the following command to initialize my dotfiles with chezmoi:
 > if you just want the files you might wanna copy them from [here](https://github.com/mttomaz/dotfiles/tree/master/home).
 
   ```bash
-  curl -fsSl https://raw.githubusercontent.com/mttomaz/dotfiles/master/install.sh | sh
+  chezmoi init --apply mttomaz
   ```
 
 ## 🛠 Software used

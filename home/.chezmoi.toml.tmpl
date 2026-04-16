@@ -7,11 +7,15 @@
 {{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
 {{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
 {{- end -}}
+
+encryption = "age"
+
+[age]
+identity = "~/.config/chezmoi/key.txt"
+recipient = "age1da0vanw68ywshlmth6dmxrgn785q9lpfw3w6r5lnstvhjg7r6cvqrh7txx"
+
 [data]
   osid = {{ $osID | quote }}
   device_type = {{ $deviceType | quote }}
   personal = {{ $personal }}
   wm = {{ $wm | quote }}
-
-[bitwarden]
-  unlock = "auto"
