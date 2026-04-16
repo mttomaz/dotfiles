@@ -1,5 +1,5 @@
 if [[ "$(tty)" = "/dev/tty1" ]]; then
-{{- if eq .wm "niri" }}
+{{ if eq .wm "niri" }}
   exec niri-session -l
 {{ else if eq .wm "hyprland" }}
   exec start-hyprland
