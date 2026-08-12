@@ -1,6 +1,6 @@
-{{- if eq .osid "linux-cachyos" "linux-arch" -}}
-#!/bin/sh
-# vim:ft=sh
+{{- if eq .osid "linux-cachyos" "linux-arch" "linux-void" -}}
+#!/bin/bash
+# vim:ft=bash
 
 info_msg() {
   echo -e "\n\033[1;32m${1}\033[0m"
@@ -11,9 +11,23 @@ info_msg "Creating directories ..."
 mkdir -p "$HOME"/.local/{share,state} "$HOME"/.cache/{zsh,scripts}
 mkdir -p "$HOME"/{Documents/{dev,github},Downloads,Pictures/screenshots}
 
+info_msg "Creating GnuPG dir ..."
+mkdir -p "$HOME"/.local/share/gnupg
+chmod 700 "$HOME"/.local/share/gnupg
+
+{{ if eq .osid "linux-cachyos" "linux-arch" -}}
+# Enabling and starting services
+info_msg "Enabling and starting services ..."
+systemctl enable --now --user gcr-ssh-agent.socket
+systemctl enable --now --user gnome-keyring-daemon.socket
+sudo systemctl enable --now cronie
+
 # Regenerating font cache
 info_msg "Regenerating font cache ..."
 fc-cache -frv
+
+info_msg "Linking files ..."
+sudo ln ~/.config/keyd/keyd.conf /etc/keyd/default.conf
 
 # Setting themes using gsettings
 info_msg "Setting themes using gsettings ..."
@@ -21,21 +35,15 @@ gsettings set org.gnome.desktop.interface gtk-theme "Kanagawa-B-LB"
 gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 gsettings set org.gnome.desktop.interface cursor-theme "cz-Hickson-Black"
 
-# Enabling and starting services
-info_msg "Enabling and starting services ..."
-systemctl enable --now --user gcr-ssh-agent.socket
-systemctl enable --now --user gnome-keyring-daemon.socket
-sudo systemctl enable --now cronie
-
 # Downloading my wallpapers, theres a script named "random-wallpaper" that sets my wallpaper
 info_msg "Downloading my collection of wallpapers ..."
 [ -d "$HOME/Pictures/wallpapers" ] || git clone https://github.com/mttomaz/wallpapers "$HOME/Pictures/wallpapers"
 
-info_msg "Linking files ..."
-sudo ln ~/.config/keyd/keyd.conf /etc/keyd/default.conf
+{{ else if eq .osid "linux-void" -}}
 
-info_msg "Creating GnuPG dir ..."
-mkdir -p "$HOME"/.local/share/gnupg
-chmod 700 "$HOME"/.local/share/gnupg
+# Enabling and starting services
+info_msg "Enabling and starting services ..."
+[ -d "/var/service/cronie" ] || sudo ln -s /etc/sv/cronie /var/service
 
+{{- end -}}
 {{- end -}}

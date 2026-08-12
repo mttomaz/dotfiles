@@ -15,9 +15,12 @@ info_msg() {
 if is_installed paru; then
   info_msg "Updating arch and AUR packages."
   paru -Syu
-else
+elif is_installed pacman; then
   info_msg "Updating arch packages."
-  doas pacman -Syu
+  sudo pacman -Syu
+elif is_installed xbps-install; then
+  info_msg "Updating void packages."
+  sudo xbps-install -Syu
 fi
 
 if is_installed flatpak; then

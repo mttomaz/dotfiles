@@ -1,12 +1,19 @@
-{{- if eq .osid "linux-cachyos" "linux-arch" -}}
+{{- if eq .osid "linux-cachyos" "linux-arch" "linux-void" -}}
 #!/bin/sh
 # vim:ft=sh
 
 {{- if not (lookPath "docker") }}
 
 echo -e "\n\033[1;32mInstalling Docker ...\033[0m"
+
+{{- if eq .osid "linux-cachyos" "linux-arch" }}
 sudo pacman -S --needed docker docker-compose
 sudo systemctl enable --now docker
+
+{{- else if eq .osid "linux-void" }}
+sudo xbps-install -S docker docker-compose
+sudo ln -s /etc/sv/docker /var/service
+{{- end }}
 sudo usermod -aG docker {{ .chezmoi.username }}
 
 {{- end -}}

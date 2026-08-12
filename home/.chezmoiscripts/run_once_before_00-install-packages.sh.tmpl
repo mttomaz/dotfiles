@@ -1,10 +1,12 @@
-{{- if eq .osid "linux-cachyos" "linux-arch" -}}
-#!/bin/sh
-# vim:ft=sh
+{{- if eq .osid "linux-cachyos" "linux-arch" "linux-void" -}}
+#!/bin/bash
+# vim:ft=bash
 
 info_msg() {
   echo -e "\n\033[1;32m${1}\033[0m"
 }
+
+{{- if eq .osid "linux-cachyos" "linux-arch" }}
 
 PKGS=(
   zsh-autosuggestions
@@ -59,6 +61,7 @@ PKGS=(
   yt-dlp
   keyd
   tree-sitter
+  mediainfo
 )
 
 # Installing packages
@@ -72,6 +75,44 @@ info_msg "Installing paru ..."
 cd /tmp && git clone https://aur.archlinux.org/paru-bin
 cd paru-bin && sudo makepkg -sic --noconfirm
 cd /tmp && rm -rf /tmp/paru-bin
+
+{{- end -}}
+{{- else if eq .osid "linux-void" }}
+
+PKGS=(
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  starship
+  gawk
+  nodejs
+  lazygit
+  gcc
+  neovim
+  yazi
+  btop
+  fzf
+  ripgrep
+  curl
+  wget
+  jq
+  poppler
+  lsd
+  tmux
+  trash-cli
+  opendoas
+  meson
+  ninja
+  tealdeer
+  fastfetch
+  7zip
+  cronie
+  tree-sitter
+  mediainfo
+)
+
+# Installing packages
+info_msg "Installing packages ..."
+sudo xbps-install -Syu "${PKGS[@]}"
 
 {{- end -}}
 {{- end -}}
