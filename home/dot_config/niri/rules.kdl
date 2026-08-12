@@ -58,6 +58,12 @@ window-rule {
   variable-refresh-rate true
 }
 
+window-rule {
+  match app-id=r#"^(gamescope)$"#
+
+  open-fullscreen true
+}
+
 // All windows that need to be floating
 window-rule {
   match app-id=r#"^(pcmanfm)$"#

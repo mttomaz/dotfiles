@@ -5,14 +5,43 @@ sort_dir_first = true
 sort_by = "natural"
 linemode = "size"
 
+[[opener.set-wallpaper]]
+run  = "awww img %s1 --transition-type wipe --transition-fps 60 --transition-duration 1.5"
+desc = "Set image as wallpaper"
+
+[[open.prepend_rules]]
+mime = "image/*"
+use  = [ "set-wallpaper", "open" ]
+
 # Plugins
 ## Git
 [[plugin.prepend_fetchers]]
-id   = "git"
-name = "*"
-run  = "git"
+url   = "*"
+run   = "git"
+group = "git"
 
 [[plugin.prepend_fetchers]]
-id   = "git"
-name = "*/"
-run  = "git"
+url   = "*/"
+run   = "git"
+group = "git"
+
+[plugin]
+  prepend_preloaders = [
+    { mime = "{audio,video,image}/*", run = "mediainfo" },
+    { mime = "application/{subrip,postscript,illustrator,dvb.ait,vnd.adobe.illustrator,eps}", run = "mediainfo" },
+    { url = "*.{ai,eps,ait}", run = "mediainfo" },
+    { mime = "{image}/*", run = "mediainfo --no-metadata" },
+    { mime = "{video}/*", run = "mediainfo --no-preview" },
+  ]
+
+  prepend_previewers = [
+    { mime = "{audio,video,image}/*", run = "mediainfo"},
+    { mime = "application/{subrip,postscript,illustrator,dvb.ait,vnd.adobe.illustrator,eps}", run = "mediainfo" },
+    { url = "*.{ai,eps,ait}", run = "mediainfo" },
+    { mime = "{image}/*", run = "mediainfo --no-metadata" },
+    { mime = "{video}/*", run = "mediainfo --no-preview" },
+  ]
+
+[tasks]
+  image_alloc      = 1073741824        # = 1024*1024*1024 = 1024MB
+
